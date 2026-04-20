@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services - Pravixa AI</title>
+<meta name="description" content="Explore our comprehensive AI services including automation, lead generation, web development, and SaaS solutions. Expert AI consulting for USA, UK, Europe & worldwide.">
+<meta name="keywords" content="AI services, automation, lead generation, web development, SaaS, AI consulting, business solutions, USA AI services">
+<meta name="author" content="Pravixa AI">
+<meta name="robots" content="index, follow">
+<meta name="language" content="English">
+<meta property="og:title" content="Services - Pravixa AI">
+<meta property="og:description" content="Explore our comprehensive AI services including automation, lead generation, web development, and SaaS solutions.">
+<meta property="og:image" content="https://globalaisolutions.com/services-og-image.jpg">
+<meta property="og:url" content="https://globalaisolutions.com/services.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Services - Pravixa AI">
+<meta name="twitter:description" content="Explore our comprehensive AI services including automation, lead generation, web development, and SaaS solutions.">
+<meta name="twitter:image" content="https://globalaisolutions.com/services-twitter-image.jpg">
+<link rel="canonical" href="https://globalaisolutions.com/services.html">
+<link rel="icon" href="fa.png" type="image/png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Pravixa AI Services",
+  "description": "Comprehensive AI services including automation, lead generation, web development, and SaaS solutions",
+  "provider": {
+    "@type": "Organization",
+    "name": "Pravixa AI"
+  },
+  "serviceType": ["AI Automation", "Lead Generation", "Web Development", "SaaS Development"]
+}
+</script>
+
+<style>
+/* ========= RESET ========= */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;}
+body{background:#0D0D0D;color:#fff;line-height:1.6;overflow-x:hidden;}
+
+/* ========= HEADER ========= */
+header{position:fixed;top:0;width:100%;z-index:1000;background:linear-gradient(135deg,rgba(0,200,150,0.1),rgba(0,123,255,0.1));backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,0.1);transition:all 0.3s ease;}
+header.scrolled{background:rgba(13,13,13,0.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,200,150,0.3);}
+.header-content{display:flex;justify-content:space-between;align-items:center;padding:20px;max-width:1200px;margin:0 auto;}
+.logo{display:flex;align-items:center;gap:20px;}
+.logo img{height:64px;filter:drop-shadow(0 0 10px rgba(0,200,150,0.5));animation:glow 2s ease-in-out infinite alternate;}
+@keyframes glow{from{filter:drop-shadow(0 0 10px rgba(0,200,150,0.5));}to{filter:drop-shadow(0 0 20px rgba(0,200,150,0.8));}}
+.nav{display:flex;align-items:center;gap:30px;}
+.nav-links{display:flex;gap:30px;list-style:none;}
+@media (max-width:768px){.nav-links{display:none;}}
+.nav-links a{color:#fff;text-decoration:none;font-weight:500;position:relative;transition:all 0.3s ease;}
+.nav-links a:hover,.nav-links a.active{color:#00C896;transform:scale(1.05);}
+.nav-links a.active::after{content:'';position:absolute;bottom:-5px;left:0;width:100%;height:2px;background:linear-gradient(90deg,#00C896,#007BFF);}
+.cta-button{background:linear-gradient(135deg,#00C896,#007BFF);color:#fff;padding:12px 24px;border-radius:25px;text-decoration:none;font-weight:600;transition:all 0.3s ease;box-shadow:0 4px 15px rgba(0,200,150,0.3);}
+.cta-button:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,200,150,0.5);}
+.hamburger{display:none;flex-direction:column;cursor:pointer;}
+@media (max-width:768px){.hamburger{display:flex;}}
+.hamburger span{width:25px;height:3px;background:#fff;margin:3px 0;transition:0.3s;transform-origin:center;}
+.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+.hamburger.active span:nth-child(2){opacity:0;}
+.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(7px,-6px);}
+.mobile-menu{position:absolute;top:100%;left:0;width:100%;background:rgba(13,13,13,0.95);backdrop-filter:blur(20px);display:none;flex-direction:column;padding:20px;transform:translateY(-20px);opacity:0;transition:all 0.3s ease;}
+.mobile-menu.active{display:flex;transform:translateY(0);opacity:1;}
+.mobile-menu a{color:#fff;text-decoration:none;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.1);}
+
+/* ========= GLOBAL ========= */
+.container{width:90%;max-width:1200px;margin:auto;}
+.section{padding:80px 0;}
+h1,h2{margin-bottom:15px;}
+p{color:#aaa;}
+.grid{display:grid;gap:20px;}
+
+/* ========= HERO ========= */
+.hero{
+  text-align:center;
+  padding:120px 20px;
+  position:relative;
+  margin-top:70px;
+  background:linear-gradient(135deg,rgba(0,200,150,0.15),rgba(0,123,255,0.15));
+  overflow:hidden;
+}
+.hero::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background:radial-gradient(circle at 20% 50%,rgba(0,200,150,0.1),transparent 50%),radial-gradient(circle at 80% 80%,rgba(0,123,255,0.1),transparent 50%);
+  animation:gradientShift 8s ease-in-out infinite;
+}
+@keyframes gradientShift{
+  0%{transform:translate(0,0);}
+  50%{transform:translate(10px,-10px);}
+  100%{transform:translate(0,0);}
+}
+.hero-content{
+  position:relative;
+  z-index:1;
+}
+.hero h1{
+  position:relative;
+  z-index:1;
+}
+.badge{
+  display:inline-block;
+  padding:8px 18px;
+  border-radius:30px;
+  background:rgba(255,255,255,0.1);
+  margin-bottom:20px;
+}
+.hero h1{font-size:3rem;font-weight:700;}
+@media (max-width:768px){.hero h1{font-size:2rem;}}
+.features{
+  margin-top:30px;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:15px;
+}
+.feature{
+  background:rgba(255,255,255,0.05);
+  padding:10px 16px;
+  border-radius:20px;
+  font-size:14px;
+  border:1px solid rgba(0,200,150,0.2);
+}
+
+/* ========= CARDS ========= */
+.card{
+  background:rgba(255,255,255,0.05);
+  padding:25px;
+  border-radius:16px;
+  transition:all 0.3s ease;
+  border:1px solid rgba(0,200,150,0.2);
+  backdrop-filter:blur(10px);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 200, 150, 0.1), transparent);
+  transition: left 0.5s;
+}
+.card:hover::before {
+  left: 100%;
+}
+.card:hover{transform:translateY(-6px) scale(1.02);background:rgba(0,200,150,0.1);box-shadow:0 15px 40px rgba(0,200,150,0.3);border-color: rgba(0,200,150, 0.5);}
+.card h3{margin-bottom:10px;color:#fff;}
+ul{margin-top:10px;padding-left:18px;}
+li{margin-bottom:6px;color:#B0B0B0;}
+
+/* ========= SERVICE GROUP ========= */
+.group-title{
+  margin-bottom:30px;
+  font-size:28px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+/* ========= GRID ========= */
+.services{
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+}
+
+/* ========= PRICING ========= */
+.pricing{
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+}
+.price-card{
+  text-align:center;
+  padding:30px;
+  border-radius:16px;
+  background:linear-gradient(135deg,rgba(0,200,150,0.1),rgba(0,123,255,0.1));
+  border:1px solid rgba(0,200,150,0.2);
+  backdrop-filter:blur(10px);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+.price-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 123, 255, 0.1), transparent);
+  transition: left 0.5s;
+}
+.price-card:hover::before {
+  left: 100%;
+}
+.price-card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 20px 40px rgba(0, 123, 255, 0.3);
+  border-color: rgba(0, 123, 255, 0.5);
+}
+
+/* ========= FOOTER ========= */
+footer{background:#0A0E27;border-top:1px solid rgba(0,200,150,0.2);padding:60px 0 0;margin-top:80px;}
+.footer-main{display:grid;grid-template-columns:1fr;gap:40px;margin-bottom:50px;}
+@media (min-width:768px){.footer-main{grid-template-columns:2fr 1fr 1fr 1fr;gap:60px;}}
+.footer-column h4{font-size:1rem;margin-bottom:20px;color:#fff;font-weight:600;}
+.footer-brand{display:flex;align-items:center;gap:15px;margin-bottom:20px;}
+.footer-brand img{height:40px;}
+.footer-description{color:#B0B0B0;font-size:0.95rem;line-height:1.6;margin-bottom:20px;}
+.social-links{display:flex;gap:15px;}
+.social-links a{width:40px;height:40px;background:rgba(0,200,150,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#00C896;text-decoration:none;transition:all 0.3s ease;}
+.social-links a:hover{background:#00C896;color:#0D0D0D;transform:scale(1.1);}
+.footer-links{list-style:none;}
+.footer-links li{margin-bottom:12px;}
+.footer-links a{color:#B0B0B0;text-decoration:none;font-size:0.95rem;transition:all 0.3s ease;}
+.footer-links a:hover{color:#00C896;transform:translateX(5px);}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.1);padding:30px 0;display:flex;flex-direction:column;gap:20px;}
+@media (min-width:768px){.footer-bottom{flex-direction:row;justify-content:space-between;align-items:center;}}
+.footer-copyright{color:#B0B0B0;font-size:0.9rem;}
+.footer-legal{display:flex;gap:20px;flex-wrap:wrap;}
+.footer-legal a{color:#B0B0B0;text-decoration:none;font-size:0.9rem;transition:all 0.3s ease;}
+.footer-legal a:hover{color:#00C896;}
+
+/* ========= CTA ========= */
+.cta{
+  text-align:center;
+  padding:100px 20px;
+}
+.cta button{
+  margin-top:20px;
+  padding:14px 28px;
+  border:none;
+  border-radius:30px;
+  background:linear-gradient(135deg,#00C896,#007BFF);
+  color:#fff;
+  font-size:16px;
+  cursor:pointer;
+  transition:all 0.3s ease;
+  font-weight:600;
+}
+.cta button:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,200,150,0.5);}
+
+/* ========= ANIMATIONS ========= */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes bounceIn {
+  0% { opacity: 0; transform: scale(0.3); }
+  50% { opacity: 1; transform: scale(1.05); }
+  70% { transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes slideIn {
+  from { width: 0; }
+  to { width: 100%; }
+}
+@keyframes glow {
+  from { filter: drop-shadow(0 0 10px rgba(0, 200, 150, 0.5)); }
+  to { filter: drop-shadow(0 0 20px rgba(0, 200, 150, 0.8)); }
+}
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+@keyframes ripple {
+  0% { transform: scale(0.5); opacity: 1; }
+  100% { transform: scale(2); opacity: 0; }
+}
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes glowPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+}
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+/* Scroll animations */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.6s ease-out;
+}
+.animate-on-scroll.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+.animate-fade-in-left {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: all 0.6s ease-out;
+}
+.animate-fade-in-left.animate {
+  opacity: 1;
+  transform: translateX(0);
+}
+.animate-fade-in-right {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: all 0.6s ease-out;
+}
+.animate-fade-in-right.animate {
+  opacity: 1;
+  transform: translateX(0);
+}
+.animate-scale-in {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.6s ease-out;
+}
+.animate-scale-in.animate {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Loading animation */
+body {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+body.loaded {
+  opacity: 1;
+}
+
+/* Animated Background */
+.animated-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+  background: linear-gradient(135deg, #0D0D0D 0%, #1a1a1a 50%, #0D0D0D 100%);
+}
+
+.bg-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(45deg, rgba(0, 200, 150, 0.1), rgba(0, 123, 255, 0.1));
+  animation: float 20s infinite linear;
+}
+
+.bg-particle:nth-child(1) { width: 80px; height: 80px; top: 10%; left: 10%; animation-delay: 0s; }
+.bg-particle:nth-child(2) { width: 60px; height: 60px; top: 20%; left: 80%; animation-delay: 2s; }
+.bg-particle:nth-child(3) { width: 100px; height: 100px; top: 60%; left: 20%; animation-delay: 4s; }
+.bg-particle:nth-child(4) { width: 70px; height: 70px; top: 80%; left: 70%; animation-delay: 6s; }
+.bg-particle:nth-child(5) { width: 90px; height: 90px; top: 40%; left: 50%; animation-delay: 8s; }
+.bg-particle:nth-child(6) { width: 50px; height: 50px; top: 70%; left: 90%; animation-delay: 10s; }
+.bg-particle:nth-child(7) { width: 120px; height: 120px; top: 30%; left: 5%; animation-delay: 12s; }
+.bg-particle:nth-child(8) { width: 85px; height: 85px; top: 90%; left: 40%; animation-delay: 14s; }
+
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-20px) rotate(120deg); }
+  66% { transform: translateY(10px) rotate(240deg); }
+  100% { transform: translateY(0px) rotate(360deg); }
+}
+
+/* ========= ANIMATION ========= */
+.fade{opacity:0;transform:translateY(40px);transition:1s;}
+.show{opacity:1;transform:translateY(0);}
+
+@media (max-width:490px){.section{padding:50px 0;}.container{padding:0 15px;}.hero h1{font-size:1.5rem;}}
+</style>
+</head>
+
+<body>
+<!-- Animated Background -->
+<div class="animated-bg">
+  <div class="bg-particle"></div>
+  <div class="bg-particle"></div>
+  <div class="bg-particle"></div>
+  <div class="bg-particle"></div>
+  <div class="bg-particle"></div>
+  <div class="bg-particle"></div>
+  <div class="bg-particle"></div>
+  <div class="bg-particle"></div>
+</div>
+
+<header id="header">
+<div class="header-content">
+<div class="logo">
+<img src="logo.png" alt="Pravixa AI Logo"></div>
+<nav class="nav">
+<ul class="nav-links">
+<li><a href="index.html">Home</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="services.html" class="active">Services</a></li>
+<li><a href="portfolio.html">Portfolio</a></li>
+<li><a href="careers.html">Careers</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+<a href="contact.html" class="cta-button">Book a Call</a>
+<div class="hamburger" onclick="toggleMenu()">
+<span></span>
+<span></span>
+<span></span>
+</div>
+</nav>
+</div>
+<div class="mobile-menu" id="mobileMenu">
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="services.html">Services</a>
+<a href="portfolio.html">Portfolio</a>
+<a href="careers.html">Careers</a>
+<a href="contact.html">Contact</a>
+<a href="contact.html" class="cta-button" style="margin-top:20px;">Book a Call</a>
+</div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="badge">🚀 Our Services</div>
+    <h1>Comprehensive IT Solutions for Your Business</h1>
+    <p>From AI-powered development to digital marketing and operations</p>
+
+    <div class="features">
+      <div class="feature">⚡ Hourly ($75–$150/hr)</div>
+      <div class="feature">💼 Dedicated Teams</div>
+      <div class="feature">🌍 US & EU Support</div>
+    </div>
+  </div>
+</section>
+
+<!-- DEVELOPMENT -->
+<section class="section fade">
+  <div class="container">
+    <div class="group-title">💻 Development Services</div>
+    <div class="grid services">
+
+      <div class="card">
+        <h3>AI & Machine Learning</h3>
+        <p>Harness the power of AI to automate processes, gain insights, and drive innovation in your business.</p>
+        <ul>
+          <li>Custom AI Models</li>
+          <li>Predictive Analytics</li>
+          <li>NLP Solutions</li>
+          <li>Computer Vision</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Custom Software</h3>
+        <p>Tailored software solutions designed to meet your unique business requirements and scale with your growth.</p>
+        <ul>
+          <li>Enterprise Software</li>
+          <li>SaaS Applications</li>
+          <li>API Development</li>
+          <li>System Integration</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Web Development</h3>
+        <p>Modern, responsive websites that engage users and drive conversions across all devices.</p>
+        <ul>
+          <li>Custom Websites</li>
+          <li>WordPress</li>
+          <li>E-commerce</li>
+          <li>Web Apps</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Mobile Apps</h3>
+        <ul>
+          <li>iOS</li>
+          <li>Android</li>
+          <li>Cross-platform</li>
+          <li>Maintenance</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>SaaS Development</h3>
+        <ul>
+          <li>Multi-tenant</li>
+          <li>Subscriptions</li>
+          <li>Cloud Infra</li>
+          <li>Auto Scaling</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- DESIGN -->
+<section class="section fade">
+  <div class="container">
+    <div class="group-title">🎨 Design Services</div>
+    <div class="grid services">
+      <div class="card">
+        <h3>UI/UX Design</h3>
+        <ul>
+          <li>User Research</li>
+          <li>Wireframing</li>
+          <li>Prototyping</li>
+          <li>Design Systems</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARKETING -->
+<section class="section fade">
+  <div class="container">
+    <div class="group-title">📈 Marketing Services</div>
+    <div class="grid services">
+
+      <div class="card">
+        <h3>SEO Services</h3>
+        <ul>
+          <li>Technical SEO</li>
+          <li>On-page SEO</li>
+          <li>Link Building</li>
+          <li>Local SEO</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Digital Marketing</h3>
+        <ul>
+          <li>Strategy</li>
+          <li>Content Marketing</li>
+          <li>Email Marketing</li>
+          <li>Analytics</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Paid Ads</h3>
+        <ul>
+          <li>Google Ads</li>
+          <li>Facebook Ads</li>
+          <li>Display Ads</li>
+          <li>Retargeting</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Social Media</h3>
+        <ul>
+          <li>Content Creation</li>
+          <li>Community Mgmt</li>
+          <li>Strategy</li>
+          <li>Analytics</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>LinkedIn Outreach</h3>
+        <ul>
+          <li>Profile Optimization</li>
+          <li>Lead Generation</li>
+          <li>Campaigns</li>
+          <li>Messaging</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- OPERATIONS -->
+<section class="section fade">
+  <div class="container">
+    <div class="group-title">⚡ Operations Services</div>
+    <div class="grid services">
+
+      <div class="card">
+        <h3>Virtual Assistance</h3>
+        <ul>
+          <li>Admin Support</li>
+          <li>Customer Service</li>
+          <li>Scheduling</li>
+          <li>Email Mgmt</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Data Processing</h3>
+        <ul>
+          <li>Data Entry</li>
+          <li>Cleaning</li>
+          <li>Migration</li>
+          <li>QA</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>CRM Automation</h3>
+        <ul>
+          <li>Workflow Automation</li>
+          <li>CRM Integration</li>
+          <li>Lead Nurturing</li>
+          <li>Dashboards</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section fade">
+  <div class="container">
+    <div class="group-title">💼 Engagement Models</div>
+    <div class="grid pricing">
+
+      <div class="price-card">
+        <h3>Hourly Model</h3>
+        <p>$75–$150/hr</p>
+      </div>
+
+      <div class="price-card">
+        <h3>Dedicated Team</h3>
+        <p>Monthly Billing</p>
+      </div>
+
+      <div class="price-card">
+        <h3>Project Based</h3>
+        <p>Fixed Pricing</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="container">
+    <h2>Ready to Get Started?</h2>
+    <p>Let’s build something amazing together</p>
+    <button>Book a Free Consultation</button>
+  </div>
+</section>
+
+<script>
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add("show");
+    }
+  });
+});
+
+document.querySelectorAll(".fade").forEach(el=>observer.observe(el));
+
+// Header scroll effect
+window.addEventListener('scroll', function() {
+  const header = document.getElementById('header');
+  if (window.scrollY > 50) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+});
+
+// Mobile menu toggle
+function toggleMenu() {
+  const menu = document.getElementById('mobileMenu');
+  const hamburger = document.querySelector('.hamburger');
+  menu.classList.toggle('active');
+  hamburger.classList.toggle('active');
+}
+
+// Enhanced scroll animations
+const scrollObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('animate');
+    }
+  });
+}, { threshold: 0.1 });
+
+// Add scroll animations to elements
+document.addEventListener('DOMContentLoaded', function() {
+  const elementsToAnimate = document.querySelectorAll('.service-card, .feature-card, .process-step, .testimonial-card');
+  elementsToAnimate.forEach(el => {
+    el.classList.add('animate-on-scroll');
+    scrollObserver.observe(el);
+  });
+
+  // Stagger grid animations
+  const grids = document.querySelectorAll('.services-grid, .features-grid, .process-grid');
+  grids.forEach(grid => {
+    const items = grid.children;
+    Array.from(items).forEach((item, index) => {
+      item.style.animationDelay = `${index * 0.1}s`;
+    });
+  });
+
+  // Floating icons
+  const icons = document.querySelectorAll('.service-icon, .feature-icon, .process-icon');
+  icons.forEach(icon => {
+    icon.style.animation = 'float 3s ease-in-out infinite';
+    icon.style.animationDelay = `${Math.random() * 2}s`;
+  });
+
+  // Typewriter effect for hero
+  const heroTitle = document.querySelector('.hero h1');
+  if (heroTitle) {
+    heroTitle.style.overflow = 'hidden';
+    heroTitle.style.borderRight = '2px solid #00C896';
+    heroTitle.style.whiteSpace = 'nowrap';
+    heroTitle.style.animation = 'typewriter 3s steps(40, end), blink 1s infinite step-end';
+  }
+
+  // Loading effect
+  document.body.classList.add('loaded');
+});
+
+// Smooth scrolling
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
+
+// Add scroll animation for particles
+window.addEventListener('scroll', () => {
+  const scrolled = window.pageYOffset;
+  const rate = scrolled * -0.5;
+  
+  document.querySelectorAll('.bg-particle').forEach((particle, index) => {
+    const speed = (index + 1) * 0.1;
+    particle.style.transform = `translateY(${rate * speed}px) rotate(${scrolled * 0.1}deg)`;
+  });
+});
+</script>
+
+<footer>
+<div class="container">
+<div class="footer-main">
+<div class="footer-column">
+<div class="footer-brand">
+<img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='logoGrad' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' style='stop-color:%2300C896;stop-opacity:1' /><stop offset='100%' style='stop-color:%23007BFF;stop-opacity:1' /></linearGradient></defs><circle cx='50' cy='50' r='48' fill='url(%23logoGrad)'/><circle cx='35' cy='40' r='8' fill='white' opacity='0.9'/><circle cx='65' cy='40' r='8' fill='white' opacity='0.9'/><path d='M 30 65 Q 50 75 70 65' stroke='white' stroke-width='3' fill='none' stroke-linecap='round'/></svg>" alt="Pravixa AI">
+</div>
+<p class="footer-description">Delivering world-class IT solutions and digital transformation services to businesses across the USA, UK, and Europe</p>
+<div class="social-links">
+<a href="https://linkedin.com" target="_blank" title="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+<a href="https://twitter.com" target="_blank" title="Twitter"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.953 4.57a10 10 0 002.856-3.51 10 10 0 01-2.836.856 4.958 4.958 0 002.165-2.724c-.951.564-2.005.974-3.127 1.195a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417a9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg></a>
+<a href="https://github.com" target="_blank" title="GitHub"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.6.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+</div>
+</div>
+<div class="footer-column">
+<h4>Services</h4>
+<ul class="footer-links">
+<li><a href="services.html">AI Automation</a></li>
+<li><a href="services.html">Lead Generation</a></li>
+<li><a href="services.html">Web Development</a></li>
+<li><a href="services.html">SaaS Development</a></li>
+</ul>
+</div>
+<div class="footer-column">
+<h4>Company</h4>
+<ul class="footer-links">
+<li><a href="about.html">About</a></li>
+<li><a href="careers.html">Careers</a></li>
+<li><a href="portfolio.html">Portfolio</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+</div>
+<div class="footer-column">
+<h4>Resources</h4>
+<ul class="footer-links">
+<li><a href="portfolio.html">Case Studies</a></li>
+<li><a href="#docs">Documentation</a></li>
+<li><a href="contact.html">Support</a></li>
+<li><a href="#privacy">Privacy Policy</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<div class="footer-copyright">© 2026 All rights reserved. Proudly serving clients worldwide</div>
+<div class="footer-legal">
+<a href="#terms">Terms</a>
+<a href="#privacy">Privacy</a>
+<a href="#cookies">Cookies</a>
+</div>
+</div>
+</div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Pravixa AI</title>
+    <meta name="description" content="Learn about Pravixa AI - a leading AI company providing cutting-edge technologies and expert consulting services across USA, UK, Europe & worldwide.">
+    <meta name="keywords" content="about Pravixa AI, AI company, AI experts, technology consulting, business innovation, USA AI, global AI services">
+    <meta name="author" content="Pravixa AI">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta property="og:title" content="About Us - Pravixa AI">
+    <meta property="og:description" content="Learn about Pravixa AI - a leading AI company providing cutting-edge technologies and expert consulting services.">
+    <meta property="og:image" content="https://globalaisolutions.com/about-og-image.jpg">
+    <meta property="og:url" content="https://globalaisolutions.com/about.html">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="About Us - Pravixa AI">
+    <meta name="twitter:description" content="Learn about Pravixa AI - a leading AI company providing cutting-edge technologies and expert consulting services.">
+    <meta name="twitter:image" content="https://globalaisolutions.com/about-twitter-image.jpg">
+    <link rel="canonical" href="https://globalaisolutions.com/about.html">
+    <link rel="icon" href="fa.png" type="image/png">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        "name": "About Pravixa AI",
+        "description": "Learn about our mission, vision, and expertise in AI technologies",
+        "url": "https://globalaisolutions.com/about.html",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Pravixa AI"
+        }
+    }
+    </script>
+    <style>
+        /* ========= GLOBAL STYLES ========= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #0D0D0D;
+            color: white;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .section {
+            padding: 80px 0;
+        }
+        .section-alt {
+            background-color: #121212;
+        }
+        /* ========= HEADER ========= */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: linear-gradient(135deg, rgba(0, 200, 150, 0.1), rgba(0, 123, 255, 0.1));
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        header.scrolled {
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 200, 150, 0.3);
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .logo img {
+            height: 64px;
+            filter: drop-shadow(0 0 10px rgba(0, 200, 150, 0.5));
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 10px rgba(0, 200, 150, 0.5)); }
+            to { filter: drop-shadow(0 0 20px rgba(0, 200, 150, 0.8)); }
+        }
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: #00C896;
+            transform: scale(1.05);
+        }
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #00C896, #007BFF);
+        }
+        .cta-button {
+            background: linear-gradient(135deg, #00C896, #007BFF);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 200, 150, 0.3);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 200, 150, 0.5);
+        }
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        .cta-button:active::before {
+            width: 300px;
+            height: 300px;
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+        }
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.3s;
+            transform-origin: center;
+        }
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+        .mobile-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(20px);
+            display: none;
+            flex-direction: column;
+            padding: 20px;
+            transform: translateY(-20px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        .mobile-menu.active {
+            display: flex;
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .mobile-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        /* ========= HERO ========= */
+        .hero {
+            background: linear-gradient(135deg, rgba(0, 200, 150, 0.15), rgba(0, 123, 255, 0.15));
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 70px;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(0, 200, 150, 0.1), transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(0, 123, 255, 0.1), transparent 50%);
+            animation: gradientShift 8s ease-in-out infinite;
+        }
+       /* Animation define karo */
+@keyframes gradientShift {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(10px, -10px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* Jis element pe apply karna hai */
+.background-effect {
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(0, 200, 150, 0.1), transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(0, 123, 255, 0.1), transparent 50%);
+  
+  animation: gradientShift 8s ease-in-out infinite;
+}
+        @keyframes gradientShift {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(10px, -10px); }
+            100% { transform: translate(0, 0); }
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            animation: fadeInUp 1s ease-out;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            color: #B0B0B0;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        /* ========= STATS ========= */
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        @media (min-width: 768px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 200, 150, 0.2);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 200, 150, 0.1), transparent);
+            transition: left 0.5s;
+        }
+        .stat-card:hover::before {
+            left: 100%;
+        }
+        .stat-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 200, 150, 0.3);
+            border-color: rgba(0, 200, 150, 0.5);
+        }
+        .stat-card h3 {
+            font-size: 2.5rem;
+            color: #00C896;
+            margin-bottom: 10px;
+        }
+        .stat-card p {
+            color: #B0B0B0;
+        }
+        /* ========= MISSION ========= */
+        .mission {
+            text-align: center;
+        }
+        .mission h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .mission-desc {
+            color: #B0B0B0;
+            max-width: 700px;
+            margin: 0 auto 50px;
+        }
+        .values {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        @media (min-width: 768px) {
+            .values {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (min-width: 1024px) {
+            .values {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        .value-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 200, 150, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 123, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+        .value-card:hover::before {
+            left: 100%;
+        }
+        .value-card:hover {
+            background: rgba(0, 200, 150, 0.1);
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 200, 150, 0.3);
+            border-color: rgba(0, 200, 150, 0.5);
+        }
+        .value-card h3 {
+            animation: float 3s ease-in-out infinite;
+        }
+        /* ========= STORY ========= */
+        .story-card {
+            background: linear-gradient(135deg, rgba(0, 200, 150, 0.1), rgba(0, 123, 255, 0.1));
+            border: 1px solid rgba(0, 200, 150, 0.2);
+            padding: 40px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        .story-card p {
+            margin-bottom: 20px;
+            color: #B0B0B0;
+        }
+        .story-card p:last-child {
+            margin-bottom: 0;
+        }
+        /* ========= FOOTER ========= */
+        footer {
+            background: #0A0E27;
+            border-top: 1px solid rgba(0, 200, 150, 0.2);
+            padding: 60px 0 0;
+            margin-top: 80px;
+        }
+        .footer-main {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        @media (min-width: 768px) {
+            .footer-main {
+                grid-template-columns: 2fr 1fr 1fr 1fr;
+                gap: 60px;
+            }
+        }
+        .footer-column h4 {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            color: white;
+            font-weight: 600;
+        }
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .footer-brand img {
+            height: 40px;
+        }
+        .footer-description {
+            color: #B0B0B0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 200, 150, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00C896;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .social-links a:hover {
+            background: #00C896;
+            color: #0D0D0D;
+            transform: scale(1.1);
+        }
+        .footer-links {
+            list-style: none;
+        }
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        .footer-links a {
+            color: #B0B0B0;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+        .footer-links a:hover {
+            color: #00C896;
+            transform: translateX(5px);
+        }
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 30px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        @media (min-width: 768px) {
+            .footer-bottom {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+        .footer-copyright {
+            color: #B0B0B0;
+            font-size: 0.9rem;
+        }
+        .footer-legal {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .footer-legal a {
+            color: #B0B0B0;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        .footer-legal a:hover {
+            color: #00C896;
+        }
+        @media (max-width: 490px) {
+            .hero { min-height: 60vh; }
+            .hero h1 { font-size: 1.5rem; }
+            .stats { gap: 15px; }
+            .footer-main { gap: 20px; }
+            .container { padding: 0 15px; }
+            .section { padding: 50px 0; }
+        }
+
+        /* ========= ANIMATIONS ========= */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.3); }
+            50% { opacity: 1; transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        @keyframes slideIn {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 10px rgba(0, 200, 150, 0.5)); }
+            to { filter: drop-shadow(0 0 20px rgba(0, 200, 150, 0.8)); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        @keyframes ripple {
+            0% { transform: scale(0.5); opacity: 1; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes glowPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        @keyframes typewriter {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        /* Scroll animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease-out;
+        }
+        .animate-on-scroll.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .animate-fade-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.6s ease-out;
+        }
+        .animate-fade-in-left.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .animate-fade-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.6s ease-out;
+        }
+        .animate-fade-in-right.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .animate-scale-in {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.6s ease-out;
+        }
+        .animate-scale-in.animate {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Loading animation */
+        body {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        body.loaded {
+            opacity: 1;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0D0D0D 0%, #1a1a1a 50%, #0D0D0D 100%);
+        }
+
+        .bg-particle {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(45deg, rgba(0, 200, 150, 0.1), rgba(0, 123, 255, 0.1));
+            animation: float 20s infinite linear;
+        }
+
+        .bg-particle:nth-child(1) { width: 80px; height: 80px; top: 10%; left: 10%; animation-delay: 0s; }
+        .bg-particle:nth-child(2) { width: 60px; height: 60px; top: 20%; left: 80%; animation-delay: 2s; }
+        .bg-particle:nth-child(3) { width: 100px; height: 100px; top: 60%; left: 20%; animation-delay: 4s; }
+        .bg-particle:nth-child(4) { width: 70px; height: 70px; top: 80%; left: 70%; animation-delay: 6s; }
+        .bg-particle:nth-child(5) { width: 90px; height: 90px; top: 40%; left: 50%; animation-delay: 8s; }
+        .bg-particle:nth-child(6) { width: 50px; height: 50px; top: 70%; left: 90%; animation-delay: 10s; }
+        .bg-particle:nth-child(7) { width: 120px; height: 120px; top: 30%; left: 5%; animation-delay: 12s; }
+        .bg-particle:nth-child(8) { width: 85px; height: 85px; top: 90%; left: 40%; animation-delay: 14s; }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(120deg); }
+            66% { transform: translateY(10px) rotate(240deg); }
+            100% { transform: translateY(0px) rotate(360deg); }
+        }
+
+
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="bg-particle"></div>
+        <div class="bg-particle"></div>
+        <div class="bg-particle"></div>
+        <div class="bg-particle"></div>
+        <div class="bg-particle"></div>
+        <div class="bg-particle"></div>
+        <div class="bg-particle"></div>
+        <div class="bg-particle"></div>
+    </div>
+    <header id="header">
+        <div class="header-content">
+            <div class="logo">
+<img src="logo.png" alt="Pravixa AI Logo">            </div>
+            <nav class="nav">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html" class="active">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <a href="contact.html" class="cta-button">Book a Call</a>
+                <div class="hamburger" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.html">Services</a>
+            <a href="portfolio.html">Portfolio</a>
+            <a href="careers.html">Careers</a>
+            <a href="contact.html">Contact</a>
+            <a href="contact.html" class="cta-button" style="margin-top: 20px;">Book a Call</a>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Building the Future One Solution at a Time</h1>
+                <p>We are a global AI-powered IT company specializing in intelligent automation, custom software development, and digital transformation</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="stats">
+                <div class="stat-card">
+                    <h3>500+</h3>
+                    <p>Projects Delivered</p>
+                    <small>Successfully completed projects across various industries</small>
+                </div>
+                <div class="stat-card">
+                    <h3>50+</h3>
+                    <p>Global Clients</p>
+                    <small>Serving clients in USA, UK, Europe, and beyond</small>
+                </div>
+                <div class="stat-card">
+                    <h3>100+</h3>
+                    <p>Team Members</p>
+                    <small>Expert professionals in AI, development, and design</small>
+                </div>
+                <div class="stat-card">
+                    <h3>99%</h3>
+                    <p>Client Satisfaction</p>
+                    <small>Proven track record of delivering excellence</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission -->
+    <section class="section mission">
+        <div class="container">
+            <h2>Our Mission & Values</h2>
+            <p class="mission-desc">We help global businesses scale using AI-driven solutions. Our mission is to democratize access to cutting-edge technology</p>
+            <div class="values">
+                <div class="value-card">
+                    <h3>💻</h3>
+                    <h4>AI-Driven Innovation</h4>
+                    <p>Leveraging cutting-edge AI technologies to solve complex business challenges and drive growth.</p>
+                </div>
+                <div class="value-card">
+                    <h3>🌍</h3>
+                    <h4>Global Excellence</h4>
+                    <p>Delivering world-class solutions with a global perspective and local expertise.</p>
+                </div>
+                <div class="value-card">
+                    <h3>⚡</h3>
+                    <h4>Speed & Precision</h4>
+                    <p>Rapid deployment of high-quality solutions with meticulous attention to detail.</p>
+                </div>
+                <div class="value-card">
+                    <h3>👥</h3>
+                    <h4>Partnership Mindset</h4>
+                    <p>Building long-term relationships through collaboration and mutual success.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story -->
+    <section class="section section-alt">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 40px;">Why We're Different</h2>
+            <div class="story-card">
+                <p>We lead with cutting-edge technologies, leveraging AI, cloud computing, and automation to create future-ready digital ecosystems.</p>
+                <p>Our approach is not just development — we act as strategic partners helping businesses innovate, scale, and dominate their industries.</p>
+                <p>With a strong offshore model, we deliver high-quality solutions with cost efficiency and speed, ensuring global competitiveness.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-main">
+                <div class="footer-column">
+                    <div class="footer-brand">
+                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='logoGrad' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' style='stop-color:%2300C896;stop-opacity:1' /><stop offset='100%' style='stop-color:%23007BFF;stop-opacity:1' /></linearGradient></defs><circle cx='50' cy='50' r='48' fill='url(%23logoGrad)'/><circle cx='35' cy='40' r='8' fill='white' opacity='0.9'/><circle cx='65' cy='40' r='8' fill='white' opacity='0.9'/><path d='M 30 65 Q 50 75 70 65' stroke='white' stroke-width='3' fill='none' stroke-linecap='round'/></svg>" alt="Pravixa AI">
+                    </div>
+                    <p class="footer-description">Delivering world-class IT solutions and digital transformation services to businesses across the USA, UK, and Europe</p>
+                    <div class="social-links">
+                        <a href="https://linkedin.com" target="_blank" title="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+                        <a href="https://twitter.com" target="_blank" title="Twitter"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.953 4.57a10 10 0 002.856-3.51 10 10 0 01-2.836.856 4.958 4.958 0 002.165-2.724c-.951.564-2.005.974-3.127 1.195a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417a9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg></a>
+                        <a href="https://github.com" target="_blank" title="GitHub"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.6.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="services.html">AI Automation</a></li>
+                        <li><a href="services.html">Lead Generation</a></li>
+                        <li><a href="services.html">Web Development</a></li>
+                        <li><a href="services.html">SaaS Development</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="portfolio.html">Case Studies</a></li>
+                        <li><a href="#docs">Documentation</a></li>
+                        <li><a href="contact.html">Support</a></li>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copyright">© 2026 All rights reserved. Proudly serving clients worldwide</div>
+                <div class="footer-legal">
+                    <a href="#terms">Terms</a>
+                    <a href="#privacy">Privacy</a>
+                    <a href="#cookies">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const hamburger = document.querySelector('.hamburger');
+            menu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Enhanced scroll animations
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Add scroll animations to elements
+        document.addEventListener('DOMContentLoaded', function() {
+            const elementsToAnimate = document.querySelectorAll('.mission-card, .value-card, .team-member, .timeline-item, .stat-card');
+            elementsToAnimate.forEach(el => {
+                el.classList.add('animate-on-scroll');
+                scrollObserver.observe(el);
+            });
+
+            // Stagger grid animations
+            const grids = document.querySelectorAll('.values-grid, .team-grid, .timeline');
+            grids.forEach(grid => {
+                const items = grid.children;
+                Array.from(items).forEach((item, index) => {
+                    item.style.animationDelay = `${index * 0.1}s`;
+                });
+            });
+
+            // Floating icons
+            const icons = document.querySelectorAll('.mission-icon, .value-icon, .team-icon');
+            icons.forEach(icon => {
+                icon.style.animation = 'float 3s ease-in-out infinite';
+                icon.style.animationDelay = `${Math.random() * 2}s`;
+            });
+
+            // Typewriter effect for hero
+            const heroTitle = document.querySelector('.hero h1');
+            if (heroTitle) {
+                heroTitle.style.overflow = 'hidden';
+                heroTitle.style.borderRight = '2px solid #00C896';
+                heroTitle.style.whiteSpace = 'nowrap';
+                heroTitle.style.animation = 'typewriter 3s steps(40, end), blink 1s infinite step-end';
+            }
+
+            // Loading effect
+            document.body.classList.add('loaded');
+        });
+
+        // Add scroll animation for particles
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            
+            document.querySelectorAll('.bg-particle').forEach((particle, index) => {
+                const speed = (index + 1) * 0.1;
+                particle.style.transform = `translateY(${rate * speed}px) rotate(${scrolled * 0.1}deg)`;
+            });
+        });
+
+    </script>
+
+</body>
+</html>
+
+</body>
+</html>
