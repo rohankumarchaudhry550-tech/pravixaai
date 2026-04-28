@@ -1,0 +1,34 @@
+{
+  "pages": [
+    {
+      "route": "/",
+      "file": "index.html",
+      "title": "Pravixa AI - Leading AI Services USA & Worldwide"
+    },
+    {
+      "route": "/about",
+      "file": "about.html",
+      "title": "About Us - Pravixa AI"
+    },
+    {
+      "route": "/services",
+      "file": "services.html",
+      "title": "Services - Pravixa AI"
+    },
+    {
+      "route": "/portfolio",
+      "file": "portfolio.html",
+      "title": "Portfolio - Pravixa AI"
+    },
+    {
+      "route": "/careers",
+      "file": "careers.html",
+      "title": "Careers - Join Our Team - Pravixa AI"
+    },
+    {
+      "route": "/contact",
+      "file": "contact.html",
+      "title": "Contact Pravixa AI - Get AI Consulting & Support Today"
+    }
+  ]
+}

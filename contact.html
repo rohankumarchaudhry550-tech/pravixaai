@@ -96,7 +96,7 @@ small{color:#888;font-size:0.85rem;}
 .hero p{font-size:1rem;color:#B0B0B0;animation:fadeInUp 0.8s ease-out 0.4s both;}
 @keyframes fadeInUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
 
-/* CONTACT METHODS SECTION */
+/* CONTACT METHODS SECTION */ 
 .contacts-section{margin-bottom:80px;}
 .contacts-title{text-align:center;margin-bottom:50px;}
 .contacts-title h2{background:linear-gradient(135deg, #00C896 0%, #007BFF 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
@@ -480,10 +480,33 @@ form.addEventListener("submit", function(e){
   }
 
   if(valid){
-    document.getElementById("successMsg").innerHTML =
-      '<div class="success">✅ Message sent successfully!</div>';
+    const payload = {
+      name: name.value.trim(),
+      email: email.value.trim(),
+      phone: document.getElementById("phone").value.trim(),
+      company: document.getElementById("company").value.trim(),
+      service: document.getElementById("service").value,
+      message: message.value.trim()
+    };
 
-    form.reset();
+    fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+      .then(async response => {
+        const data = await response.json();
+        if (!response.ok) {
+          throw new Error(data.error || 'Unable to submit your message right now.');
+        }
+        document.getElementById("successMsg").innerHTML =
+          '<div class="success">✅ Message sent successfully! We will contact you soon.</div>';
+        form.reset();
+      })
+      .catch(error => {
+        document.getElementById("successMsg").innerHTML =
+          `<div class="success" style="background:rgba(255,107,107,0.16);color:#ffb3b3;border-color:#ff7b7b;">⚠️ ${error.message}</div>`;
+      });
   }
 });
 
