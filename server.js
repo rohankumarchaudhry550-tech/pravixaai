@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+const multer = require('multer');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 
@@ -11,7 +12,28 @@ const ADMIN_PASS = process.env.ADMIN_PASS || 'PravixaAI@2026';
 const SESSION_SECRET = process.env.SESSION_SECRET || 'pravixa-admin-session';
 const DATA_DIR = path.join(__dirname, 'data');
 const CONTACTS_FILE = path.join(DATA_DIR, 'contacts.json');
+const APPLICATIONS_FILE = path.join(DATA_DIR, 'applications.json');
+const ADMINS_FILE = path.join(DATA_DIR, 'admins.json');
 const SITE_FILE = path.join(DATA_DIR, 'site.json');
+const UPLOADS_DIR = path.join(__dirname, 'uploads');
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    if (!fs.existsSync(UPLOADS_DIR)) {
+      fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+    }
+    cb(null, UPLOADS_DIR);
+  },
+  filename: (req, file, cb) => {
+    const safeName = file.originalname.replace(/\s+/g, '_').replace(/[^a-zA-Z0-9._-]/g, '');
+    cb(null, `${Date.now()}_${safeName}`);
+  }
+});
+
+const upload = multer({
+  storage,
+  limits: { fileSize: 5 * 1024 * 1024 }
+});
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -25,8 +47,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(express.static(__dirname));
 app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use('/uploads', express.static(UPLOADS_DIR));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
@@ -45,6 +67,20 @@ function ensureDataDir() {
   if (!fs.existsSync(CONTACTS_FILE)) {
     fs.writeFileSync(CONTACTS_FILE, JSON.stringify([]));
   }
+  if (!fs.existsSync(APPLICATIONS_FILE)) {
+    fs.writeFileSync(APPLICATIONS_FILE, JSON.stringify([]));
+  }
+  if (!fs.existsSync(ADMINS_FILE)) {
+    fs.writeFileSync(
+      ADMINS_FILE,
+      JSON.stringify([
+        {
+          username: 'admin',
+          password: 'PravixaAI@2026'
+        }
+      ], null, 2)
+    );
+  }
   if (!fs.existsSync(SITE_FILE)) {
     fs.writeFileSync(
       SITE_FILE,
@@ -59,6 +95,9 @@ function ensureDataDir() {
         ]
       }, null, 2)
     );
+  }
+  if (!fs.existsSync(UPLOADS_DIR)) {
+    fs.mkdirSync(UPLOADS_DIR, { recursive: true });
   }
 }
 
@@ -82,6 +121,26 @@ function readSiteData() {
   }
 }
 
+function readAdmins() {
+  try {
+    return JSON.parse(fs.readFileSync(ADMINS_FILE, 'utf8'));
+  } catch (error) {
+    return [];
+  }
+}
+
+function readApplications() {
+  try {
+    return JSON.parse(fs.readFileSync(APPLICATIONS_FILE, 'utf8'));
+  } catch (error) {
+    return [];
+  }
+}
+
+function writeApplications(applications) {
+  fs.writeFileSync(APPLICATIONS_FILE, JSON.stringify(applications, null, 2));
+}
+
 function ensureAdmin(req, res, next) {
   if (req.session && req.session.authenticated) {
     return next();
@@ -91,32 +150,42 @@ function ensureAdmin(req, res, next) {
 
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
 app.get('/about', (req, res) => res.sendFile(path.join(__dirname, 'about.html')));
+app.get('/about.html', (req, res) => res.redirect(301, '/about'));
 app.get('/services', (req, res) => res.sendFile(path.join(__dirname, 'services.html')));
+app.get('/services.html', (req, res) => res.redirect(301, '/services'));
 app.get('/portfolio', (req, res) => res.sendFile(path.join(__dirname, 'portfolio.html')));
+app.get('/portfolio.html', (req, res) => res.redirect(301, '/portfolio'));
 app.get('/careers', (req, res) => res.sendFile(path.join(__dirname, 'careers.html')));
+app.get('/careers.html', (req, res) => res.redirect(301, '/careers'));
 app.get('/contact', (req, res) => res.sendFile(path.join(__dirname, 'contact.html')));
-
+app.get('/contact.html', (req, res) => res.redirect(301, '/contact'));
+app.get('/index.html', (req, res) => res.redirect(301, '/'));
+app.get('/admin.html', (req, res) => res.redirect(301, '/admin'));
 app.get('/admin', (req, res) => {
   if (req.session?.authenticated) {
     return res.redirect('/admin/dashboard');
   }
-  res.redirect('/admin/login');
+  res.sendFile(path.join(__dirname, 'admin.html'));
 });
 
 app.get('/admin/login', (req, res) => {
   if (req.session?.authenticated) {
     return res.redirect('/admin/dashboard');
   }
-  res.render('login', { error: null });
+  res.redirect('/admin');
 });
 
 app.post('/admin/login', (req, res) => {
   const { username, password } = req.body;
-  if (username === ADMIN_USER && password === ADMIN_PASS) {
+  const admins = readAdmins();
+  const user = admins.find(admin => admin.username === String(username).trim());
+
+  if ((user && user.password === password) || (username === ADMIN_USER && password === ADMIN_PASS)) {
     req.session.authenticated = true;
     return res.redirect('/admin/dashboard');
   }
-  res.status(401).render('login', { error: 'Invalid username or password' });
+
+  res.redirect('/admin?error=1');
 });
 
 app.get('/admin/logout', (req, res) => {
@@ -125,11 +194,15 @@ app.get('/admin/logout', (req, res) => {
 
 app.get('/admin/dashboard', ensureAdmin, (req, res) => {
   const contacts = readContacts();
+  const applications = readApplications();
   const siteData = readSiteData();
+  const pages = Array.isArray(siteData.pages) ? siteData.pages : [];
   res.render('dashboard', {
     contactsCount: contacts.length,
+    applicationCount: applications.length,
     recentContacts: contacts.slice(-5).reverse(),
-    pages: siteData.pages
+    recentApplications: applications.slice(-5).reverse(),
+    pages
   });
 });
 
@@ -143,6 +216,18 @@ app.post('/admin/contacts/delete', ensureAdmin, (req, res) => {
   const contacts = readContacts().filter(contact => contact.id !== id);
   writeContacts(contacts);
   res.redirect('/admin/contacts');
+});
+
+app.get('/admin/applications', ensureAdmin, (req, res) => {
+  const applications = readApplications().slice().reverse();
+  res.render('applications', { applications });
+});
+
+app.post('/admin/applications/delete', ensureAdmin, (req, res) => {
+  const { id } = req.body;
+  const applications = readApplications().filter(application => application.id !== id);
+  writeApplications(applications);
+  res.redirect('/admin/applications');
 });
 
 app.get('/api/contacts', ensureAdmin, (req, res) => {
@@ -169,6 +254,31 @@ app.post('/api/contact', (req, res) => {
   writeContacts(contacts);
   res.json({ success: true, message: 'Message received successfully.' });
 });
+
+app.post('/api/application', upload.single('resume'), (req, res) => {
+  const { name, email, phone, role, portfolio, message } = req.body;
+  if (!name || !email || !role || !message) {
+    return res.status(400).json({ error: 'Name, email, role, and message are required.' });
+  }
+  const applications = readApplications();
+  const newApplication = {
+    id: `a_${Date.now()}`,
+    createdAt: new Date().toISOString(),
+    name: String(name).trim(),
+    email: String(email).trim(),
+    phone: String(phone || '').trim(),
+    role: String(role).trim(),
+    portfolio: String(portfolio || '').trim(),
+    message: String(message).trim(),
+    resumePath: req.file ? `/uploads/${req.file.filename}` : null,
+    resumeOriginalName: req.file ? req.file.originalname : null
+  };
+  applications.push(newApplication);
+  writeApplications(applications);
+  res.json({ success: true, message: 'Application received successfully.' });
+});
+
+app.use(express.static(__dirname));
 
 app.use((req, res) => {
   res.status(404).sendFile(path.join(__dirname, '404.html'), err => {

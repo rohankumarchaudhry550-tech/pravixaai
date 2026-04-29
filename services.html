@@ -12,14 +12,14 @@
 <meta property="og:title" content="Services - Pravixa AI">
 <meta property="og:description" content="Explore our comprehensive AI services including automation, lead generation, web development, and SaaS solutions.">
 <meta property="og:image" content="https://globalaisolutions.com/services-og-image.jpg">
-<meta property="og:url" content="https://globalaisolutions.com/services.html">
+<meta property="og:url" content="https://globalaisolutions.com/services">
 <link rel="icon" href="logo.png">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Services - Pravixa AI">
 <meta name="twitter:description" content="Explore our comprehensive AI services including automation, lead generation, web development, and SaaS solutions.">
 <meta name="twitter:image" content="https://globalaisolutions.com/services-twitter-image.jpg">
-<link rel="canonical" href="https://globalaisolutions.com/services.html">
+<link rel="canonical" href="https://globalaisolutions.com/services">
 <link rel="icon" href="fa.png" type="image/png">
 <script type="application/ld+json">
 {
@@ -110,7 +110,7 @@ p{color:#aaa;}
   background:rgba(255,255,255,0.1);
   margin-bottom:20px;
 }
-.hero h1{font-size:3rem;font-weight:700;}
+.hero h1{font-size:3rem;font-weight:700;overflow-wrap:anywhere;word-break:break-word;white-space:normal;display:inline-block;max-width:100%;}
 @media (max-width:768px){.hero h1{font-size:2rem;}}
 .features{
   margin-top:30px;
@@ -428,7 +428,7 @@ body.loaded {
   .container{width:96%;padding:0 12px;}
   .hero{padding:70px 12px 50px;margin-top:48px;}
   .hero h1{font-size:1.6rem;margin-bottom:8px;line-height:1.2;}
-  .hero p{font-size:0.85rem;line-height:1.5;}
+  .hero p{font-size:0.85rem;line-height:1.5;overflow-wrap:anywhere;word-break:break-word;}
   .badge{padding:5px 12px;font-size:0.75rem;margin-bottom:10px;}
   h1{font-size:1.6rem;margin-bottom:10px;}
   h2{font-size:1.3rem;margin-bottom:10px;}
@@ -453,6 +453,65 @@ body.loaded {
 </style>
 </head>
 
+    <style>
+        /* Unified page background and animation overrides */
+        body {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1e1e1e 50%, #0a0a0a 100%);
+            color: #fff;
+            overflow-x: hidden;
+        }
+        .hero {
+            position: relative;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(0,200,150,0.15), rgba(0,123,255,0.15));
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(0,200,150,0.10), transparent 45%), radial-gradient(circle at 80% 80%, rgba(0,123,255,0.10), transparent 45%);
+            animation: gradientShift 10s ease-in-out infinite alternate;
+        }
+        .hero .container {
+            position: relative;
+            z-index: 1;
+        }
+        .animated-bg {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+        }
+        .bg-particle {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, rgba(0,200,150,0.2), rgba(0,123,255,0.2));
+            border-radius: 16px;
+            opacity: 0.6;
+            filter: blur(1px);
+            animation: modernFloat 20s infinite ease-in-out;
+        }
+        .bg-particle:nth-child(odd) { animation-duration: 18s; }
+        .bg-particle:nth-child(even) { animation-duration: 22s; }
+        @keyframes gradientShift { 0% { transform: translate(0, 0); } 50% { transform: translate(14px, -14px); } 100% { transform: translate(0, 0); } }
+        @keyframes modernFloat { 0% { transform: translateY(0) rotate(0deg); opacity: 0.4; } 50% { transform: translateY(-30px) rotate(180deg); opacity: 0.75; } 100% { transform: translateY(0) rotate(360deg); opacity: 0.4; } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInLeft { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes fadeInRight { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+        .animate-on-scroll { opacity: 0; transform: translateY(50px); transition: all 0.6s ease-out; }
+        .animate-on-scroll.animate { opacity: 1; transform: translateY(0); }
+        .animate-fade-in-left { opacity: 0; transform: translateX(-50px); transition: all 0.6s ease-out; }
+        .animate-fade-in-left.animate { opacity: 1; transform: translateX(0); }
+        .animate-fade-in-right { opacity: 0; transform: translateX(50px); transition: all 0.6s ease-out; }
+        .animate-fade-in-right.animate { opacity: 1; transform: translateX(0); }
+        .animate-scale-in { opacity: 0; transform: scale(0.8); transition: all 0.6s ease-out; }
+        .animate-scale-in.animate { opacity: 1; transform: scale(1); }
+        body.loaded { opacity: 1; transition: opacity 0.5s ease; }
+    </style>
 <body>
 <!-- Animated Background -->
 <div class="animated-bg">
@@ -489,6 +548,7 @@ body.loaded {
 <li><a href="services.html" class="active">Services</a></li>
 <li><a href="portfolio.html">Portfolio</a></li>
 <li><a href="careers.html">Careers</a></li>
+<li><a href="admin.html">Admin</a></li>
 <li><a href="contact.html">Contact</a></li>
 </ul>
 <a href="contact.html" class="cta-button">Book a Call</a>
@@ -500,12 +560,13 @@ body.loaded {
 </nav>
 </div>
  <div class="mobile-menu" id="mobileMenu">
-    <a href="#home">Home</a>
+    <a href="index.html">Home</a>
     <a href="about.html">About</a>
     <a href="services.html">Services</a>
-    <a href="#portfolio">Portfolio</a>
-    <a href="#careers">Careers</a>
-    <a href="#contact">Contact</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="careers.html">Careers</a>
+    <a href="admin.html">Admin</a>
+    <a href="contact.html">Contact</a>
 
     <!-- CTA BUTTON INSIDE MOBILE -->
     <a href="contact.html" class="cta-button mobile-cta">Book a Call</a>
@@ -527,8 +588,8 @@ body.loaded {
 <!-- HERO -->
 <section class="hero">
   <div class="container">
-    <div class="badge">🚀 Our Services</div>
-    <h1>Professional AI Services & Digital Solutions</h1>
+    <div class="badges">🚀 Our Services</div>
+    <h1>AI & Digital Solutions</h1>
     <p>Expert development, automation, and digital transformation services for businesses worldwide. From AI-powered development to marketing and operations consulting.</p>
 
     <div class="features">
@@ -536,6 +597,13 @@ body.loaded {
       <div class="feature">💼 Dedicated Expert Teams</div>
       <div class="feature">🌍 24/7 Global Support</div>
     </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <h2>Comprehensive AI Services for Businesses Worldwide</h2>
+    <p>Our AI services cover automation, lead generation, web development, SaaS platforms, and digital marketing. Whether you need a new product, a smarter sales funnel, or workflow automation, Pravixa AI builds solutions that increase revenue, improve efficiency, and deliver measurable ROI.</p>
   </div>
 </section>
 
@@ -820,9 +888,17 @@ document.addEventListener('DOMContentLoaded', function() {
   const heroTitle = document.querySelector('.hero h1');
   if (heroTitle) {
     heroTitle.style.overflow = 'hidden';
+    heroTitle.style.display = 'inline-block';
+    heroTitle.style.maxWidth = '100%';
     heroTitle.style.borderRight = '2px solid #00C896';
-    heroTitle.style.whiteSpace = 'nowrap';
-    heroTitle.style.animation = 'typewriter 3s steps(40, end), blink 1s infinite step-end';
+    if (window.innerWidth >= 768) {
+      heroTitle.style.whiteSpace = 'nowrap';
+      heroTitle.style.animation = 'typewriter 3s steps(40, end), blink 1s infinite step-end';
+    } else {
+      heroTitle.style.whiteSpace = 'normal';
+      heroTitle.style.animation = 'none';
+      heroTitle.style.borderRight = 'none';
+    }
   }
 
   // Loading effect
@@ -886,27 +962,27 @@ document.addEventListener('mousemove', (e) => {
 <div class="footer-column">
 <h4>Services</h4>
 <ul class="footer-links">
-<li><a href="services.html">AI Automation</a></li>
-<li><a href="services.html">Lead Generation</a></li>
-<li><a href="services.html">Web Development</a></li>
-<li><a href="services.html">SaaS Development</a></li>
+<li><a href="/services">AI Automation</a></li>
+<li><a href="/services">Lead Generation</a></li>
+<li><a href="/services">Web Development</a></li>
+<li><a href="/services">SaaS Development</a></li>
 </ul>
 </div>
 <div class="footer-column">
 <h4>Company</h4>
 <ul class="footer-links">
-<li><a href="about.html">About</a></li>
-<li><a href="careers.html">Careers</a></li>
-<li><a href="portfolio.html">Portfolio</a></li>
-<li><a href="contact.html">Contact</a></li>
+<li><a href="/about">About</a></li>
+<li><a href="/careers">Careers</a></li>
+<li><a href="/portfolio">Portfolio</a></li>
+<li><a href="/contact">Contact</a></li>
 </ul>
 </div>
 <div class="footer-column">
 <h4>Resources</h4>
 <ul class="footer-links">
-<li><a href="portfolio.html">Case Studies</a></li>
+<li><a href="/portfolio">Case Studies</a></li>
 <li><a href="#docs">Documentation</a></li>
-<li><a href="contact.html">Support</a></li>
+<li><a href="/contact">Support</a></li>
 <li><a href="#privacy">Privacy Policy</a></li>
 </ul>
 </div>
