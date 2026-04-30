@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= page.title %> | Pravixa AI</title>
+  <meta name="description" content="<%= page.description %>">
+  <link rel="canonical" href="https://globalaisolutions.com/<%= page.title.toLowerCase().replace(/\s+/g, '-') %>">
+  <link rel="icon" href="/fa.png" type="image/png">
+  <style>
+    body{margin:0;font-family:Inter,Arial,sans-serif;background:#07111f;color:#edf7ff;line-height:1.7;}
+    header{padding:22px 28px;background:#081827;border-bottom:1px solid rgba(255,255,255,0.08);}
+    .nav{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:20px;}
+    .brand{display:flex;align-items:center;gap:12px;color:#fff;text-decoration:none;font-weight:800;}
+    .brand img{height:42px;}
+    .links{display:flex;gap:18px;flex-wrap:wrap;}
+    .links a{color:#cde2f5;text-decoration:none;}
+    .links a:hover{color:#00c896;}
+    main{max-width:980px;margin:0 auto;padding:72px 24px;}
+    h1{font-size:clamp(2.1rem,5vw,4rem);line-height:1.08;margin:0 0 18px;color:#fff;}
+    .intro{font-size:1.08rem;color:#bdd0e5;margin:0 0 34px;max-width:760px;}
+    section{background:rgba(255,255,255,0.04);border:1px solid rgba(0,200,150,0.16);border-radius:18px;padding:24px;margin:18px 0;}
+    h2{margin:0 0 10px;color:#00c896;font-size:1.25rem;}
+    p{margin:0;color:#cddbeb;}
+    .cta{display:inline-flex;margin-top:28px;padding:13px 18px;border-radius:12px;background:#00c896;color:#06111d;text-decoration:none;font-weight:800;}
+    footer{border-top:1px solid rgba(255,255,255,0.08);padding:24px;text-align:center;color:#8fa7bd;}
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="nav">
+      <a class="brand" href="/"><img src="/logo.png" alt="Pravixa AI Logo">Pravixa AI</a>
+      <div class="links">
+        <a href="/">Home</a>
+        <a href="/services">Services</a>
+        <a href="/portfolio">Portfolio</a>
+        <a href="/careers">Careers</a>
+        <a href="/contact">Contact</a>
+        <a href="/admin">Admin</a>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <h1><%= page.heading %></h1>
+    <p class="intro"><%= page.description %></p>
+    <% page.sections.forEach(section => { %>
+      <section>
+        <h2><%= section[0] %></h2>
+        <p><%= section[1] %></p>
+      </section>
+    <% }) %>
+    <a class="cta" href="/contact">Get in Touch</a>
+  </main>
+  <footer>© 2026 Pravixa AI. All rights reserved.</footer>
+</body>
+</html>

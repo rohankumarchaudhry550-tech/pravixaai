@@ -3,21 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Careers - Join Our Team - Pravixa AI</title>
-<meta name="description" content="Join Pravixa AI team. Explore exciting career opportunities in AI, machine learning, and technology innovation. Work with cutting-edge projects worldwide.">
-<meta name="keywords" content="careers Pravixa AI, AI jobs, technology careers, machine learning jobs, software engineering jobs, join AI company">
+<title>Careers at Pravixa AI | AI, Software, Marketing & Operations Jobs</title>
+<meta name="description" content="Apply for careers at Pravixa AI across AI engineering, software development, SaaS, SEO, digital marketing, design, DevOps, and operations. Submit your resume online.">
+<meta name="keywords" content="Pravixa AI careers, AI jobs, software engineering jobs, SaaS jobs, SEO jobs, digital marketing careers, DevOps jobs, technology careers">
 <meta name="author" content="Pravixa AI">
 <meta name="robots" content="index, follow">
 <meta name="language" content="English">
-<meta property="og:title" content="Careers - Join Our Team - Pravixa AI">
-<meta property="og:description" content="Join Pravixa AI team. Explore exciting career opportunities in AI, machine learning, and technology innovation.">
+<meta property="og:title" content="Careers at Pravixa AI | AI, Software, Marketing & Operations Jobs">
+<meta property="og:description" content="Apply for AI, software, SaaS, SEO, digital marketing, design, DevOps, and operations roles at Pravixa AI.">
 <meta property="og:image" content="https://globalaisolutions.com/careers-og-image.jpg">
 <meta property="og:url" content="https://globalaisolutions.com/careers">
 <link rel="icon" href="logo.png">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Careers - Join Our Team - Pravixa AI">
-<meta name="twitter:description" content="Join Pravixa AI team. Explore exciting career opportunities in AI, machine learning, and technology innovation.">
+<meta name="twitter:title" content="Careers at Pravixa AI | AI, Software, Marketing & Operations Jobs">
+<meta name="twitter:description" content="Apply for AI, software, SaaS, SEO, digital marketing, design, DevOps, and operations roles at Pravixa AI.">
 <meta name="twitter:image" content="https://globalaisolutions.com/careers-twitter-image.jpg">
 <link rel="canonical" href="https://globalaisolutions.com/careers">
 <link rel="icon" href="fa.png" type="image/png">
@@ -427,15 +427,15 @@ body.loaded {
 <img src="logo.png" alt="Pravixa AI Logo"></div>
 <nav class="nav">
 <ul class="nav-links">
-<li><a href="index.html">Home</a></li>
-<li><a href="about.html">About</a></li>
-<li><a href="services.html">Services</a></li>
-<li><a href="portfolio.html">Portfolio</a></li>
-<li><a href="careers.html" class="active">Careers</a></li>
-<li><a href="admin.html">Admin</a></li>
-<li><a href="contact.html">Contact</a></li>
+<li><a href="/">Home</a></li>
+<li><a href="/about">About</a></li>
+<li><a href="/services">Services</a></li>
+<li><a href="/portfolio">Portfolio</a></li>
+<li><a href="/careers" class="active">Careers</a></li>
+<li><a href="/admin">Admin</a></li>
+<li><a href="/contact">Contact</a></li>
 </ul>
-<a href="contact.html" class="cta-button">Book a Call</a>
+<a href="/contact" class="cta-button">Book a Call</a>
 <div class="hamburger" onclick="toggleMenu()">
 <span></span>
 <span></span>
@@ -444,16 +444,16 @@ body.loaded {
 </nav>
 </div>
  <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="services.html">Services</a>
-    <a href="portfolio.html">Portfolio</a>
-    <a href="careers.html">Careers</a>
-    <a href="admin.html">Admin</a>
-    <a href="contact.html">Contact</a>
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+    <a href="/services">Services</a>
+    <a href="/portfolio">Portfolio</a>
+    <a href="/careers">Careers</a>
+    <a href="/admin">Admin</a>
+    <a href="/contact">Contact</a>
 
     <!-- CTA BUTTON INSIDE MOBILE -->
-    <a href="contact.html" class="cta-button mobile-cta">Book a Call</a>
+    <a href="/contact" class="cta-button mobile-cta">Book a Call</a>
     <style>
         /* Desktop → CTA visible */
 .cta-button {
@@ -473,8 +473,8 @@ body.loaded {
 <section class="hero">
   <div class="container">
     <div class="badges">🚀 Join Our Team</div>
-    <h1>Tech Careers, Global Reach</h1>
-    <p>Join a fast-growing international team working on cutting-edge AI, cloud technologies, and web development. Flexible remote positions available for developers, designers, and AI specialists</p>
+    <h1>Careers at Pravixa AI</h1>
+    <p>Join a fast-growing team building AI systems, software products, SaaS platforms, websites, SEO campaigns, digital growth programs, and automation workflows for growing businesses.</p>
 
     <div class="features">
       <div class="feature">🌍 Fully Remote-First Work</div>
@@ -624,7 +624,7 @@ body.loaded {
 <section id="resumeSection" class="section fade form-section">
   <div class="container">
     <h2>Submit Your Resume</h2>
-    <p class="form-description">Apply directly to Pravixa AI. Upload your resume and tell us which role you want.</p>
+    <p class="form-description">Apply directly to Pravixa AI for AI, software, design, marketing, DevOps, and operations roles. Upload your resume and tell us where you can create impact.</p>
     <div class="form-box">
       <form id="resumeForm" enctype="multipart/form-data">
         <div class="form-group">
@@ -655,7 +655,7 @@ body.loaded {
           <label for="appResume">Resume (PDF/DOC/DOCX)</label>
           <input type="file" id="appResume" name="resume" accept=".pdf,.doc,.docx">
         </div>
-        <button type="submit">Submit Application</button>
+        <button type="submit" id="applicationSubmit">Submit Application</button>
         <div id="applicationSuccessMsg"></div>
       </form>
     </div>
@@ -862,21 +862,54 @@ if (resumeForm) {
   resumeForm.addEventListener('submit', async function(e) {
     e.preventDefault();
     const applicationSuccessMsg = document.getElementById('applicationSuccessMsg');
+    const applicationSubmit = document.getElementById('applicationSubmit');
     applicationSuccessMsg.innerHTML = '';
     const formData = new FormData(resumeForm);
+    const email = String(formData.get('email') || '').trim();
+    const resume = document.getElementById('appResume').files[0];
+    const allowedResumeTypes = ['pdf', 'doc', 'docx'];
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+      applicationSuccessMsg.innerHTML = '<div class="success" style="background:rgba(255,107,107,0.16);color:#ffb3b3;border-color:#ff7b7b;">Please enter a valid email address.</div>';
+      return;
+    }
+
+    if (resume) {
+      const extension = resume.name.split('.').pop().toLowerCase();
+      if (!allowedResumeTypes.includes(extension)) {
+        applicationSuccessMsg.innerHTML = '<div class="success" style="background:rgba(255,107,107,0.16);color:#ffb3b3;border-color:#ff7b7b;">Please upload a PDF, DOC, or DOCX resume.</div>';
+        return;
+      }
+      if (resume.size > 5 * 1024 * 1024) {
+        applicationSuccessMsg.innerHTML = '<div class="success" style="background:rgba(255,107,107,0.16);color:#ffb3b3;border-color:#ff7b7b;">Resume file size must be 5MB or less.</div>';
+        return;
+      }
+    }
+
+    applicationSubmit.disabled = true;
+    applicationSubmit.textContent = 'Submitting...';
     try {
       const response = await fetch('/api/application', {
         method: 'POST',
         body: formData
       });
-      const data = await response.json();
+      const text = await response.text();
+      let data = {};
+      try {
+        data = text ? JSON.parse(text) : {};
+      } catch (err) {
+        data = { error: response.statusText || 'Unexpected server response.' };
+      }
       if (!response.ok) {
         throw new Error(data.error || 'Unable to send your application at this time.');
       }
-      applicationSuccessMsg.innerHTML = '<div class="success">✅ Application submitted successfully.</div>';
+      applicationSuccessMsg.innerHTML = '<div class="success">Application submitted successfully.</div>';
       resumeForm.reset();
     } catch (error) {
-      applicationSuccessMsg.innerHTML = `<div class="success" style="background:rgba(255,107,107,0.16);color:#ffb3b3;border-color:#ff7b7b;">⚠️ ${error.message}</div>`;
+      applicationSuccessMsg.innerHTML = `<div class="success" style="background:rgba(255,107,107,0.16);color:#ffb3b3;border-color:#ff7b7b;">${error.message}</div>`;
+    } finally {
+      applicationSubmit.disabled = false;
+      applicationSubmit.textContent = 'Submit Application';
     }
   });
 }
@@ -1027,22 +1060,37 @@ document.addEventListener('mousemove', (e) => {
 <h4>Resources</h4>
 <ul class="footer-links">
 <li><a href="/portfolio">Case Studies</a></li>
-<li><a href="#docs">Documentation</a></li>
-<li><a href="/contact">Support</a></li>
-<li><a href="#privacy">Privacy Policy</a></li>
+<li><a href="/documentation">Documentation</a></li>
+<li><a href="/support">Support</a></li>
+<li><a href="/privacy">Privacy Policy</a></li>
 </ul>
 </div>
 </div>
 <div class="footer-bottom">
 <div class="footer-copyright">© 2026 All rights reserved. Proudly serving clients worldwide</div>
 <div class="footer-legal">
-<a href="#terms">Terms</a>
-<a href="#privacy">Privacy</a>
-<a href="#cookies">Cookies</a>
+<a href="/terms">Terms</a>
+<a href="/privacy">Privacy</a>
+<a href="/cookies">Cookies</a>
 </div>
 </div>
 </div>
 </footer>
 
-</body>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.logo, .footer-brand').forEach(function (logo) {
+    logo.setAttribute('role', 'link');
+    logo.setAttribute('tabindex', '0');
+    logo.style.cursor = 'pointer';
+    logo.addEventListener('click', function () { window.location.href = '/'; });
+    logo.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        window.location.href = '/';
+      }
+    });
+  });
+});
+</script></body>
 </html>

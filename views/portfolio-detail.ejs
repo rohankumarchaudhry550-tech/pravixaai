@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= project.title %> Case Study | Pravixa AI Portfolio</title>
+  <meta name="description" content="<%= project.summary %>">
+  <link rel="canonical" href="https://globalaisolutions.com/portfolio/<%= slug %>">
+  <link rel="icon" href="/fa.png" type="image/png">
+  <style>
+    body{margin:0;font-family:Inter,Arial,sans-serif;background:#070d19;color:#eef7ff;line-height:1.7;}
+    header{padding:22px 28px;background:#081827;border-bottom:1px solid rgba(255,255,255,0.08);}
+    .nav{max-width:1120px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:20px;}
+    .brand{display:flex;align-items:center;gap:12px;color:#fff;text-decoration:none;font-weight:800;}
+    .brand img{height:42px;}
+    .links{display:flex;gap:18px;flex-wrap:wrap;}
+    .links a{color:#cde2f5;text-decoration:none;}
+    .links a:hover{color:#00c896;}
+    main{max-width:1120px;margin:0 auto;padding:70px 24px;}
+    .eyebrow{color:#00c896;font-weight:800;text-transform:uppercase;font-size:.82rem;letter-spacing:.08em;}
+    h1{font-size:clamp(2.2rem,5vw,4.4rem);line-height:1.05;margin:12px 0 18px;}
+    .summary{max-width:820px;color:#bdd0e5;font-size:1.1rem;margin-bottom:34px;}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin:28px 0;}
+    .panel{background:rgba(255,255,255,0.04);border:1px solid rgba(0,200,150,0.16);border-radius:18px;padding:24px;}
+    h2{margin:0 0 10px;color:#00c896;font-size:1.22rem;}
+    p{margin:0;color:#d2dfef;}
+    .tags{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+    .tag{padding:8px 10px;border-radius:999px;background:rgba(0,200,150,.12);color:#9df7df;font-size:.9rem;}
+    .actions{display:flex;gap:14px;flex-wrap:wrap;margin:36px 0;}
+    .btn{display:inline-flex;padding:13px 18px;border-radius:12px;text-decoration:none;font-weight:800;}
+    .primary{background:#00c896;color:#06111d;}
+    .secondary{border:1px solid rgba(255,255,255,.18);color:#dbeaff;}
+    .related a{display:block;color:#dbeaff;text-decoration:none;margin:8px 0;}
+    .related a:hover{color:#00c896;}
+    footer{border-top:1px solid rgba(255,255,255,0.08);padding:24px;text-align:center;color:#8fa7bd;}
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="nav">
+      <a class="brand" href="/"><img src="/logo.png" alt="Pravixa AI Logo">Pravixa AI</a>
+      <div class="links">
+        <a href="/">Home</a>
+        <a href="/services">Services</a>
+        <a href="/portfolio">Portfolio</a>
+        <a href="/careers">Careers</a>
+        <a href="/contact">Contact</a>
+        <a href="/admin">Admin</a>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="eyebrow"><%= project.category %> Case Study</div>
+    <h1><%= project.title %></h1>
+    <p class="summary"><%= project.summary %></p>
+    <div class="grid">
+      <section class="panel"><h2>Problem</h2><p><%= project.problem %></p></section>
+      <section class="panel"><h2>Solution</h2><p><%= project.solution %></p></section>
+      <section class="panel"><h2>Result</h2><p><%= project.result %></p></section>
+    </div>
+    <section class="panel">
+      <h2>Technology Stack</h2>
+      <div class="tags">
+        <% project.stack.forEach(item => { %><span class="tag"><%= item %></span><% }) %>
+      </div>
+    </section>
+    <div class="actions">
+      <a class="btn primary" href="/contact">Start a Similar Project</a>
+      <a class="btn secondary" href="/portfolio">Back to Portfolio</a>
+    </div>
+    <section class="panel related">
+      <h2>More Case Studies</h2>
+      <% relatedProjects.forEach(item => { %>
+        <a href="/portfolio/<%= item.slug %>"><%= item.title %> - <%= item.category %></a>
+      <% }) %>
+    </section>
+  </main>
+  <footer>© 2026 Pravixa AI. All rights reserved.</footer>
+</body>
+</html>

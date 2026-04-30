@@ -3,32 +3,57 @@
     {
       "route": "/",
       "file": "index.html",
-      "title": "Pravixa AI - Leading AI Services USA & Worldwide"
+      "title": "Pravixa AI | AI Automation, Custom Software, SaaS & Digital Growth"
     },
     {
       "route": "/about",
       "file": "about.html",
-      "title": "About Us - Pravixa AI"
+      "title": "About Pravixa AI | AI Automation, Software & Digital Transformation Team"
     },
     {
       "route": "/services",
       "file": "services.html",
-      "title": "Services - Pravixa AI"
+      "title": "Pravixa AI Services | AI Automation, SaaS, Web, SEO & CRM"
     },
     {
       "route": "/portfolio",
       "file": "portfolio.html",
-      "title": "Portfolio - Pravixa AI"
+      "title": "Pravixa AI Portfolio | AI, SaaS, Web, Mobile & Automation Case Studies"
     },
     {
       "route": "/careers",
       "file": "careers.html",
-      "title": "Careers - Join Our Team - Pravixa AI"
+      "title": "Careers at Pravixa AI | AI, Software, Marketing & Operations Jobs"
     },
     {
       "route": "/contact",
       "file": "contact.html",
-      "title": "Contact Pravixa AI - Get AI Consulting & Support Today"
+      "title": "Contact Pravixa AI | AI Consulting, Automation & Software Experts"
+    },
+    {
+      "route": "/documentation",
+      "file": "documentation.html",
+      "title": "Documentation | Pravixa AI"
+    },
+    {
+      "route": "/support",
+      "file": "support.html",
+      "title": "Support | Pravixa AI"
+    },
+    {
+      "route": "/privacy",
+      "file": "privacy.html",
+      "title": "Privacy Policy | Pravixa AI"
+    },
+    {
+      "route": "/terms",
+      "file": "terms.html",
+      "title": "Terms of Service | Pravixa AI"
+    },
+    {
+      "route": "/cookies",
+      "file": "cookies.html",
+      "title": "Cookie Policy | Pravixa AI"
     }
   ]
 }

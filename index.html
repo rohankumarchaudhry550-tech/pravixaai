@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pravixa AI - Leading AI Services USA & Worldwide</title>
-    <meta name="description" content="Transform your business with Pravixa AI. Leading AI services in USA, UK, Europe & worldwide. Expert AI automation, consulting, and cutting-edge technologies.">
-    <meta name="keywords" content="AI services, artificial intelligence, business automation, AI consulting, USA AI solutions, global AI, machine learning, AI technologies">
+    <title>Pravixa AI | AI Automation, Custom Software, SaaS & Digital Growth</title>
+    <meta name="description" content="Pravixa AI builds AI automation, custom software, SaaS platforms, websites, SEO systems, digital marketing campaigns, and CRM workflows for growing businesses worldwide.">
+    <meta name="keywords" content="Pravixa AI, AI automation services, AI consulting company, custom software development, SaaS development, web development, SEO services, CRM automation, digital marketing">
     <meta name="author" content="Pravixa AI">
     <meta name="robots" content="index, follow">
     <meta name="language" content="English">
-    <meta property="og:title" content="Pravixa AI - Leading AI Services USA & Worldwide">
-    <meta property="og:description" content="Transform your business with Pravixa AI. Leading AI services in USA, UK, Europe & worldwide.">
+    <meta property="og:title" content="Pravixa AI | AI Automation, Custom Software, SaaS & Digital Growth">
+    <meta property="og:description" content="Build smarter business systems with Pravixa AI: AI automation, custom software, SaaS, web development, SEO, digital marketing, and CRM workflows.">
     <meta property="og:image" content="https://globalaisolutions.com/og-image.jpg">
     <meta property="og:url" content="https://globalaisolutions.com">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Pravixa AI - Leading AI Services USA & Worldwide">
-    <meta name="twitter:description" content="Transform your business with Pravixa AI. Leading AI services in USA, UK, Europe & worldwide.">
+    <meta name="twitter:title" content="Pravixa AI | AI Automation, Custom Software, SaaS & Digital Growth">
+    <meta name="twitter:description" content="Build smarter business systems with Pravixa AI: AI automation, custom software, SaaS, web development, SEO, digital marketing, and CRM workflows.">
     <meta name="twitter:image" content="https://globalaisolutions.com/twitter-image.jpg">
     <link rel="canonical" href="https://globalaisolutions.com">
     <link rel="icon" href="fa.png" type="image/png">
@@ -29,7 +29,7 @@
         "name": "Pravixa AI",
         "url": "https://globalaisolutions.com",
         "logo": "https://globalaisolutions.com/logo.png",
-        "description": "Leading AI services provider in USA and worldwide, offering cutting-edge AI technologies and expert consulting.",
+        "description": "AI automation, custom software, SaaS development, web development, SEO, digital marketing, and CRM workflow services for businesses worldwide.",
         "address": {
             "@type": "PostalAddress",
             "addressCountry": "US"
@@ -153,8 +153,15 @@
         }
         html, body {
     overflow-x: hidden;
-    width: 110%;
+    width: 100%;
 }
+@media (max-width: 490px) {
+    html, body {
+        width: 120%;
+        overflow-x: hidden;
+    }
+}
+
         /* Loading animation */
         body {
             opacity: 0;
@@ -853,6 +860,52 @@
             0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
             40% { transform: scale(1); opacity: 1; }
         }
+        .chatbot-quick-replies {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding: 10px 15px 0;
+            border-top: 1px solid rgba(0, 200, 150, 0.12);
+            scrollbar-width: none;
+        }
+        .chatbot-quick-replies::-webkit-scrollbar {
+            display: none;
+        }
+        .quick-reply,
+        .chatbot-action {
+            border: 1px solid rgba(0, 200, 150, 0.35);
+            background: rgba(0, 200, 150, 0.1);
+            color: #b9fff0;
+            border-radius: 999px;
+            padding: 8px 12px;
+            font-size: 0.78rem;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .quick-reply:hover,
+        .chatbot-action:hover {
+            background: rgba(0, 200, 150, 0.22);
+            color: #ffffff;
+            transform: translateY(-1px);
+        }
+        .chatbot-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .chatbot-action {
+            display: inline-flex;
+            text-decoration: none;
+        }
+        .message-content ul {
+            margin: 8px 0 0 18px;
+            padding: 0;
+        }
+        .message-content li {
+            margin: 4px 0;
+        }
         /* ========= RESPONSIVE DESIGN ========= */
         @media (max-width: 490px) {
             .hero h1 { font-size: 2rem; }
@@ -873,6 +926,32 @@
             .footer-main {
                 grid-template-columns: 1fr;
                 gap: 30px;
+            }
+            .chatbot-container {
+                right: 12px;
+                bottom: 12px;
+            }
+            .chatbot-icon {
+                width: 54px;
+                height: 54px;
+            }
+            .chatbot-window {
+                width: calc(100vw - 24px);
+                right: 0;
+                bottom: 66px;
+                max-width: none;
+                max-height: 78vh;
+            }
+            .chatbot-header {
+                padding: 14px;
+            }
+            .chatbot-messages {
+                padding: 14px;
+                gap: 12px;
+            }
+            .message-content {
+                max-width: 88%;
+                font-size: 0.86rem;
             }
         }
 
@@ -986,14 +1065,15 @@
             </div>
             <nav class="nav">
                 <ul class="nav-links">
-                    <li><a href="#home" class="active">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="portfolio.html">Portfolio</a></li>
-                    <li><a href="careers.html">Careers</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="/" class="active">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/services">Services</a></li>
+                    <li><a href="/portfolio">Portfolio</a></li>
+                    <li><a href="/careers">Careers</a></li>
+                    <li><a href="/admin">Admin</a></li>
+                    <li><a href="/contact">Contact</a></li>
                 </ul>
-                <a href="contact.html" class="cta-button">Book a Call</a>
+                <a href="/contact" class="cta-button">Book a Call</a>
                 <div class="hamburger" onclick="toggleMenu()">
                     <span></span>
                     <span></span>
@@ -1002,15 +1082,16 @@
             </nav>
         </div>
        <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="services.html">Services</a>
-    <a href="portfolio.html">Portfolio</a>
-    <a href="careers.html">Careers</a>
-    <a href="contact.html">Contact</a>
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+    <a href="/services">Services</a>
+    <a href="/portfolio">Portfolio</a>
+    <a href="/careers">Careers</a>
+    <a href="/admin">Admin</a>
+    <a href="/contact">Contact</a>
 
     <!-- CTA BUTTON INSIDE MOBILE -->
-    <a href="contact.html" class="cta-button mobile-cta">Book a Call</a>
+    <a href="/contact" class="cta-button mobile-cta">Book a Call</a>
     <style>
         /* Desktop → CTA visible */
 .cta-button {
@@ -1031,19 +1112,19 @@
     <div class="hero-overlay"></div>
     <div class="container">
         <div class="hero-content">
-            <h1>Transform Growth with AI</h1>
+            <h1>AI Automation, Custom Software, SaaS and Digital Growth Services</h1>
 
             <p class="subtitle">
-                Leading AI Services in the USA & Worldwide
+                Practical AI, software, web, SEO, marketing, and automation solutions for businesses worldwide
             </p>
 
             <p class="tagline">
-                Empower your business with advanced artificial intelligence solutions, expert consulting, and smart automation to increase efficiency, reduce costs, and accelerate growth.
+                Pravixa AI helps companies automate operations, launch scalable software, improve search visibility, generate leads, and build reliable digital systems that support measurable growth.
             </p>
 
             <div class="hero-buttons">
-                <a href="contact.html" class="btn-primary">Start Your AI Journey</a>
-                <a href="services.html" class="btn-outline">Explore Services</a>
+                <a href="/contact" class="btn-primary">Start Your AI Journey</a>
+                <a href="/services" class="btn-outline">Explore Services</a>
             </div>
         </div>
     </div>
@@ -3804,9 +3885,9 @@ max-height: 1400px;
                     <h4>Resources</h4>
                     <ul class="footer-links">
                         <li><a href="/portfolio">Case Studies</a></li>
-                        <li><a href="#docs">Documentation</a></li>
-                        <li><a href="/contact">Support</a></li>
-                        <li><a href="#privacy">Privacy Policy</a></li>
+                        <li><a href="/documentation">Documentation</a></li>
+                        <li><a href="/support">Support</a></li>
+                        <li><a href="/privacy">Privacy Policy</a></li>
                     </ul>
                 </div>
             </div>
@@ -3816,9 +3897,9 @@ max-height: 1400px;
                     © 2026 All rights reserved. Proudly serving clients worldwide
                 </div>
                 <div class="footer-legal">
-                    <a href="#terms">Terms</a>
-                    <a href="#privacy">Privacy</a>
-                    <a href="#cookies">Cookies</a>
+                    <a href="/terms">Terms</a>
+                    <a href="/privacy">Privacy</a>
+                    <a href="/cookies">Cookies</a>
                 </div>
             </div>
         </div>
@@ -3851,6 +3932,12 @@ max-height: 1400px;
                     <div class="message-content">Hello! 👋 Welcome to Pravixa AI. How can I help you today?</div>
                     <div class="message-time">Just now</div>
                 </div>
+            </div>
+            <div class="chatbot-quick-replies" id="chatbotQuickReplies">
+                <button class="quick-reply" type="button" onclick="sendQuickReply('What services do you offer?')">Services</button>
+                <button class="quick-reply" type="button" onclick="sendQuickReply('How much does a project cost?')">Pricing</button>
+                <button class="quick-reply" type="button" onclick="sendQuickReply('Show me portfolio case studies')">Portfolio</button>
+                <button class="quick-reply" type="button" onclick="sendQuickReply('I want to contact your team')">Contact</button>
             </div>
             <div class="chatbot-input-area">
                 <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Type your message...">
@@ -3974,24 +4061,123 @@ max-height: 1400px;
             }
         }
 
-        const chatResponses = {
-            'hello': ['Hello! 👋 Welcome to Pravixa AI. How can I help you today?', 'Hi there! Welcome to our AI-powered world. What can I assist you with?', 'Greetings! Ready to explore AI solutions?'],
-            'hi': ['Hello! 👋 Welcome to Pravixa AI. How can I help you today?', 'Hi there! Welcome to our AI-powered world. What can I assist you with?', 'Greetings! Ready to explore AI solutions?'],
-            'services': ['We offer AI Automation, Lead Generation, Web Development, SaaS Development, AI Calling & Chat Systems, and Marketing & SEO. Would you like to know more about any of these?', 'Our comprehensive services include intelligent automation, lead generation systems, custom web development, SaaS platforms, AI communication tools, and digital marketing solutions.'],
-            'contact': ['You can reach us through our Contact page or book a call directly. We\'re here to help!', 'Feel free to visit our Contact page or schedule a consultation. Our team is ready to discuss your project!'],
-            'pricing': ['Our pricing varies based on your specific needs and project scope. Let\'s discuss your requirements - visit our Contact page to get a personalized quote!', 'We offer flexible pricing models tailored to your business needs. Contact us for a detailed proposal.'],
-            'about': ['We are a global AI company specializing in intelligent automation and digital transformation. Serving clients across USA, UK, Europe & worldwide.', 'Pravixa AI delivers cutting-edge AI technologies and expert consulting services to businesses worldwide.'],
-            'team': ['Our talented team includes AI experts, developers, designers, and consultants working together to deliver exceptional results.', 'We have a diverse team of AI specialists, software engineers, and business consultants dedicated to your success.'],
-            'portfolio': ['Check out our success stories and case studies on the Portfolio page to see real results from our AI solutions.', 'Our Portfolio showcases successful projects including AI automation, lead generation systems, and custom software development.'],
-            'careers': ['Interested in joining our innovative team? Visit our Careers page to explore current opportunities in AI and technology.', 'We\'re always looking for talented individuals. Check our Careers page for exciting opportunities in AI and software development.'],
-            'automation': ['Our AI automation solutions streamline operations, reduce costs, and boost productivity. We handle everything from process analysis to implementation.', 'AI automation can transform your business operations. We specialize in intelligent workflow automation, RPA, and custom automation solutions.'],
-            'lead generation': ['Our AI-powered lead generation systems use advanced algorithms to identify and qualify prospects, resulting in higher conversion rates.', 'We create sophisticated lead generation systems that combine AI with data analysis to deliver qualified leads consistently.'],
-            'web development': ['We build modern, high-performance websites with cutting-edge technologies, ensuring great user experience and SEO optimization.', 'Our web development services include responsive design, e-commerce platforms, and custom web applications built with the latest technologies.'],
-            'saas': ['We develop scalable SaaS platforms with robust architecture, ensuring security, performance, and seamless user experience.', 'Our SaaS development expertise covers cloud-native applications, multi-tenant systems, and enterprise-grade software solutions.'],
-            'thanks': ['You\'re welcome! Feel free to ask if you have more questions. 😊', 'Happy to help! Don\'t hesitate to reach out anytime.', 'My pleasure! Is there anything else I can assist you with?'],
-            'bye': ['Goodbye! Thanks for chatting with us. Feel free to return anytime!', 'Take care! We\'re here whenever you need assistance.', 'Farewell! Looking forward to our next conversation.'],
-            'default': ['That\'s an interesting question! For more detailed information, please visit our website or contact our team directly.', 'I\'d be happy to help with that. Could you provide more details about what you\'re looking for?', 'Great question! Our experts would love to discuss this with you. Please visit our Contact page to get in touch.']
-        };
+        const chatbotKnowledge = [
+            {
+                intent: 'greeting',
+                keywords: ['hello', 'hi', 'hey', 'namaste', 'good morning', 'good evening', 'start'],
+                answer: 'Hello. I can help with Pravixa AI services, pricing, timelines, portfolio, careers, contact, support, and project planning. Tell me what you want to build or choose a quick option below.',
+                actions: [{ label: 'Explore Services', href: '/services' }, { label: 'Contact Team', href: '/contact' }]
+            },
+            {
+                intent: 'services',
+                keywords: ['service', 'services', 'offer', 'provide', 'do you do', 'solution', 'solutions', 'work'],
+                answer: 'Pravixa AI provides AI automation, machine learning, custom software, SaaS development, web development, mobile apps, UI/UX, SEO, paid ads, LinkedIn outreach, CRM automation, data processing, and virtual assistance.',
+                actions: [{ label: 'View Services', href: '/services' }, { label: 'Book Consultation', href: '/contact' }]
+            },
+            {
+                intent: 'automation',
+                keywords: ['automation', 'workflow', 'process', 'manual work', 'rpa', 'crm automation', 'zapier', 'make', 'operations'],
+                answer: 'For automation, we map your workflow, identify repetitive tasks, connect tools through APIs or CRM flows, and build dashboards or AI assistants where useful. Common wins include faster follow-ups, cleaner data, and lower manual workload.',
+                actions: [{ label: 'Automation Services', href: '/services#ai-automation' }, { label: 'Discuss Workflow', href: '/contact' }]
+            },
+            {
+                intent: 'ai',
+                keywords: ['ai', 'artificial intelligence', 'machine learning', 'ml', 'chatbot', 'computer vision', 'nlp', 'predictive', 'model'],
+                answer: 'We build practical AI systems such as chatbots, predictive analytics, NLP tools, recommendation systems, computer vision workflows, and internal AI assistants. We focus on business outcomes, not just experiments.',
+                actions: [{ label: 'AI Services', href: '/services#ai-automation' }, { label: 'AI Case Study', href: '/portfolio/predictive-analytics-platform' }]
+            },
+            {
+                intent: 'web',
+                keywords: ['website', 'web development', 'web app', 'landing page', 'frontend', 'backend', 'ecommerce', 'e-commerce', 'wordpress'],
+                answer: 'We build fast, responsive, SEO-ready websites and web apps with clear messaging, modern UI, backend integrations, forms, dashboards, and conversion-focused pages.',
+                actions: [{ label: 'Web Services', href: '/services#web-development' }, { label: 'Website Case Study', href: '/portfolio/global-saas-website' }]
+            },
+            {
+                intent: 'saas',
+                keywords: ['saas', 'software as a service', 'subscription', 'dashboard', 'multi tenant', 'platform', 'portal'],
+                answer: 'For SaaS, we can plan and build user authentication, subscriptions, dashboards, admin panels, APIs, cloud infrastructure, analytics, and scalable multi-tenant workflows.',
+                actions: [{ label: 'SaaS Services', href: '/services#saas-development' }, { label: 'SaaS Case Study', href: '/portfolio/project-management-platform' }]
+            },
+            {
+                intent: 'marketing',
+                keywords: ['marketing', 'seo', 'ads', 'google ads', 'paid ads', 'ppc', 'linkedin', 'lead generation', 'content', 'social media'],
+                answer: 'Our growth services include technical SEO, on-page SEO, content strategy, paid advertising, LinkedIn outreach, lead generation funnels, analytics, and landing page improvements.',
+                actions: [{ label: 'Marketing Services', href: '/services#lead-generation' }, { label: 'Get Growth Plan', href: '/contact' }]
+            },
+            {
+                intent: 'pricing',
+                keywords: ['price', 'pricing', 'cost', 'budget', 'quote', 'package', 'charges', 'rate', 'how much'],
+                answer: 'Pricing depends on scope, timeline, integrations, and required team size. We support hourly, dedicated team, and fixed project models. Share your goal, required features, timeline, and budget range to get a practical estimate.',
+                actions: [{ label: 'Request Quote', href: '/contact' }, { label: 'View Services', href: '/services' }]
+            },
+            {
+                intent: 'timeline',
+                keywords: ['timeline', 'time', 'deadline', 'duration', 'how long', 'delivery', 'launch', 'start'],
+                answer: 'Simple landing pages can be planned quickly, while custom software, SaaS, or AI systems need discovery, design, build, QA, and launch. Send your requirements and we can suggest a realistic delivery plan.',
+                actions: [{ label: 'Start Project', href: '/contact' }]
+            },
+            {
+                intent: 'portfolio',
+                keywords: ['portfolio', 'case study', 'case studies', 'project', 'projects', 'examples', 'work', 'results'],
+                answer: 'You can review portfolio details for predictive analytics, SaaS websites, fitness apps, project management SaaS, e-commerce, and AI support chatbots.',
+                actions: [{ label: 'View Portfolio', href: '/portfolio' }, { label: 'AI Case Study', href: '/portfolio/customer-support-chatbot' }]
+            },
+            {
+                intent: 'contact',
+                keywords: ['contact', 'call', 'meeting', 'consultation', 'demo', 'talk', 'email', 'phone', 'get in touch', 'connect'],
+                answer: 'You can contact Pravixa AI through the contact form. Share your name, email, service interest, and project details, and the team can follow up with next steps.',
+                actions: [{ label: 'Open Contact Form', href: '/contact' }]
+            },
+            {
+                intent: 'careers',
+                keywords: ['career', 'careers', 'job', 'jobs', 'hiring', 'apply', 'resume', 'internship', 'vacancy'],
+                answer: 'For careers, visit the careers page and submit your resume with the role you are interested in. The backend stores applications in the admin panel for review.',
+                actions: [{ label: 'Careers Page', href: '/careers' }]
+            },
+            {
+                intent: 'admin',
+                keywords: ['admin', 'dashboard', 'login', 'panel', 'backend', 'leads', 'applications'],
+                answer: 'The admin panel is available at /admin. It shows dashboard metrics, contact leads, career applications, and uploaded resumes after login.',
+                actions: [{ label: 'Admin Login', href: '/admin' }]
+            },
+            {
+                intent: 'support',
+                keywords: ['support', 'help', 'issue', 'bug', 'not working', 'error', 'problem', 'fix'],
+                answer: 'For support, send the page URL, what you clicked, what you expected, and any screenshot or error text. If it is website-related, we can inspect the route, form, or backend flow.',
+                actions: [{ label: 'Contact Support', href: '/support' }]
+            },
+            {
+                intent: 'location',
+                keywords: ['location', 'country', 'usa', 'uk', 'europe', 'india', 'remote', 'worldwide', 'global'],
+                answer: 'Pravixa AI works with clients worldwide, including the USA, UK, Europe, and remote-first teams. Projects can be managed online through structured communication and milestone delivery.',
+                actions: [{ label: 'About Pravixa AI', href: '/about' }]
+            },
+            {
+                intent: 'security',
+                keywords: ['security', 'privacy', 'data', 'nda', 'confidential', 'safe', 'resume', 'cookies'],
+                answer: 'We treat submitted contact and career information as business data for follow-up and review. For website policies, you can read the privacy, terms, and cookie pages.',
+                actions: [{ label: 'Privacy Policy', href: '/privacy' }, { label: 'Terms', href: '/terms' }]
+            },
+            {
+                intent: 'thanks',
+                keywords: ['thanks', 'thank you', 'appreciate', 'great', 'ok', 'okay'],
+                answer: 'You are welcome. Ask me about services, pricing, timelines, portfolio, careers, or contact options anytime.',
+                actions: [{ label: 'Contact Team', href: '/contact' }]
+            },
+            {
+                intent: 'bye',
+                keywords: ['bye', 'goodbye', 'see you', 'later'],
+                answer: 'Goodbye. You can come back anytime or use the contact page when you are ready to discuss a project.',
+                actions: [{ label: 'Contact', href: '/contact' }]
+            }
+        ];
+
+        const defaultSuggestions = [
+            'What services do you offer?',
+            'How much does a project cost?',
+            'Show me portfolio case studies',
+            'I want to contact your team'
+        ];
 
         function sendChatMessage() {
             const input = document.getElementById('chatbotInput');
@@ -4007,11 +4193,18 @@ max-height: 1400px;
             setTimeout(() => {
                 hideTypingIndicator();
                 const response = getChatResponse(message);
-                typeMessage(response, () => {
+                typeMessage(response.answer, response.actions, () => {
                     chatHistory.push({type: 'bot', text: response, time: new Date().toISOString()});
                     localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
                 });
-            }, 1000 + Math.random() * 1000);
+                updateQuickReplies(response.suggestions);
+            }, 450 + Math.random() * 450);
+        }
+
+        function sendQuickReply(message) {
+            const input = document.getElementById('chatbotInput');
+            input.value = message;
+            sendChatMessage();
         }
 
         function showTypingIndicator() {
@@ -4046,7 +4239,7 @@ max-height: 1400px;
             isTyping = false;
         }
 
-        function typeMessage(text, callback) {
+        function typeMessage(text, actions = [], callback) {
             const messagesContainer = document.getElementById('chatbotMessages');
             const messageDiv = document.createElement('div');
             messageDiv.className = 'message bot';
@@ -4070,19 +4263,35 @@ max-height: 1400px;
                 } else {
                     clearInterval(timer);
                     typingText.removeAttribute('id');
+                    if (actions.length) {
+                        const actionsWrap = document.createElement('div');
+                        actionsWrap.className = 'chatbot-actions';
+                        actions.forEach(action => {
+                            const link = document.createElement('a');
+                            link.className = 'chatbot-action';
+                            link.href = action.href;
+                            link.textContent = action.label;
+                            actionsWrap.appendChild(link);
+                        });
+                        typingText.parentElement.appendChild(actionsWrap);
+                    }
                     if (callback) callback();
                 }
-            }, 30);
+            }, 12);
         }
 
         function addUserMessage(text) {
             const messagesContainer = document.getElementById('chatbotMessages');
             const messageDiv = document.createElement('div');
             messageDiv.className = 'message user';
-            messageDiv.innerHTML = `
-                <div class="message-content">${text}</div>
-                <div class="message-time">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
-            `;
+            const content = document.createElement('div');
+            content.className = 'message-content';
+            content.textContent = text;
+            const time = document.createElement('div');
+            time.className = 'message-time';
+            time.textContent = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            messageDiv.appendChild(content);
+            messageDiv.appendChild(time);
             messagesContainer.appendChild(messageDiv);
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
             chatHistory.push({type: 'user', text: text, time: new Date().toISOString()});
@@ -4090,16 +4299,77 @@ max-height: 1400px;
         }
 
         function getChatResponse(message) {
-            const lowerMessage = message.toLowerCase();
-            
-            for (const key in chatResponses) {
-                if (lowerMessage.includes(key)) {
-                    const responses = chatResponses[key];
-                    return responses[Math.floor(Math.random() * responses.length)];
-                }
+            const lowerMessage = normalizeMessage(message);
+            const scored = chatbotKnowledge
+                .map(item => ({
+                    ...item,
+                    score: item.keywords.reduce((total, keyword) => total + scoreKeyword(lowerMessage, keyword), 0)
+                }))
+                .sort((a, b) => b.score - a.score);
+
+            if (scored[0] && scored[0].score > 0) {
+                return {
+                    answer: scored[0].answer,
+                    actions: scored[0].actions || [],
+                    suggestions: buildSuggestions(scored[0].intent)
+                };
             }
-            
-            return chatResponses.default[Math.floor(Math.random() * chatResponses.default.length)];
+
+            return {
+                answer: 'I can help with Pravixa AI services, pricing, AI automation, websites, SaaS, SEO, portfolio, careers, admin, and contact questions. If your question is specific, share your goal, industry, timeline, and budget range so I can guide you better.',
+                actions: [{ label: 'Services', href: '/services' }, { label: 'Contact Team', href: '/contact' }],
+                suggestions: defaultSuggestions
+            };
+        }
+
+        function normalizeMessage(message) {
+            return message.toLowerCase().replace(/[^\w\s-]/g, ' ').replace(/\s+/g, ' ').trim();
+        }
+
+        function scoreKeyword(message, keyword) {
+            const normalizedKeyword = normalizeMessage(keyword);
+            if (!normalizedKeyword) return 0;
+            if (message === normalizedKeyword) return 6;
+            if (message.includes(normalizedKeyword)) return normalizedKeyword.includes(' ') ? 5 : 3;
+            const words = normalizedKeyword.split(' ');
+            return words.filter(word => word.length > 2 && message.includes(word)).length;
+        }
+
+        function buildSuggestions(intent) {
+            const map = {
+                greeting: ['What services do you offer?', 'How much does a project cost?', 'Show me portfolio case studies'],
+                services: ['Tell me about AI automation', 'Do you build SaaS?', 'Can you help with SEO?'],
+                automation: ['What can you automate?', 'CRM automation example', 'Discuss workflow'],
+                ai: ['AI chatbot project', 'Predictive analytics example', 'Start AI project'],
+                web: ['Website development cost', 'SEO-ready website', 'Show website case study'],
+                saas: ['SaaS development cost', 'SaaS case study', 'Need admin panel'],
+                marketing: ['Can you help with SEO?', 'LinkedIn lead generation', 'Paid ads support'],
+                pricing: ['What affects project cost?', 'How long does a project take?', 'Request a quote'],
+                timeline: ['How long does a project take?', 'What is your process?', 'Start project'],
+                portfolio: ['Show AI case study', 'Show SaaS case study', 'Start a similar project'],
+                contact: ['What should I include?', 'Open contact page', 'Need support'],
+                careers: ['How do I apply?', 'Open careers page', 'What roles are available?'],
+                admin: ['Open admin login', 'Where are leads stored?', 'Application dashboard'],
+                support: ['Contact support', 'Report a page issue', 'Form not working'],
+                location: ['Do you work worldwide?', 'Remote project process', 'Contact team'],
+                security: ['Privacy policy', 'Do you sign NDA?', 'Resume data handling'],
+                thanks: ['Show services', 'Contact team', 'View portfolio']
+            };
+            return map[intent] || defaultSuggestions;
+        }
+
+        function updateQuickReplies(suggestions = defaultSuggestions) {
+            const wrap = document.getElementById('chatbotQuickReplies');
+            if (!wrap) return;
+            wrap.innerHTML = '';
+            suggestions.slice(0, 4).forEach(suggestion => {
+                const button = document.createElement('button');
+                button.className = 'quick-reply';
+                button.type = 'button';
+                button.textContent = suggestion;
+                button.addEventListener('click', () => sendQuickReply(suggestion));
+                wrap.appendChild(button);
+            });
         }
 
         // Load chat history on page load
@@ -4113,14 +4383,15 @@ max-height: 1400px;
                         <div class="message-avatar">
                             <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300C896'><circle cx='12' cy='12' r='10'/><circle cx='9' cy='10' r='1.5'/><circle cx='15' cy='10' r='1.5'/><path d='M12 16c-1.5 0-2.5.5-2.5 1.5S10.5 19 12 19s2.5-.5 2.5-1.5S13.5 16 12 16.z'/></svg>" alt="Bot">
                         </div>
-                        <div class="message-content">${msg.text}</div>
+                            <div class="message-content">${typeof msg.text === 'string' ? msg.text : msg.text.answer}</div>
                         <div class="message-time">${new Date(msg.time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
                     `;
                 } else {
                     messageDiv.innerHTML = `
-                        <div class="message-content">${msg.text}</div>
+                        <div class="message-content"></div>
                         <div class="message-time">${new Date(msg.time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
                     `;
+                    messageDiv.querySelector('.message-content').textContent = msg.text;
                 }
                 messagesContainer.appendChild(messageDiv);
             });
@@ -4273,5 +4544,20 @@ max-height: 1400px;
             resultsObserver.observe(provenResults);
         }
     </script>
-</body>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.logo, .footer-brand').forEach(function (logo) {
+    logo.setAttribute('role', 'link');
+    logo.setAttribute('tabindex', '0');
+    logo.style.cursor = 'pointer';
+    logo.addEventListener('click', function () { window.location.href = '/'; });
+    logo.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        window.location.href = '/';
+      }
+    });
+  });
+});
+</script></body>
 </html>

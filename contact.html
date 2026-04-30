@@ -3,21 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact Pravixa AI - Get AI Consulting & Support Today</title>
-<meta name="description" content="Contact Pravixa AI for expert AI consulting, automation services, and business transformation. Respond within 24 hours. Serving USA, UK, Europe & worldwide clients with cutting-edge AI solutions.">
-<meta name="keywords" content="contact Pravixa AI, AI consulting services, business automation, AI experts, get AI quote, AI services contact, USA AI company, AI support">
+<title>Contact Pravixa AI | AI Consulting, Automation & Software Experts</title>
+<meta name="description" content="Contact Pravixa AI for AI consulting, business automation, custom software, SaaS, web development, SEO, and digital growth services. Get a practical response within 24 hours.">
+<meta name="keywords" content="contact Pravixa AI, AI consulting company, business automation services, custom software development, SaaS development, web development agency, SEO services, AI experts">
 <meta name="author" content="Pravixa AI">
 <meta name="robots" content="index, follow">
 <meta name="language" content="English">
 <meta name="theme-color" content="#00C896">
-<meta property="og:title" content="Contact Pravixa AI - Get AI Consulting & Support Today">
-<meta property="og:description" content="Contact Pravixa AI for expert AI consulting, automation services, and business transformation. Fast response, global reach.">
+<meta property="og:title" content="Contact Pravixa AI | AI Consulting, Automation & Software Experts">
+<meta property="og:description" content="Contact Pravixa AI for AI consulting, automation, custom software, SaaS, web development, SEO, digital marketing, and CRM workflow support.">
 <meta property="og:image" content="https://globalaisolutions.com/contact-og-image.jpg">
 <meta property="og:url" content="https://globalaisolutions.com/contact">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Contact Pravixa AI - Get AI Consulting & Support Today">
-<meta name="twitter:description" content="Contact Pravixa AI for expert AI consulting, automation services, and business transformation.">
+<meta name="twitter:title" content="Contact Pravixa AI | AI Consulting, Automation & Software Experts">
+<meta name="twitter:description" content="Contact Pravixa AI for AI consulting, automation, custom software, SaaS, web development, SEO, digital marketing, and CRM workflow support.">
 <meta name="twitter:image" content="https://globalaisolutions.com/contact-twitter-image.jpg">
 <link rel="canonical" href="https://globalaisolutions.com/contact">
 <link rel="icon" href="fa.png" type="image/png">
@@ -549,15 +549,15 @@ body.loaded {
 <img src="logo.png" alt="Pravixa AI Logo"></div>
 <nav class="nav">
 <ul class="nav-links">
-<li><a href="index.html">Home</a></li>
-<li><a href="about.html">About</a></li>
-<li><a href="services.html">Services</a></li>
-<li><a href="portfolio.html">Portfolio</a></li>
-<li><a href="careers.html">Careers</a></li>
-<li><a href="admin.html">Admin</a></li>
-<li><a href="contact.html" class="active">Contact</a></li>
+<li><a href="/">Home</a></li>
+<li><a href="/about">About</a></li>
+<li><a href="/services">Services</a></li>
+<li><a href="/portfolio">Portfolio</a></li>
+<li><a href="/careers">Careers</a></li>
+<li><a href="/admin">Admin</a></li>
+<li><a href="/contact" class="active">Contact</a></li>
 </ul>
-<a href="contact.html" class="cta-button">Book a Call</a>
+<a href="/contact" class="cta-button">Book a Call</a>
 <div class="hamburger" onclick="toggleMenu()">
 <span></span>
 <span></span>
@@ -566,16 +566,16 @@ body.loaded {
 </nav>
 </div>
  <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="services.html">Services</a>
-    <a href="portfolio.html">Portfolio</a>
-    <a href="careers.html">Careers</a>
-    <a href="admin.html">Admin</a>
-    <a href="contact.html">Contact</a>
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+    <a href="/services">Services</a>
+    <a href="/portfolio">Portfolio</a>
+    <a href="/careers">Careers</a>
+    <a href="/admin">Admin</a>
+    <a href="/contact">Contact</a>
 
     <!-- CTA BUTTON INSIDE MOBILE -->
-    <a href="contact.html" class="cta-button mobile-cta">Book a Call</a>
+    <a href="/contact" class="cta-button mobile-cta">Book a Call</a>
     <style>
         /* Desktop → CTA visible */
 .cta-button {
@@ -596,8 +596,8 @@ body.loaded {
   <div class="container">
     <div class="hero-content">
       <div class="badges">📩 Let's Connect</div>
-      <h1>Expert AI Consulting</h1>
-      <p>Connect with certified AI specialists for strategic consulting, automation solutions, and digital transformation. We deliver actionable strategies with fast 24-hour response times.</p>
+      <h1>Contact Pravixa AI for AI Consulting and Automation</h1>
+      <p>Speak with our AI, software, SaaS, automation, SEO, and digital growth specialists. Share your goals and get a practical response within 24 hours.</p>
     </div>
   </div>
 </section>
@@ -605,7 +605,7 @@ body.loaded {
 <section class="section">
   <div class="container">
     <h2>Contact Our AI Consultants Today</h2>
-    <p>Reach out to Pravixa AI for expert AI consulting, automation services, and business transformation. We provide fast, personalized support to help your company adopt modern AI and technology solutions with confidence.</p>
+    <p>Reach out to Pravixa AI for AI consulting, workflow automation, custom software, web development, SaaS platforms, SEO, and digital transformation support. Our team helps businesses turn technology ideas into reliable, measurable outcomes.</p>
   </div>
 </section>
 
@@ -705,7 +705,7 @@ body.loaded {
           <span class="error" id="messageError"></span>
         </div>
 
-        <button type="submit">✉️ Send Message</button>
+        <button type="submit" id="contactSubmit">Send Message</button>
 
         <div id="successMsg"></div>
 
@@ -718,6 +718,7 @@ body.loaded {
 
 <script>
 const form = document.getElementById("contactForm");
+const contactSubmit = document.getElementById("contactSubmit");
 
 form.addEventListener("submit", function(e){
   e.preventDefault();
@@ -726,6 +727,7 @@ form.addEventListener("submit", function(e){
 
   const name = document.getElementById("name");
   const email = document.getElementById("email");
+  const service = document.getElementById("service");
   const message = document.getElementById("message");
 
   document.getElementById("nameError").textContent="";
@@ -737,8 +739,14 @@ form.addEventListener("submit", function(e){
     valid=false;
   }
 
-  if(!email.value.includes("@")){
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim())){
     document.getElementById("emailError").textContent="Valid email required";
+    valid=false;
+  }
+
+  if(service.value.trim()===""){
+    document.getElementById("successMsg").innerHTML =
+      '<div class="success" style="background:rgba(255,107,107,0.16);color:#ffb3b3;border-color:#ff7b7b;">Please select the service you are interested in.</div>';
     valid=false;
   }
 
@@ -748,6 +756,9 @@ form.addEventListener("submit", function(e){
   }
 
   if(valid){
+    contactSubmit.disabled = true;
+    contactSubmit.textContent = 'Sending...';
+    document.getElementById("successMsg").innerHTML = '';
     const payload = {
       name: name.value.trim(),
       email: email.value.trim(),
@@ -763,17 +774,27 @@ form.addEventListener("submit", function(e){
       body: JSON.stringify(payload)
     })
       .then(async response => {
-        const data = await response.json();
+        const text = await response.text();
+        let data = {};
+        try {
+          data = text ? JSON.parse(text) : {};
+        } catch (err) {
+          data = { error: response.statusText || 'Unexpected server response.' };
+        }
         if (!response.ok) {
           throw new Error(data.error || 'Unable to submit your message right now.');
         }
         document.getElementById("successMsg").innerHTML =
-          '<div class="success">✅ Message sent successfully! We will contact you soon.</div>';
+          '<div class="success">Message sent successfully. We will contact you soon.</div>';
         form.reset();
       })
       .catch(error => {
         document.getElementById("successMsg").innerHTML =
-          `<div class="success" style="background:rgba(255,107,107,0.16);color:#ffb3b3;border-color:#ff7b7b;">⚠️ ${error.message}</div>`;
+          `<div class="success" style="background:rgba(255,107,107,0.16);color:#ffb3b3;border-color:#ff7b7b;">${error.message}</div>`;
+      })
+      .finally(() => {
+        contactSubmit.disabled = false;
+        contactSubmit.textContent = 'Send Message';
       });
   }
 });
@@ -933,22 +954,37 @@ document.addEventListener('mousemove', (e) => {
 <h4>Resources</h4>
 <ul class="footer-links">
 <li><a href="/portfolio">Case Studies</a></li>
-<li><a href="#docs">Documentation</a></li>
-<li><a href="/contact">Support</a></li>
-<li><a href="#privacy">Privacy Policy</a></li>
+<li><a href="/documentation">Documentation</a></li>
+<li><a href="/support">Support</a></li>
+<li><a href="/privacy">Privacy Policy</a></li>
 </ul>
 </div>
 </div>
 <div class="footer-bottom">
 <div class="footer-copyright">© 2026 All rights reserved. Proudly serving clients worldwide</div>
 <div class="footer-legal">
-<a href="#terms">Terms</a>
-<a href="#privacy">Privacy</a>
-<a href="#cookies">Cookies</a>
+<a href="/terms">Terms</a>
+<a href="/privacy">Privacy</a>
+<a href="/cookies">Cookies</a>
 </div>
 </div>
 </div>
 </footer>
 
-</body>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.logo, .footer-brand').forEach(function (logo) {
+    logo.setAttribute('role', 'link');
+    logo.setAttribute('tabindex', '0');
+    logo.style.cursor = 'pointer';
+    logo.addEventListener('click', function () { window.location.href = '/'; });
+    logo.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        window.location.href = '/';
+      }
+    });
+  });
+});
+</script></body>
 </html>
