@@ -1,72 +1,232 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Manage Contacts - Pravixa AI Admin</title>
-  <style>
-    body{margin:0;font-family:Inter,sans-serif;background:#080f1d;color:#eef5ff;}
-    .topbar{display:flex;justify-content:space-between;align-items:center;padding:22px 32px;background:#08131e;border-bottom:1px solid rgba(255,255,255,0.08);}
-    .topbar h1{font-size:1.7rem;color:#00c896;margin:0;}
-    .topbar a{color:#fff;text-decoration:none;background:rgba(255,255,255,0.08);padding:10px 18px;border-radius:999px;}
-    .content{padding:32px;max-width:1200px;margin:0 auto;}
-    table{width:100%;border-collapse:collapse;overflow:hidden;border-radius:18px;background:rgba(255,255,255,0.03);}
-    th,td{padding:14px;border-bottom:1px solid rgba(255,255,255,0.08);vertical-align:top;}
-    th{background:rgba(0,200,150,0.1);color:#fff;}
-    tr:hover{background:rgba(255,255,255,0.03);}
-    .small{color:#99b6cb;font-size:0.92rem;line-height:1.55;}
-    .nowrap{white-space:nowrap;}
-    .delete-form{display:inline;}
-    .delete-button{color:#ff7b7b;background:transparent;border:none;font-size:0.95rem;cursor:pointer;text-decoration:underline;}
-    .empty{padding:32px;background:rgba(255,255,255,0.04);border-radius:18px;text-align:center;color:#cbd8ea;}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Contacts - Pravixa AI Admin</title>
+
+<style>
+*,*::before,*::after{box-sizing:border-box;}
+
+body{
+  margin:0;
+  font-family:Inter,Arial,sans-serif;
+  background:#080f1d;
+  color:#eef5ff;
+  overflow-x:hidden;
+}
+
+/* TOPBAR */
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 20px;
+  background:#08131e;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.topbar h1{
+  margin:0;
+  font-size:1.5rem;
+  color:#00c896;
+}
+
+.topbar div{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.topbar a{
+  text-decoration:none;
+  padding:8px 14px;
+  border-radius:999px;
+  background:rgba(255,255,255,0.08);
+  color:#fff;
+  font-size:0.85rem;
+}
+
+/* CONTENT */
+.content{
+  max-width:1200px;
+  margin:auto;
+  padding:24px 16px;
+}
+
+/* TABLE WRAP */
+.table-wrap{
+  overflow-x:auto;
+  border-radius:16px;
+}
+
+/* TABLE */
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:850px;
+  background:rgba(255,255,255,0.03);
+}
+
+th,td{
+  padding:12px;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  text-align:left;
+}
+
+th{
+  background:rgba(0,200,150,0.1);
+  font-size:0.9rem;
+}
+
+tr:hover{
+  background:rgba(255,255,255,0.04);
+}
+
+.small{
+  color:#99b6cb;
+  font-size:0.85rem;
+}
+
+.delete-button{
+  color:#ff7b7b;
+  background:none;
+  border:none;
+  cursor:pointer;
+}
+
+.empty{
+  padding:30px;
+  text-align:center;
+  background:rgba(255,255,255,0.05);
+  border-radius:16px;
+}
+
+/* 🔥 MOBILE CARDS */
+@media(max-width:490px){
+
+  table{
+    display:none;
+  }
+
+  .card{
+    background:rgba(255,255,255,0.04);
+    border-radius:14px;
+    padding:14px;
+    margin-bottom:14px;
+    border:1px solid rgba(0,200,150,0.2);
+  }
+
+  .card p{
+    margin:6px 0;
+    font-size:0.9rem;
+  }
+
+  .card strong{
+    color:#00c896;
+  }
+
+  .topbar{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:10px;
+  }
+
+  .topbar div{
+    width:100%;
+    justify-content:space-between;
+  }
+}
+</style>
 </head>
+
 <body>
-  <div class="topbar">
-    <h1>Contacts</h1>
-    <div>
-      <a href="/admin/dashboard">Dashboard</a>
-      <a href="/admin/logout">Logout</a>
+
+<div class="topbar">
+  <h1>Contacts</h1>
+  <div>
+    <a href="/admin/dashboard">Dashboard</a>
+    <a href="/admin/logout">Logout</a>
+  </div>
+</div>
+
+<div class="content">
+
+<% if (contacts.length === 0) { %>
+
+  <div class="empty">No contacts yet.</div>
+
+<% } else { %>
+
+  <!-- DESKTOP TABLE -->
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Company</th>
+          <th>Service</th>
+          <th>Message</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% contacts.forEach(c => { %>
+        <tr>
+          <td><%= new Date(c.createdAt).toLocaleString() %></td>
+          <td><%= c.name %></td>
+          <td><%= c.email %></td>
+          <td><%= c.phone || '—' %></td>
+          <td><%= c.company || '—' %></td>
+          <td><%= c.service || '—' %></td>
+          <td class="small"><%= c.message %></td>
+          <td>
+            <form method="post" action="/admin/contacts/delete">
+              <input type="hidden" name="id" value="<%= c.id %>">
+              <button class="delete-button">Delete</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- MOBILE CARDS -->
+  <% contacts.forEach(c => { %>
+    <div class="card">
+      <p><strong>Name:</strong> <%= c.name %></p>
+      <p><strong>Email:</strong> <%= c.email %></p>
+      <p><strong>Service:</strong> <%= c.service || '—' %></p>
+      <p><strong>Date:</strong> <%= new Date(c.createdAt).toLocaleString() %></p>
+
+      <% if(c.company){ %>
+        <p><strong>Company:</strong> <%= c.company %></p>
+      <% } %>
+
+      <% if(c.phone){ %>
+        <p><strong>Phone:</strong> <%= c.phone %></p>
+      <% } %>
+
+      <p class="small"><strong>Message:</strong> <%= c.message %></p>
+
+      <form method="post" action="/admin/contacts/delete">
+        <input type="hidden" name="id" value="<%= c.id %>">
+        <button class="delete-button">Delete</button>
+      </form>
     </div>
-  </div>
-  <div class="content">
-    <% if (contacts.length === 0) { %>
-      <div class="empty">No contact form submissions have been received yet.</div>
-    <% } else { %>
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Company</th>
-            <th>Service</th>
-            <th>Message</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% contacts.forEach(contact => { %>
-            <tr>
-              <td class="nowrap"><%= new Date(contact.createdAt).toLocaleString() %></td>
-              <td><%= contact.name %></td>
-              <td><%= contact.email %></td>
-              <td><%= contact.phone || '—' %></td>
-              <td><%= contact.company || '—' %></td>
-              <td><%= contact.service || '—' %></td>
-              <td><span class="small"><%= contact.message %></span></td>
-              <td>
-                <form class="delete-form" method="post" action="/admin/contacts/delete">
-                  <input type="hidden" name="id" value="<%= contact.id %>" />
-                  <button type="submit" class="delete-button">Delete</button>
-                </form>
-              </td>
-            </tr>
-          <% }) %>
-        </tbody>
-      </table>
-    <% } %>
-  </div>
+  <% }) %>
+
+<% } %>
+
+</div>
+
 </body>
 </html>

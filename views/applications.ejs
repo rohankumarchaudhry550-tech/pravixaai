@@ -1,88 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Manage Applications - Pravixa AI Admin</title>
-  <style>
-    body{margin:0;font-family:Inter,sans-serif;background:#080f1d;color:#eef5ff;}
-    .topbar{display:flex;justify-content:space-between;align-items:center;padding:22px 32px;background:#08131e;border-bottom:1px solid rgba(255,255,255,0.08);}
-    .topbar h1{font-size:1.7rem;color:#00c896;margin:0;}
-    .topbar a{color:#fff;text-decoration:none;background:rgba(255,255,255,0.08);padding:10px 18px;border-radius:999px;}
-    .content{padding:32px;max-width:1200px;margin:0 auto;}
-    table{width:100%;border-collapse:collapse;overflow:hidden;border-radius:18px;background:rgba(255,255,255,0.03);}
-    th,td{padding:14px;border-bottom:1px solid rgba(255,255,255,0.08);vertical-align:top;}
-    th{background:rgba(0,200,150,0.1);color:#fff;}
-    tr:hover{background:rgba(255,255,255,0.03);}
-    .small{color:#99b6cb;font-size:0.92rem;line-height:1.55;}
-    .nowrap{white-space:nowrap;}
-    .delete-form{display:inline;}
-    .delete-button{color:#ff7b7b;background:transparent;border:none;font-size:0.95rem;cursor:pointer;text-decoration:underline;}
-    .empty{padding:32px;background:rgba(255,255,255,0.04);border-radius:18px;text-align:center;color:#cbd8ea;}
-    .resume-link{color:#00c896;text-decoration:none;}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Applications - Pravixa AI Admin</title>
+
+<style>
+*,*::before,*::after{box-sizing:border-box;}
+
+body{
+  margin:0;
+  font-family:Inter,Arial,sans-serif;
+  background:#080f1d;
+  color:#eef5ff;
+  overflow-x:hidden;
+}
+
+/* TOPBAR */
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 20px;
+  background:#08131e;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.topbar h1{
+  margin:0;
+  font-size:1.5rem;
+  color:#00c896;
+}
+
+.topbar div{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.topbar a{
+  text-decoration:none;
+  padding:8px 14px;
+  border-radius:999px;
+  background:rgba(255,255,255,0.08);
+  color:#fff;
+  font-size:0.85rem;
+}
+
+/* CONTENT */
+.content{
+  max-width:1200px;
+  margin:auto;
+  padding:24px 16px;
+}
+
+/* TABLE WRAPPER */
+.table-wrap{
+  overflow-x:auto;
+  border-radius:16px;
+}
+
+/* TABLE */
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:900px;
+  background:rgba(255,255,255,0.03);
+}
+
+th,td{
+  padding:12px;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  text-align:left;
+}
+
+th{
+  background:rgba(0,200,150,0.1);
+  font-size:0.9rem;
+}
+
+tr:hover{
+  background:rgba(255,255,255,0.04);
+}
+
+.small{
+  color:#99b6cb;
+  font-size:0.85rem;
+}
+
+.delete-button{
+  color:#ff7b7b;
+  background:none;
+  border:none;
+  cursor:pointer;
+}
+
+.resume-link{
+  color:#00c896;
+  text-decoration:none;
+}
+
+.empty{
+  padding:30px;
+  text-align:center;
+  background:rgba(255,255,255,0.05);
+  border-radius:16px;
+}
+
+/* 🔥 MOBILE CARD VIEW */
+@media(max-width:490px){
+
+  table{
+    display:none;
+  }
+
+  .card{
+    background:rgba(255,255,255,0.04);
+    border-radius:14px;
+    padding:14px;
+    margin-bottom:14px;
+    border:1px solid rgba(0,200,150,0.2);
+  }
+
+  .card p{
+    margin:6px 0;
+    font-size:0.9rem;
+  }
+
+  .card strong{
+    color:#00c896;
+  }
+
+  .topbar{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:10px;
+  }
+
+  .topbar div{
+    width:100%;
+    justify-content:space-between;
+  }
+}
+</style>
 </head>
+
 <body>
-  <div class="topbar">
-    <h1>Applications</h1>
-    <div>
-      <a href="/admin/dashboard">Dashboard</a>
-      <a href="/admin/contacts">Contacts</a>
-      <a href="/admin/logout">Logout</a>
+
+<div class="topbar">
+  <h1>Applications</h1>
+  <div>
+    <a href="/admin/dashboard">Dashboard</a>
+    <a href="/admin/contacts">Contacts</a>
+    <a href="/admin/logout">Logout</a>
+  </div>
+</div>
+
+<div class="content">
+
+<% if (applications.length === 0) { %>
+
+  <div class="empty">No applications yet.</div>
+
+<% } else { %>
+
+  <!-- DESKTOP TABLE -->
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Role</th>
+          <th>Portfolio</th>
+          <th>Resume</th>
+          <th>Message</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% applications.forEach(app => { %>
+        <tr>
+          <td><%= new Date(app.createdAt).toLocaleString() %></td>
+          <td><%= app.name %></td>
+          <td><%= app.email %></td>
+          <td><%= app.phone || '—' %></td>
+          <td><%= app.role %></td>
+          <td>
+            <% if(app.portfolio){ %>
+              <a class="resume-link" href="<%= app.portfolio %>" target="_blank">Open</a>
+            <% } else { %>—<% } %>
+          </td>
+          <td>
+            <% if(app.resumePath){ %>
+              <a class="resume-link" href="<%= app.resumePath %>" target="_blank">Download</a>
+            <% } else { %>—<% } %>
+          </td>
+          <td class="small"><%= app.message %></td>
+          <td>
+            <form method="post" action="/admin/applications/delete">
+              <input type="hidden" name="id" value="<%= app.id %>">
+              <button class="delete-button">Delete</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- MOBILE CARDS -->
+  <% applications.forEach(app => { %>
+    <div class="card">
+      <p><strong>Name:</strong> <%= app.name %></p>
+      <p><strong>Email:</strong> <%= app.email %></p>
+      <p><strong>Role:</strong> <%= app.role %></p>
+      <p><strong>Date:</strong> <%= new Date(app.createdAt).toLocaleString() %></p>
+
+      <% if(app.portfolio){ %>
+        <p><strong>Portfolio:</strong> <a class="resume-link" href="<%= app.portfolio %>" target="_blank">Open</a></p>
+      <% } %>
+
+      <% if(app.resumePath){ %>
+        <p><strong>Resume:</strong> <a class="resume-link" href="<%= app.resumePath %>" target="_blank">Download</a></p>
+      <% } %>
+
+      <form method="post" action="/admin/applications/delete">
+        <input type="hidden" name="id" value="<%= app.id %>">
+        <button class="delete-button">Delete</button>
+      </form>
     </div>
-  </div>
-  <div class="content">
-    <% if (applications.length === 0) { %>
-      <div class="empty">No applications have been submitted yet.</div>
-    <% } else { %>
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Role</th>
-            <th>Portfolio</th>
-            <th>Resume</th>
-            <th>Message</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% applications.forEach(application => { %>
-            <tr>
-              <td class="nowrap"><%= new Date(application.createdAt).toLocaleString() %></td>
-              <td><%= application.name %></td>
-              <td><%= application.email %></td>
-              <td><%= application.phone || '—' %></td>
-              <td><%= application.role %></td>
-              <td>
-                <% if (application.portfolio) { %>
-                  <a class="resume-link" href="<%= application.portfolio %>" target="_blank" rel="noopener">Open</a>
-                <% } else { %>
-                  —
-                <% } %>
-              </td>
-              <td>
-                <% if (application.resumePath) { %>
-                  <a class="resume-link" href="<%= application.resumePath %>" target="_blank" rel="noopener"><%= application.resumeOriginalName || 'Download' %></a>
-                <% } else { %>
-                  —
-                <% } %>
-              </td>
-              <td><span class="small"><%= application.message %></span></td>
-              <td>
-                <form class="delete-form" method="post" action="/admin/applications/delete">
-                  <input type="hidden" name="id" value="<%= application.id %>" />
-                  <button type="submit" class="delete-button">Delete</button>
-                </form>
-              </td>
-            </tr>
-          <% }) %>
-        </tbody>
-      </table>
-    <% } %>
-  </div>
+  <% }) %>
+
+<% } %>
+
+</div>
+
 </body>
 </html>

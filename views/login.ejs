@@ -1,35 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Login - Pravixa AI</title>
-  <style>
-    body{margin:0;font-family:Inter,sans-serif;background:#06090f;color:#fff;display:flex;align-items:center;justify-content:center;height:100vh;}
-    .login-box{background:rgba(255,255,255,0.06);padding:40px;border-radius:24px;box-shadow:0 24px 80px rgba(0,0,0,0.4);width:100%;max-width:420px;}
-    h1{margin-bottom:16px;font-size:2rem;color:#00c896;}
-    label{display:block;margin-top:18px;font-size:0.95rem;color:#bbb;}
-    input{width:100%;padding:14px 16px;margin-top:8px;border-radius:12px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.05);color:#fff;font-size:1rem;}
-    button{width:100%;padding:14px 16px;margin-top:24px;border:none;border-radius:12px;background:linear-gradient(135deg,#00c896,#007bff);color:#fff;font-size:1rem;font-weight:700;cursor:pointer;}
-    .error{margin-top:16px;color:#ff6b6b;background:rgba(255,255,255,0.08);padding:12px 14px;border-radius:12px;border:1px solid rgba(255,107,107,0.2);}
-    .hint{margin-top:12px;color:#8fbbc6;font-size:0.9rem;}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Login - Pravixa AI</title>
+
+<style>
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, sans-serif;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at top left, #00c89622, transparent 40%),
+              radial-gradient(circle at bottom right, #007bff22, transparent 40%),
+              #050a14;
+  color: #fff;
+  overflow: hidden;
+}
+
+/* GLOW BACKGROUND ANIMATION */
+body::before {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: #00c896;
+  filter: blur(140px);
+  opacity: 0.15;
+  top: -100px;
+  left: -100px;
+  animation: float 6s infinite ease-in-out;
+}
+
+body::after {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: #007bff;
+  filter: blur(140px);
+  opacity: 0.15;
+  bottom: -100px;
+  right: -100px;
+  animation: float 8s infinite ease-in-out reverse;
+}
+
+@keyframes float {
+  0%,100% { transform: translate(0,0); }
+  50% { transform: translate(30px, 30px); }
+}
+
+/* LOGIN BOX */
+.login-box {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  padding: 38px;
+  border-radius: 24px;
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+  animation: fadeUp 0.6s ease;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+h1 {
+  margin: 0 0 12px;
+  font-size: 2rem;
+  color: #00c896;
+}
+
+/* INPUT GROUP */
+label {
+  display: block;
+  margin-top: 18px;
+  font-size: 0.9rem;
+  color: #a9c6d8;
+}
+
+.input-wrap {
+  position: relative;
+}
+
+input {
+  width: 100%;
+  padding: 14px 16px;
+  margin-top: 6px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  transition: 0.25s;
+}
+
+input:focus {
+  border-color: #00c896;
+  box-shadow: 0 0 0 3px rgba(0,200,150,0.15);
+}
+
+/* PASSWORD TOGGLE */
+.toggle {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: #9fded0;
+}
+
+/* BUTTON */
+button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 24px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg,#00c896,#007bff);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0,200,150,0.3);
+}
+
+/* ERROR */
+.error {
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(255,107,107,0.1);
+  border: 1px solid rgba(255,107,107,0.3);
+  color: #ff8a8a;
+}
+
+/* HINT */
+.hint {
+  margin-top: 14px;
+  font-size: 0.85rem;
+  color: #8fb7c9;
+}
+
+/* MOBILE */
+@media(max-width:490px){
+  .login-box {
+    padding: 28px 20px;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+    text-align: center;
+  }
+}
+</style>
 </head>
+
 <body>
-  <div class="login-box">
-    <h1>Admin Login</h1>
-    <form method="post" action="/admin/login">
-      <label for="username">Username</label>
-      <input id="username" name="username" type="text" required autocomplete="username" />
-      <label for="password">Password</label>
-      <input id="password" name="password" type="password" required autocomplete="current-password" />
-      <button type="submit">Sign In</button>
-    </form>
-    <% if (error) { %>
-      <div class="error"><%= error %></div>
-    <% } else { %>
-      <div class="hint">Use your admin credentials to manage contact leads and view backend status.</div>
-    <% } %>
-  </div>
+
+<div class="login-box">
+  <h1>Admin Login</h1>
+
+  <form method="post" action="/admin/login">
+    
+    <label>Username</label>
+    <input name="username" type="text" required>
+
+    <label>Password</label>
+    <div class="input-wrap">
+      <input id="password" name="password" type="password" required>
+      <span class="toggle" onclick="togglePassword()">Show</span>
+    </div>
+
+    <button type="submit">Sign In</button>
+  </form>
+
+  <% if (error) { %>
+    <div class="error"><%= error %></div>
+  <% } else { %>
+    <div class="hint">Secure admin access for managing leads and applications.</div>
+  <% } %>
+</div>
+
+<script>
+function togglePassword() {
+  const input = document.getElementById("password");
+  input.type = input.type === "password" ? "text" : "password";
+}
+</script>
+
 </body>
 </html>

@@ -1,56 +1,316 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title><%= page.title %> | Pravixa AI</title>
-  <meta name="description" content="<%= page.description %>">
-  <link rel="canonical" href="https://globalaisolutions.com/<%= page.title.toLowerCase().replace(/\s+/g, '-') %>">
-  <link rel="icon" href="/fa.png" type="image/png">
+  <meta name="description" content="<%= page.description %>" />
+  <link rel="canonical" href="https://globalaisolutions.com/<%= page.title.toLowerCase().replace(/\s+/g, '-') %>" />
+  <link rel="icon" href="/fa.png" type="image/png" />
+
   <style>
-    body{margin:0;font-family:Inter,Arial,sans-serif;background:#07111f;color:#edf7ff;line-height:1.7;}
-    header{padding:22px 28px;background:#081827;border-bottom:1px solid rgba(255,255,255,0.08);}
-    .nav{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:20px;}
-    .brand{display:flex;align-items:center;gap:12px;color:#fff;text-decoration:none;font-weight:800;}
-    .brand img{height:42px;}
-    .links{display:flex;gap:18px;flex-wrap:wrap;}
-    .links a{color:#cde2f5;text-decoration:none;}
-    .links a:hover{color:#00c896;}
-    main{max-width:980px;margin:0 auto;padding:72px 24px;}
-    h1{font-size:clamp(2.1rem,5vw,4rem);line-height:1.08;margin:0 0 18px;color:#fff;}
-    .intro{font-size:1.08rem;color:#bdd0e5;margin:0 0 34px;max-width:760px;}
-    section{background:rgba(255,255,255,0.04);border:1px solid rgba(0,200,150,0.16);border-radius:18px;padding:24px;margin:18px 0;}
-    h2{margin:0 0 10px;color:#00c896;font-size:1.25rem;}
-    p{margin:0;color:#cddbeb;}
-    .cta{display:inline-flex;margin-top:28px;padding:13px 18px;border-radius:12px;background:#00c896;color:#06111d;text-decoration:none;font-weight:800;}
-    footer{border-top:1px solid rgba(255,255,255,0.08);padding:24px;text-align:center;color:#8fa7bd;}
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      background: #07111f;
+      color: #edf7ff;
+      overflow-x: hidden;
+    }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(8, 24, 39, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .nav {
+      max-width: 1100px;
+      margin: auto;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .brand img {
+      height: 36px;
+    }
+
+    /* NAV LINKS */
+    .links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .links a {
+      color: #cde2f5;
+      text-decoration: none;
+      font-size: 0.95rem;
+      position: relative;
+    }
+
+    .links a::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background: #00c896;
+      transition: 0.3s;
+    }
+
+    .links a:hover::after {
+      width: 100%;
+    }
+
+    /* HAMBURGER */
+    .menu-toggle {
+      display: none;
+      width: 28px;
+      height: 22px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      position: absolute;
+      width: 100%;
+      height: 3px;
+      background: white;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+
+    .menu-toggle span:nth-child(1) { top: 0; }
+    .menu-toggle span:nth-child(2) { top: 9px; }
+    .menu-toggle span:nth-child(3) { top: 18px; }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg);
+      top: 9px;
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg);
+      top: 9px;
+    }
+
+    /* MOBILE MENU */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 260px;
+      height: 100vh;
+      background: rgba(8, 24, 39, 0.96);
+      backdrop-filter: blur(16px);
+      padding: 80px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      transition: 0.35s ease;
+      z-index: 999;
+    }
+
+    .mobile-menu.active {
+      right: 0;
+    }
+
+    .mobile-menu a {
+      color: #cde2f5;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
+    /* OVERLAY */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.3s;
+    }
+
+    .overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* MAIN */
+    main {
+      max-width: 980px;
+      margin: auto;
+      padding: 70px 20px;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      margin-bottom: 16px;
+    }
+
+    .intro {
+      color: #bdd0e5;
+      margin-bottom: 28px;
+    }
+
+    section {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(0,200,150,0.18);
+      border-radius: 16px;
+      padding: 20px;
+      margin: 16px 0;
+      transition: 0.25s;
+    }
+
+    section:hover {
+      transform: translateY(-4px);
+      border-color: #00c896;
+    }
+
+    h2 {
+      color: #00c896;
+      margin-bottom: 8px;
+    }
+
+    .cta {
+      display: inline-block;
+      margin-top: 24px;
+      padding: 12px 20px;
+      border-radius: 10px;
+      background: linear-gradient(135deg,#00c896,#007bff);
+      color: white;
+      font-weight: 700;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .cta:hover {
+      transform: translateY(-2px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #8fa7bd;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    /* 🔥 MOBILE */
+    @media (max-width: 490px) {
+
+      .links {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      main {
+        padding: 50px 16px;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+      }
+
+      .cta {
+        width: 100%;
+      }
+    }
   </style>
 </head>
+
 <body>
-  <header>
-    <nav class="nav">
-      <a class="brand" href="/"><img src="/logo.png" alt="Pravixa AI Logo">Pravixa AI</a>
-      <div class="links">
-        <a href="/">Home</a>
-        <a href="/services">Services</a>
-        <a href="/portfolio">Portfolio</a>
-        <a href="/careers">Careers</a>
-        <a href="/contact">Contact</a>
-        <a href="/admin">Admin</a>
-      </div>
-    </nav>
-  </header>
-  <main>
-    <h1><%= page.heading %></h1>
-    <p class="intro"><%= page.description %></p>
-    <% page.sections.forEach(section => { %>
-      <section>
-        <h2><%= section[0] %></h2>
-        <p><%= section[1] %></p>
-      </section>
-    <% }) %>
-    <a class="cta" href="/contact">Get in Touch</a>
-  </main>
-  <footer>© 2026 Pravixa AI. All rights reserved.</footer>
+
+<header>
+  <nav class="nav">
+    <a class="brand" href="/">
+      <img src="/logo.png" alt="Pravixa AI Logo" />
+      Pravixa AI
+    </a>
+
+    <div class="links">
+      <a href="/">Home</a>
+      <a href="/services">Services</a>
+      <a href="/portfolio">Portfolio</a>
+      <a href="/careers">Careers</a>
+      <a href="/contact">Contact</a>
+      <a href="/admin">Admin</a>
+    </div>
+
+    <div class="menu-toggle" onclick="toggleMenu()" id="menuBtn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/">Home</a>
+  <a href="/services">Services</a>
+  <a href="/portfolio">Portfolio</a>
+  <a href="/careers">Careers</a>
+  <a href="/contact">Contact</a>
+  <a href="/admin">Admin</a>
+</div>
+
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+<main>
+  <h1><%= page.heading %></h1>
+  <p class="intro"><%= page.description %></p>
+
+  <% page.sections.forEach(section => { %>
+    <section>
+      <h2><%= section[0] %></h2>
+      <p><%= section[1] %></p>
+    </section>
+  <% }) %>
+
+  <a class="cta" href="/contact">Get in Touch</a>
+</main>
+
+<footer>
+  © 2026 Pravixa AI. All rights reserved.
+</footer>
+
+<script>
+function toggleMenu() {
+  document.getElementById("mobileMenu").classList.toggle("active");
+  document.getElementById("overlay").classList.toggle("active");
+  document.getElementById("menuBtn").classList.toggle("active");
+}
+</script>
+
 </body>
 </html>
