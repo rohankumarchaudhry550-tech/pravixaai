@@ -9,6 +9,12 @@
       color-scheme: dark;
       font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     }
+    html, body {
+  overflow-x: hidden;
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+}
     body {
       margin: 0;
       min-height: 100vh;
@@ -135,6 +141,51 @@
       .actions { flex-direction: column; align-items: stretch; }
       .back-link { width: 100%; }
     }
+    @media (max-width: 490px) {
+
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 100%;
+    padding: 22px 16px;
+    border-radius: 20px;
+  }
+
+  form {
+    width: 100%;
+    gap: 14px;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px 14px;
+  }
+
+  .primary,
+  .back-link {
+    width: 100%;
+    max-width: 100%;
+    padding: 14px;
+  }
+
+  .actions {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  h1,
+  .subtitle,
+  .brand {
+    text-align: center;
+  }
+}
   </style>
 </head>
 <body>
