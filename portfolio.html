@@ -75,10 +75,10 @@ p{color:#aaa}
 .hero{text-align:center;padding:120px 20px;position:relative;margin-top:70px;background:linear-gradient(135deg,rgba(0,200,150,0.15),rgba(0,123,255,0.15));min-height:60vh;display:flex;align-items:center;justify-content:center;}
 .hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 20% 50%, rgba(0,200,150,0.1), transparent 50%),radial-gradient(circle at 80% 80%, rgba(0,123,255,0.1), transparent 50%);animation:gradientShift 8s ease-in-out infinite;}
 @keyframes gradientShift{0%{transform:translate(0,0);}50%{transform:translate(10px,-10px);}100%{transform:translate(0,0);}}
-.badge{display:inline-block;padding:8px 18px;border-radius:30px;background:rgba(255,255,255,0.1);margin-bottom:20px;animation:fadeInDown 1s ease-out;}
+.badge{display:inline-block;padding:8px 18px;border-radius:30px;background:rgba(255,255,255,0.1);margin-bottom:20px;}
 @keyframes fadeInDown{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
-.hero h1{font-size:3rem;font-weight:700;animation:fadeInUp 1s ease-out 0.2s both;overflow-wrap:anywhere;word-break:break-word;white-space:normal;display:inline-block;max-width:100%;}
-.hero p{font-size:1.2rem;color:#B0B0B0;animation:fadeInUp 1s ease-out 0.4s both;overflow-wrap:anywhere;word-break:break-word;}
+.hero h1{font-size:3rem;font-weight:700;overflow-wrap:anywhere;word-break:break-word;white-space:normal;display:inline-block;max-width:100%;}
+.hero p{font-size:1.2rem;color:#B0B0B0;overflow-wrap:anywhere;word-break:break-word;}
 @media (max-width:768px){.hero{min-height:50vh;}.hero h1{font-size:2rem;}}
 
 /* FILTERS */
@@ -195,7 +195,7 @@ footer{background:#0A0E27;border-top:1px solid rgba(0,200,150,0.2);padding:60px 
   100% { background-position: 200% 0; }
 }
 to { width: 100%; }
-}
+
 @keyframes blink {
   50% { border-color: transparent; }
 }
