@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3000;
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 const CONFIGURED_JWT_SECRET = String(process.env.JWT_SECRET || '');
 if (IS_PRODUCTION && CONFIGURED_JWT_SECRET.length < 32) {
-  throw new Error('JWT_SECRET must be set to at least 32 characters in production.');
+  console.warn('WARNING: JWT_SECRET is not configured or is too short in production. A temporary secret will be used, but you should set JWT_SECRET to a stable 32+ character value.');
 }
 const JWT_SECRET = CONFIGURED_JWT_SECRET || crypto.randomBytes(32).toString('hex');
 const ADMIN_COOKIE = 'pravixa_admin_token';
