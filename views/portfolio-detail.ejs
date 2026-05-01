@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title><%= project.title %> Case Study | Pravixa AI</title>
+  <title><%= project.title %> Solution Example | Pravixa AI</title>
   <meta name="description" content="<%= project.summary %>">
-  <link rel="canonical" href="https://globalaisolutions.com/portfolio/<%= slug %>">
+  <link rel="canonical" href="https://pravixaai.com/portfolio/<%= slug %>">
     <link rel="icon" href="fa.png" type="image/png">
 
   <style>
@@ -288,7 +288,6 @@
       <a href="/portfolio">Portfolio</a>
       <a href="/careers">Careers</a>
       <a href="/contact">Contact</a>
-      <a href="/admin">Admin</a>
     </div>
 
     <div class="menu-toggle" onclick="toggleMenu()" id="menuBtn">
@@ -303,14 +302,13 @@
   <a href="/portfolio">Portfolio</a>
   <a href="/careers">Careers</a>
   <a href="/contact">Contact</a>
-  <a href="/admin">Admin</a>
 </div>
 
 <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
 <main>
 
-  <div class="eyebrow"><%= project.category %> Case Study</div>
+  <div class="eyebrow"><%= project.category %> Solution Example</div>
   <h1><%= project.title %></h1>
   <p class="summary"><%= project.summary %></p>
 
@@ -331,11 +329,11 @@
 
   <div class="actions">
     <a class="btn primary" href="/contact">Start a Similar Project</a>
-    <a class="btn secondary" href="/portfolio">Back to Portfolio</a>
+    <a class="btn secondary" href="/portfolio">Back to Solutions</a>
   </div>
 
   <section class="panel">
-    <h2>More Case Studies</h2>
+    <h2>More Solution Examples</h2>
     <% relatedProjects.forEach(item => { %>
       <p><a href="/portfolio/<%= item.slug %>"><%= item.title %></a></p>
     <% }) %>

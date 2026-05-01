@@ -20,8 +20,12 @@ async function request(baseUrl, path, options = {}) {
 async function main() {
   const contactsFile = path.join(__dirname, '..', 'data', 'contacts.json');
   const applicationsFile = path.join(__dirname, '..', 'data', 'applications.json');
+  const adminsFile = path.join(__dirname, '..', 'data', 'admins.json');
+  const usersFile = path.join(__dirname, '..', 'data', 'users.json');
   const originalContacts = fs.existsSync(contactsFile) ? fs.readFileSync(contactsFile, 'utf8') : '[]';
   const originalApplications = fs.existsSync(applicationsFile) ? fs.readFileSync(applicationsFile, 'utf8') : '[]';
+  const originalAdmins = fs.existsSync(adminsFile) ? fs.readFileSync(adminsFile, 'utf8') : '[]';
+  const originalUsers = fs.existsSync(usersFile) ? fs.readFileSync(usersFile, 'utf8') : '[]';
   const server = app.listen(0);
   await new Promise(resolve => server.once('listening', resolve));
   const { port } = server.address();
@@ -41,8 +45,11 @@ async function main() {
       '/portfolio/customer-support-chatbot',
       '/careers',
       '/contact',
+      '/consultation',
+      '/login',
+      '/signup',
       '/admin',
-      '/admin/login',
+      '/admin/setup',
       '/documentation',
       '/privacy',
       '/terms',
@@ -88,19 +95,65 @@ async function main() {
     });
     assert(application.response.status === 200, `/api/application returned ${application.response.status}: ${application.text}`);
 
+    const signup = await request(baseUrl, '/api/signup', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        name: 'Smoke Test Customer',
+        email: 'customer@example.com',
+        company: 'Example Customer Company',
+        businessType: 'SaaS',
+        password: 'Customer@2026'
+      })
+    });
+    assert(signup.response.status === 201, `/api/signup returned ${signup.response.status}: ${signup.text}`);
+    const signupCookie = signup.response.headers.get('set-cookie');
+    assert(signupCookie, 'Signup did not set a user session cookie');
+
+    const userDashboard = await request(baseUrl, '/dashboard', {
+      headers: { cookie: signupCookie }
+    });
+    assert(userDashboard.response.status === 200, `/dashboard returned ${userDashboard.response.status}`);
+
+    const me = await request(baseUrl, '/api/me', {
+      headers: { cookie: signupCookie }
+    });
+    assert(me.response.status === 200, `/api/me returned ${me.response.status}`);
+    assert(JSON.parse(me.text).email === 'customer@example.com', '/api/me returned the wrong user');
+
+    const customerLogin = await request(baseUrl, '/api/login', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        email: 'customer@example.com',
+        password: 'Customer@2026'
+      })
+    });
+    assert(customerLogin.response.status === 200, `/api/login returned ${customerLogin.response.status}: ${customerLogin.text}`);
+
+    const setup = await request(baseUrl, '/admin/setup', {
+      method: 'POST',
+      headers: { 'content-type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        username: 'admin@example.com',
+        password: 'PravixaSmoke@2026'
+      })
+    });
+    assert(setup.response.status === 302, `/admin/setup returned ${setup.response.status}`);
+
     const login = await request(baseUrl, '/admin/login', {
       method: 'POST',
       headers: { 'content-type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams({
-        username: 'admin',
-        password: 'PravixaAI@2026'
+        username: 'admin@example.com',
+        password: 'PravixaSmoke@2026'
       })
     });
     assert(login.response.status === 302, `/admin/login returned ${login.response.status}`);
     const cookie = login.response.headers.get('set-cookie');
     assert(cookie, 'Admin login did not set a session cookie');
 
-    for (const path of ['/admin/dashboard', '/admin/contacts', '/admin/applications', '/api/contacts', '/api/applications']) {
+    for (const path of ['/admin/dashboard', '/admin/contacts', '/admin/applications', '/admin/users', '/admin/logs', '/admin/settings', '/api/contacts', '/api/applications', '/api/users', '/api/admin/stats']) {
       const { response } = await request(baseUrl, path, {
         headers: { cookie }
       });
@@ -112,6 +165,8 @@ async function main() {
     await new Promise(resolve => server.close(resolve));
     fs.writeFileSync(contactsFile, originalContacts);
     fs.writeFileSync(applicationsFile, originalApplications);
+    fs.writeFileSync(adminsFile, originalAdmins);
+    fs.writeFileSync(usersFile, originalUsers);
   }
 }
 

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Users | Pravixa AI Admin</title>
+  <link rel="icon" href="/fa.png">
+  <style>
+    body{margin:0;font-family:Inter,Arial,sans-serif;background:#07111d;color:#eef7ff}.app{display:grid;grid-template-columns:260px 1fr;min-height:100vh}.sidebar{background:#081827;padding:24px}.brand{display:flex;gap:12px;align-items:center;margin-bottom:28px}.brand img{height:42px}.nav{display:grid;gap:8px}.nav a{color:#bcd0e5;text-decoration:none;padding:12px 14px;border-radius:12px}.nav a.active,.nav a:hover{background:rgba(0,200,150,.14);color:#fff}.main{padding:28px}.panel{background:#0d1d31;border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:18px;margin-bottom:18px;overflow:auto}table{width:100%;border-collapse:collapse}th,td{padding:12px;border-bottom:1px solid rgba(255,255,255,.08);text-align:left;vertical-align:top}.muted{color:#98adc3}.badge{display:inline-flex;padding:5px 9px;border-radius:999px;background:rgba(0,200,150,.14);color:#9ee8d3;font-weight:800;font-size:.78rem}@media(max-width:900px){.app{grid-template-columns:1fr}.main{padding:18px}}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><img src="/logo.png" alt="Pravixa AI Logo"><strong>Pravixa AI</strong></div>
+      <nav class="nav">
+        <a href="/admin/dashboard">Dashboard</a>
+        <a href="/admin/contacts">Leads</a>
+        <a href="/admin/applications">Applications</a>
+        <a class="active" href="/admin/users">Users</a>
+        <a href="/admin/logs">Logs</a>
+        <a href="/admin/settings">Settings</a>
+        <a href="/admin/logout">Logout</a>
+      </nav>
+    </aside>
+    <main class="main">
+      <h1>Users</h1>
+      <p class="muted">Customer signups and admin accounts. Password hashes are never displayed.</p>
+
+      <section class="panel">
+        <h2>Customer Accounts</h2>
+        <% if (!customers || customers.length === 0) { %>
+          <p class="muted">No customer accounts yet.</p>
+        <% } else { %>
+          <table>
+            <thead><tr><th>Name</th><th>Email</th><th>Company</th><th>Status</th><th>Signup</th><th>Last Login</th></tr></thead>
+            <tbody>
+              <% customers.forEach(user => { %>
+                <tr>
+                  <td><%= user.name %></td>
+                  <td><%= user.email %></td>
+                  <td><%= user.company || user.businessType || 'Not specified' %></td>
+                  <td><span class="badge"><%= user.status %></span></td>
+                  <td><%= user.createdAt ? new Date(user.createdAt).toLocaleString() : '' %></td>
+                  <td><%= user.lastLoginAt ? new Date(user.lastLoginAt).toLocaleString() : 'Not yet' %></td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        <% } %>
+      </section>
+
+      <section class="panel">
+        <h2>Admin Accounts</h2>
+        <% if (!adminUsers || adminUsers.length === 0) { %>
+          <p class="muted">No admin accounts configured.</p>
+        <% } else { %>
+          <table>
+            <thead><tr><th>Email</th><th>Role</th><th>Created</th></tr></thead>
+            <tbody>
+              <% adminUsers.forEach(user => { %>
+                <tr><td><%= user.username %></td><td><%= user.role %></td><td><%= new Date(user.createdAt).toLocaleString() %></td></tr>
+              <% }) %>
+            </tbody>
+          </table>
+        <% } %>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

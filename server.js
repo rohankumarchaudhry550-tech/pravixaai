@@ -1,20 +1,28 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+const crypto = require('crypto');
 const multer = require('multer');
 const bodyParser = require('body-parser');
-const session = require('express-session');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const ADMIN_USER = process.env.ADMIN_USER || 'admin';
-const ADMIN_PASS = process.env.ADMIN_PASS || 'PravixaAI@2026';
-const SESSION_SECRET = process.env.SESSION_SECRET || 'pravixa-admin-session';
+const IS_PRODUCTION = process.env.NODE_ENV === 'production';
+const CONFIGURED_JWT_SECRET = String(process.env.JWT_SECRET || '');
+if (IS_PRODUCTION && CONFIGURED_JWT_SECRET.length < 32) {
+  throw new Error('JWT_SECRET must be set to at least 32 characters in production.');
+}
+const JWT_SECRET = CONFIGURED_JWT_SECRET || crypto.randomBytes(32).toString('hex');
+const ADMIN_COOKIE = 'pravixa_admin_token';
+const USER_COOKIE = 'pravixa_user_token';
+const AUTH_MAX_AGE_SECONDS = Number(process.env.ADMIN_SESSION_SECONDS || 60 * 60 * 2);
 const DATA_DIR = path.join(__dirname, 'data');
 const CONTACTS_FILE = path.join(DATA_DIR, 'contacts.json');
 const APPLICATIONS_FILE = path.join(DATA_DIR, 'applications.json');
 const ADMINS_FILE = path.join(DATA_DIR, 'admins.json');
+const USERS_FILE = path.join(DATA_DIR, 'users.json');
 const SITE_FILE = path.join(DATA_DIR, 'site.json');
+const LOG_FILE = path.join(DATA_DIR, 'app.log');
 const UPLOADS_DIR = path.join(__dirname, 'uploads');
 const MAX_TEXT_LENGTH = 1200;
 const MAX_SHORT_LENGTH = 160;
@@ -95,10 +103,10 @@ const PORTFOLIO_PROJECTS = {
   'global-saas-website': {
     title: 'Global SaaS Website',
     category: 'Web Development',
-    summary: 'A fast, SEO-focused SaaS website redesigned to improve product clarity, performance, and demo conversions.',
+    summary: 'A fast, SEO-focused SaaS website redesigned to improve product clarity, performance, and consultation conversions.',
     problem: 'The SaaS website had low conversion rates, unclear messaging, and slow page performance.',
     solution: 'We rebuilt the experience with clearer product pages, stronger SEO structure, faster loading, and conversion-focused calls to action.',
-    result: 'Demo requests increased by 300% and page speed improved by 60%.',
+    result: 'The site became faster, clearer, and better structured for consultation requests.',
     stack: ['React', 'Next.js', 'SEO', 'Conversion Optimization']
   },
   'fitness-tracking-app': {
@@ -107,7 +115,7 @@ const PORTFOLIO_PROJECTS = {
     summary: 'A cross-platform fitness app with AI-based progress tracking and personalized user insights.',
     problem: 'The brand needed a scalable mobile product that could support personalized fitness journeys.',
     solution: 'We developed a React Native app with Firebase, AI tracking logic, progress insights, and clean mobile UX.',
-    result: 'The app reached 100K+ downloads and a 4.8-star user rating.',
+    result: 'The app created a scalable mobile foundation for personalized fitness tracking.',
     stack: ['React Native', 'Firebase', 'AI Tracking', 'Mobile UX']
   },
   'project-management-platform': {
@@ -116,7 +124,7 @@ const PORTFOLIO_PROJECTS = {
     summary: 'A cloud SaaS platform for team collaboration, task automation, and project visibility.',
     problem: 'Growing teams needed a custom workflow that generic project tools could not support.',
     solution: 'We built a multi-user SaaS platform with task tracking, permissions, automation, and cloud infrastructure.',
-    result: 'The platform supports 500+ teams and more than 1M managed tasks.',
+    result: 'The platform supports structured task ownership, permissions, automation, and reporting.',
     stack: ['Node.js', 'MongoDB', 'AWS', 'Workflow Automation']
   },
   'luxury-fashion-store': {
@@ -125,7 +133,7 @@ const PORTFOLIO_PROJECTS = {
     summary: 'An e-commerce experience with AI-assisted shopping and AR try-on to reduce cart abandonment.',
     problem: 'The store had high cart abandonment because customers needed more confidence before purchase.',
     solution: 'We improved the buying journey with AR try-on, AI-assisted recommendations, and optimized product flows.',
-    result: 'Cart abandonment dropped by 45% and average order value doubled.',
+    result: 'The improved buying journey reduced friction and supported higher-value purchases.',
     stack: ['Shopify', 'AR', 'AI Recommendations', 'E-commerce UX']
   },
   'customer-support-chatbot': {
@@ -134,7 +142,7 @@ const PORTFOLIO_PROJECTS = {
     summary: 'An NLP chatbot integrated with support workflows to reduce repetitive tickets and provide 24/7 answers.',
     problem: 'Support volume was increasing operational costs and slowing response times.',
     solution: 'We built an API-connected NLP chatbot that handles common questions, captures context, and routes complex issues.',
-    result: 'Support costs dropped by 70% while customers gained 24/7 self-service support.',
+    result: 'The workflow reduced repetitive support load while adding 24/7 self-service coverage.',
     stack: ['NLP', 'Python', 'API Integration', 'Support Automation']
   }
 };
@@ -183,14 +191,11 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(UPLOADS_DIR));
 app.use(bodyParser.json({ limit: '100kb' }));
 app.use(bodyParser.urlencoded({ extended: true, limit: '100kb' }));
-app.use(
-  session({
-    secret: SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: { maxAge: 1000 * 60 * 60 }
-  })
-);
+
+app.use((req, res, next) => {
+  res.locals.currentPath = req.path;
+  next();
+});
 
 function ensureDataDir() {
   if (!fs.existsSync(DATA_DIR)) {
@@ -203,15 +208,10 @@ function ensureDataDir() {
     fs.writeFileSync(APPLICATIONS_FILE, JSON.stringify([]));
   }
   if (!fs.existsSync(ADMINS_FILE)) {
-    fs.writeFileSync(
-      ADMINS_FILE,
-      JSON.stringify([
-        {
-          username: 'admin',
-          password: 'PravixaAI@2026'
-        }
-      ], null, 2)
-    );
+    fs.writeFileSync(ADMINS_FILE, JSON.stringify([], null, 2));
+  }
+  if (!fs.existsSync(USERS_FILE)) {
+    fs.writeFileSync(USERS_FILE, JSON.stringify([], null, 2));
   }
   if (!fs.existsSync(SITE_FILE)) {
     fs.writeFileSync(
@@ -221,7 +221,7 @@ function ensureDataDir() {
           { route: '/', file: 'index.html', title: 'Pravixa AI - Leading AI Services USA & Worldwide' },
           { route: '/about', file: 'about.html', title: 'About Us - Pravixa AI' },
           { route: '/services', file: 'services.html', title: 'Services - Pravixa AI' },
-          { route: '/portfolio', file: 'portfolio.html', title: 'Portfolio - Pravixa AI' },
+          { route: '/portfolio', file: 'portfolio.html', title: 'Solutions - Pravixa AI' },
           { route: '/careers', file: 'careers.html', title: 'Careers - Join Our Team - Pravixa AI' },
           { route: '/contact', file: 'contact.html', title: 'Contact Pravixa AI - Get AI Consulting & Support Today' }
         ]
@@ -230,6 +230,9 @@ function ensureDataDir() {
   }
   if (!fs.existsSync(UPLOADS_DIR)) {
     fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+  }
+  if (!fs.existsSync(LOG_FILE)) {
+    fs.writeFileSync(LOG_FILE, '');
   }
 }
 
@@ -246,6 +249,149 @@ function writeJsonFile(filePath, data) {
   const tempFile = `${filePath}.tmp`;
   fs.writeFileSync(tempFile, JSON.stringify(data, null, 2));
   fs.renameSync(tempFile, filePath);
+}
+
+function appendLog(level, message, meta = {}) {
+  const entry = {
+    time: new Date().toISOString(),
+    level,
+    message,
+    ...meta
+  };
+  try {
+    fs.appendFileSync(LOG_FILE, `${JSON.stringify(entry)}\n`);
+  } catch (error) {
+    if (!IS_PRODUCTION) {
+      process.stderr.write(`Log write failed: ${error.message}\n`);
+    }
+  }
+}
+
+function readLogs(limit = 150) {
+  try {
+    return fs.readFileSync(LOG_FILE, 'utf8')
+      .split('\n')
+      .filter(Boolean)
+      .slice(-limit)
+      .reverse()
+      .map(line => {
+        try {
+          return JSON.parse(line);
+        } catch (error) {
+          return { time: '', level: 'error', message: line };
+        }
+      });
+  } catch (error) {
+    return [];
+  }
+}
+
+function parseCookies(req) {
+  return String(req.headers.cookie || '')
+    .split(';')
+    .map(cookie => cookie.trim())
+    .filter(Boolean)
+    .reduce((cookies, cookie) => {
+      const index = cookie.indexOf('=');
+      if (index > -1) {
+        cookies[decodeURIComponent(cookie.slice(0, index))] = decodeURIComponent(cookie.slice(index + 1));
+      }
+      return cookies;
+    }, {});
+}
+
+function base64url(input) {
+  return Buffer.from(input).toString('base64url');
+}
+
+function signJwt(payload) {
+  const header = { alg: 'HS256', typ: 'JWT' };
+  const now = Math.floor(Date.now() / 1000);
+  const body = {
+    ...payload,
+    iat: now,
+    exp: now + AUTH_MAX_AGE_SECONDS
+  };
+  const unsigned = `${base64url(JSON.stringify(header))}.${base64url(JSON.stringify(body))}`;
+  const signature = crypto.createHmac('sha256', JWT_SECRET).update(unsigned).digest('base64url');
+  return `${unsigned}.${signature}`;
+}
+
+function verifyJwt(token) {
+  if (!token) {
+    return null;
+  }
+  const parts = token.split('.');
+  if (parts.length !== 3) {
+    return null;
+  }
+  const [encodedHeader, encodedBody, signature] = parts;
+  const unsigned = `${encodedHeader}.${encodedBody}`;
+  const expected = crypto.createHmac('sha256', JWT_SECRET).update(unsigned).digest('base64url');
+  const given = Buffer.from(signature);
+  const valid = given.length === Buffer.from(expected).length
+    && crypto.timingSafeEqual(given, Buffer.from(expected));
+  if (!valid) {
+    return null;
+  }
+  try {
+    const payload = JSON.parse(Buffer.from(encodedBody, 'base64url').toString('utf8'));
+    if (!payload.exp || payload.exp < Math.floor(Date.now() / 1000)) {
+      return null;
+    }
+    return payload;
+  } catch (error) {
+    return null;
+  }
+}
+
+function setAuthCookie(res, token) {
+  setSessionCookie(res, ADMIN_COOKIE, token);
+}
+
+function setUserCookie(res, token) {
+  setSessionCookie(res, USER_COOKIE, token);
+}
+
+function setSessionCookie(res, name, token) {
+  const flags = [
+    `${name}=${encodeURIComponent(token)}`,
+    'Path=/',
+    'HttpOnly',
+    'SameSite=Lax',
+    `Max-Age=${AUTH_MAX_AGE_SECONDS}`
+  ];
+  if (IS_PRODUCTION) {
+    flags.push('Secure');
+  }
+  res.setHeader('Set-Cookie', flags.join('; '));
+}
+
+function clearAuthCookie(res) {
+  clearSessionCookie(res, ADMIN_COOKIE);
+}
+
+function clearUserCookie(res) {
+  clearSessionCookie(res, USER_COOKIE);
+}
+
+function clearSessionCookie(res, name) {
+  res.setHeader('Set-Cookie', `${name}=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0${IS_PRODUCTION ? '; Secure' : ''}`);
+}
+
+function hashPassword(password, salt = crypto.randomBytes(16).toString('hex')) {
+  const hash = crypto.scryptSync(String(password), salt, 64).toString('hex');
+  return `scrypt$${salt}$${hash}`;
+}
+
+function verifyPassword(password, storedHash) {
+  if (!storedHash || !storedHash.startsWith('scrypt$')) {
+    return false;
+  }
+  const [, salt, hash] = storedHash.split('$');
+  const candidate = hashPassword(password, salt).split('$')[2];
+  return Buffer.from(candidate, 'hex').length === Buffer.from(hash, 'hex').length
+    && crypto.timingSafeEqual(Buffer.from(candidate, 'hex'), Buffer.from(hash, 'hex'));
 }
 
 function readContacts() {
@@ -265,7 +411,36 @@ function readSiteData() {
 }
 
 function readAdmins() {
-  return readJsonArray(ADMINS_FILE);
+  return readJsonArray(ADMINS_FILE).filter(admin => admin.username && admin.passwordHash);
+}
+
+function writeAdmins(admins) {
+  writeJsonFile(ADMINS_FILE, admins.map(admin => ({
+    id: admin.id || makeId('u'),
+    username: cleanText(admin.username, 120),
+    passwordHash: admin.passwordHash,
+    createdAt: admin.createdAt || new Date().toISOString(),
+    role: admin.role || 'administrator'
+  })));
+}
+
+function readUsers() {
+  return readJsonArray(USERS_FILE).filter(user => user.email && user.passwordHash);
+}
+
+function writeUsers(users) {
+  writeJsonFile(USERS_FILE, users.map(user => ({
+    id: user.id || makeId('usr'),
+    createdAt: user.createdAt || new Date().toISOString(),
+    lastLoginAt: user.lastLoginAt || null,
+    name: cleanText(user.name),
+    email: cleanText(user.email, 120).toLowerCase(),
+    company: cleanText(user.company),
+    businessType: cleanText(user.businessType || user.company),
+    passwordHash: user.passwordHash,
+    status: user.status || 'active',
+    role: user.role || 'customer'
+  })));
 }
 
 function readApplications() {
@@ -293,11 +468,120 @@ function makeId(prefix) {
 }
 
 function ensureAdmin(req, res, next) {
-  if (req.session && req.session.authenticated) {
+  const token = parseCookies(req)[ADMIN_COOKIE];
+  const payload = verifyJwt(token);
+  if (payload?.sub) {
+    req.admin = payload;
+    res.locals.admin = payload;
     return next();
+  }
+  clearAuthCookie(res);
+  if (req.path.startsWith('/api/')) {
+    return res.status(401).json({ error: 'Authentication required. Please sign in again.' });
   }
   res.redirect('/admin/login');
 }
+
+function ensureUser(req, res, next) {
+  const token = parseCookies(req)[USER_COOKIE];
+  const payload = verifyJwt(token);
+  if (payload?.sub && payload.type === 'customer') {
+    req.user = payload;
+    res.locals.user = payload;
+    return next();
+  }
+  clearUserCookie(res);
+  if (req.path.startsWith('/api/')) {
+    return res.status(401).json({ error: 'Please log in to continue.' });
+  }
+  res.redirect('/login');
+}
+
+function formatDateKey(date) {
+  return date.toISOString().slice(0, 10);
+}
+
+function buildAdminStats(contacts, applications) {
+  const today = new Date();
+  const days = Array.from({ length: 7 }, (_, index) => {
+    const date = new Date(today);
+    date.setDate(today.getDate() - (6 - index));
+    return formatDateKey(date);
+  });
+  const leadTrend = days.map(day => contacts.filter(contact => String(contact.createdAt || '').startsWith(day)).length);
+  const applicationTrend = days.map(day => applications.filter(application => String(application.createdAt || '').startsWith(day)).length);
+  const serviceCounts = contacts.reduce((counts, contact) => {
+    const service = contact.service || 'Not specified';
+    counts[service] = (counts[service] || 0) + 1;
+    return counts;
+  }, {});
+  const calls = contacts.filter(contact => contact.phone).length;
+  const conversionRate = contacts.length ? Math.round((applications.length / contacts.length) * 100) : 0;
+  const costSaved = (contacts.length * 180 + applications.length * 120 + calls * 75);
+  return {
+    leads: contacts.length,
+    calls,
+    costSaved,
+    conversionRate,
+    line: { labels: days.map(day => day.slice(5)), leads: leadTrend, applications: applicationTrend },
+    pie: {
+      labels: Object.keys(serviceCounts).slice(0, 6),
+      values: Object.values(serviceCounts).slice(0, 6)
+    }
+  };
+}
+
+function publicUser(user) {
+  if (!user) {
+    return null;
+  }
+  return {
+    id: user.id,
+    createdAt: user.createdAt,
+    lastLoginAt: user.lastLoginAt || null,
+    name: user.name,
+    email: user.email,
+    company: user.company,
+    businessType: user.businessType,
+    status: user.status || 'active',
+    role: user.role || 'customer'
+  };
+}
+
+function ensureEnvAdmin() {
+  const envUser = cleanText(process.env.ADMIN_USER, 120).toLowerCase();
+  const envPassword = String(process.env.ADMIN_PASSWORD || '');
+  if (!envUser || !envPassword || readAdmins().length > 0) {
+    return;
+  }
+  if (!isValidEmail(envUser) || envPassword.length < 12) {
+    appendLog('warning', 'ADMIN_USER or ADMIN_PASSWORD is invalid; first admin setup required');
+    return;
+  }
+  writeAdmins([{
+    id: makeId('u'),
+    username: envUser,
+    passwordHash: hashPassword(envPassword),
+    createdAt: new Date().toISOString(),
+    role: 'administrator'
+  }]);
+  appendLog('info', 'admin created from environment', { username: envUser });
+}
+
+app.use((req, res, next) => {
+  const started = Date.now();
+  res.on('finish', () => {
+    if (req.path.startsWith('/api/') || req.path.startsWith('/admin')) {
+      appendLog('info', 'request', {
+        method: req.method,
+        path: req.path,
+        status: res.statusCode,
+        durationMs: Date.now() - started
+      });
+    }
+  });
+  next();
+});
 
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
 app.get('/about', (req, res) => res.sendFile(path.join(__dirname, 'about.html')));
@@ -324,6 +608,24 @@ app.get('/careers', (req, res) => res.sendFile(path.join(__dirname, 'careers.htm
 app.get('/careers.html', (req, res) => res.redirect(301, '/careers'));
 app.get('/contact', (req, res) => res.sendFile(path.join(__dirname, 'contact.html')));
 app.get('/contact.html', (req, res) => res.redirect(301, '/contact'));
+app.get('/consultation', (req, res) => res.sendFile(path.join(__dirname, 'consultation.html')));
+app.get('/consultation.html', (req, res) => res.redirect(301, '/consultation'));
+app.get('/login', (req, res) => res.sendFile(path.join(__dirname, 'login.html')));
+app.get('/login.html', (req, res) => res.redirect(301, '/login'));
+app.get('/signup', (req, res) => res.sendFile(path.join(__dirname, 'signup.html')));
+app.get('/signup.html', (req, res) => res.redirect(301, '/signup'));
+app.get('/dashboard', ensureUser, (req, res) => {
+  const user = readUsers().find(item => item.id === req.user.sub);
+  if (!user) {
+    clearUserCookie(res);
+    return res.redirect('/login');
+  }
+  res.render('user-dashboard', { user: publicUser(user) });
+});
+app.get('/logout', (req, res) => {
+  clearUserCookie(res);
+  res.redirect('/login');
+});
 app.get('/get-in-touch', (req, res) => res.redirect(301, '/contact'));
 app.get('/index.html', (req, res) => res.redirect(301, '/'));
 app.get('/terms', (req, res) => res.render('simple-page', { page: LEGAL_PAGES.terms }));
@@ -334,80 +636,216 @@ app.get('/support', (req, res) => res.render('simple-page', { page: LEGAL_PAGES.
 app.get('/admin.html', (req, res) => res.redirect(301, '/admin'));
 app.get('/admin-login', (req, res) => res.redirect(301, '/admin/login'));
 app.get('/admin', (req, res) => {
-  if (req.session?.authenticated) {
+  if (readAdmins().length === 0) {
+    return res.redirect('/admin/setup');
+  }
+  if (verifyJwt(parseCookies(req)[ADMIN_COOKIE])) {
     return res.redirect('/admin/dashboard');
   }
-  res.sendFile(path.join(__dirname, 'admin.html'));
+  res.redirect('/admin/login');
+});
+
+app.get('/admin/setup', (req, res) => {
+  if (readAdmins().length > 0) {
+    return res.redirect('/admin/login');
+  }
+  res.render('admin-setup', { error: null });
+});
+
+app.post('/admin/setup', (req, res) => {
+  try {
+    if (readAdmins().length > 0) {
+      return res.redirect('/admin/login');
+    }
+    const username = cleanText(req.body.username, 120).toLowerCase();
+    const password = String(req.body.password || '');
+    if (!isValidEmail(username) || password.length < 12) {
+      return res.status(400).render('admin-setup', {
+        error: 'Use a valid email and a password with at least 12 characters.'
+      });
+    }
+    const admin = {
+      id: makeId('u'),
+      username,
+      passwordHash: hashPassword(password),
+      createdAt: new Date().toISOString(),
+      role: 'administrator'
+    };
+    writeAdmins([admin]);
+    appendLog('info', 'first admin created', { username });
+    const token = signJwt({ sub: admin.id, username: admin.username, role: admin.role });
+    setAuthCookie(res, token);
+    res.redirect('/admin/dashboard');
+  } catch (error) {
+    appendLog('error', 'admin setup failed', { error: error.message });
+    res.status(500).render('admin-setup', { error: 'Unable to create admin account. Please try again.' });
+  }
 });
 
 app.get('/admin/login', (req, res) => {
-  if (req.session?.authenticated) {
+  if (readAdmins().length === 0) {
+    return res.redirect('/admin/setup');
+  }
+  if (verifyJwt(parseCookies(req)[ADMIN_COOKIE])) {
     return res.redirect('/admin/dashboard');
   }
-  res.sendFile(path.join(__dirname, 'admin.html'));
+  res.render('admin-login', { error: null });
 });
 
 app.post('/admin/login', (req, res) => {
-  const { username, password } = req.body;
-  const admins = readAdmins();
-  const user = admins.find(admin => admin.username === String(username).trim());
+  try {
+    const username = cleanText(req.body.username, 120).toLowerCase();
+    const password = String(req.body.password || '');
+    const user = readAdmins().find(admin => admin.username.toLowerCase() === username);
 
-  if ((user && user.password === password) || (username === ADMIN_USER && password === ADMIN_PASS)) {
-    req.session.authenticated = true;
-    return res.redirect('/admin/dashboard');
+    if (user && verifyPassword(password, user.passwordHash)) {
+      const token = signJwt({ sub: user.id, username: user.username, role: user.role || 'administrator' });
+      setAuthCookie(res, token);
+      appendLog('info', 'admin login succeeded', { username });
+      return res.redirect('/admin/dashboard');
+    }
+
+    appendLog('warning', 'admin login failed', { username });
+    res.status(401).render('admin-login', { error: 'Invalid email or password.' });
+  } catch (error) {
+    appendLog('error', 'admin login error', { error: error.message });
+    res.status(500).render('admin-login', { error: 'Sign in is temporarily unavailable. Please try again.' });
   }
-
-  res.redirect('/admin?error=1');
 });
 
 app.get('/admin/logout', (req, res) => {
-  req.session.destroy(() => res.redirect('/admin/login'));
+  clearAuthCookie(res);
+  res.redirect('/admin/login');
 });
 
 app.get('/admin/dashboard', ensureAdmin, (req, res) => {
-  const contacts = readContacts();
-  const applications = readApplications();
-  const siteData = readSiteData();
-  const pages = Array.isArray(siteData.pages) ? siteData.pages : [];
-  res.render('dashboard', {
-    contactsCount: contacts.length,
-    applicationCount: applications.length,
-    recentContacts: contacts.slice(-5).reverse(),
-    recentApplications: applications.slice(-5).reverse(),
-    pages
-  });
+  try {
+    const contacts = readContacts();
+    const applications = readApplications();
+    const users = readUsers();
+    const siteData = readSiteData();
+    const pages = Array.isArray(siteData.pages) ? siteData.pages : [];
+    res.render('dashboard', {
+      stats: buildAdminStats(contacts, applications),
+      recentContacts: contacts.slice(-5).reverse(),
+      recentApplications: applications.slice(-5).reverse(),
+      recentUsers: users.slice(-5).reverse().map(publicUser),
+      pages
+    });
+  } catch (error) {
+    appendLog('error', 'dashboard render failed', { error: error.message });
+    res.status(500).render('dashboard', {
+      stats: buildAdminStats([], []),
+      recentContacts: [],
+      recentApplications: [],
+      recentUsers: [],
+      pages: [],
+      error: 'Dashboard data could not be loaded right now.'
+    });
+  }
 });
 
 app.get('/admin/contacts', ensureAdmin, (req, res) => {
-  const contacts = readContacts().slice().reverse();
-  res.render('contacts', { contacts });
+  try {
+    const contacts = readContacts().slice().reverse();
+    res.render('contacts', { contacts });
+  } catch (error) {
+    appendLog('error', 'contacts render failed', { error: error.message });
+    res.status(500).render('contacts', { contacts: [], error: 'Contacts could not be loaded.' });
+  }
 });
 
 app.post('/admin/contacts/delete', ensureAdmin, (req, res) => {
-  const { id } = req.body;
-  const contacts = readContacts().filter(contact => contact.id !== String(id));
-  writeContacts(contacts);
-  res.redirect('/admin/contacts');
+  try {
+    const { id } = req.body;
+    const contacts = readContacts().filter(contact => contact.id !== String(id));
+    writeContacts(contacts);
+    res.redirect('/admin/contacts');
+  } catch (error) {
+    appendLog('error', 'contact delete failed', { error: error.message });
+    res.redirect('/admin/contacts');
+  }
 });
 
 app.get('/admin/applications', ensureAdmin, (req, res) => {
-  const applications = readApplications().slice().reverse();
-  res.render('applications', { applications });
+  try {
+    const applications = readApplications().slice().reverse();
+    res.render('applications', { applications });
+  } catch (error) {
+    appendLog('error', 'applications render failed', { error: error.message });
+    res.status(500).render('applications', { applications: [], error: 'Applications could not be loaded.' });
+  }
 });
 
 app.post('/admin/applications/delete', ensureAdmin, (req, res) => {
-  const { id } = req.body;
-  const applications = readApplications().filter(application => application.id !== String(id));
-  writeApplications(applications);
-  res.redirect('/admin/applications');
+  try {
+    const { id } = req.body;
+    const applications = readApplications().filter(application => application.id !== String(id));
+    writeApplications(applications);
+    res.redirect('/admin/applications');
+  } catch (error) {
+    appendLog('error', 'application delete failed', { error: error.message });
+    res.redirect('/admin/applications');
+  }
+});
+
+app.get('/admin/users', ensureAdmin, (req, res) => {
+  res.render('users', {
+    adminUsers: readAdmins().map(({ passwordHash, ...admin }) => admin),
+    customers: readUsers().map(publicUser).reverse()
+  });
+});
+
+app.get('/admin/logs', ensureAdmin, (req, res) => {
+  res.render('logs', { logs: readLogs() });
+});
+
+app.get('/admin/settings', ensureAdmin, (req, res) => {
+  res.render('settings', {
+    settings: {
+      environment: process.env.NODE_ENV || 'development',
+      sessionMinutes: Math.round(AUTH_MAX_AGE_SECONDS / 60),
+      adminsConfigured: readAdmins().length,
+      uploadsEnabled: true,
+      maxUploadMb: 5
+    }
+  });
 });
 
 app.get('/api/contacts', ensureAdmin, (req, res) => {
-  res.json(readContacts());
+  try {
+    res.json(readContacts());
+  } catch (error) {
+    appendLog('error', 'contacts api failed', { error: error.message });
+    res.status(500).json({ error: 'Contacts could not be loaded.' });
+  }
 });
 
 app.get('/api/applications', ensureAdmin, (req, res) => {
-  res.json(readApplications());
+  try {
+    res.json(readApplications());
+  } catch (error) {
+    appendLog('error', 'applications api failed', { error: error.message });
+    res.status(500).json({ error: 'Applications could not be loaded.' });
+  }
+});
+
+app.get('/api/users', ensureAdmin, (req, res) => {
+  try {
+    res.json(readUsers().map(publicUser));
+  } catch (error) {
+    appendLog('error', 'users api failed', { error: error.message });
+    res.status(500).json({ error: 'Users could not be loaded.' });
+  }
+});
+
+app.get('/api/admin/stats', ensureAdmin, (req, res) => {
+  try {
+    res.json(buildAdminStats(readContacts(), readApplications()));
+  } catch (error) {
+    appendLog('error', 'stats api failed', { error: error.message });
+    res.status(500).json({ error: 'Analytics could not be loaded.' });
+  }
 });
 
 app.get('/api/health', (req, res) => {
@@ -418,74 +856,172 @@ app.get('/api/health', (req, res) => {
   });
 });
 
+app.get('/api/me', ensureUser, (req, res) => {
+  const user = readUsers().find(item => item.id === req.user.sub);
+  if (!user) {
+    return res.status(404).json({ error: 'User account was not found.' });
+  }
+  res.json(publicUser(user));
+});
+
+app.post('/api/signup', (req, res) => {
+  try {
+    const name = cleanText(req.body.name);
+    const email = cleanText(req.body.email, 120).toLowerCase();
+    const company = cleanText(req.body.company);
+    const businessType = cleanText(req.body.businessType || req.body.company);
+    const password = String(req.body.password || '');
+
+    if (!name || !email || !company || !password) {
+      return res.status(400).json({ error: 'Please complete name, email, company, and password.' });
+    }
+    if (!isValidEmail(email)) {
+      return res.status(400).json({ error: 'Please enter a valid email address.' });
+    }
+    if (password.length < 8) {
+      return res.status(400).json({ error: 'Password must be at least 8 characters.' });
+    }
+
+    const users = readUsers();
+    if (users.some(user => user.email.toLowerCase() === email)) {
+      return res.status(409).json({ error: 'An account with this email already exists. Please log in.' });
+    }
+
+    const user = {
+      id: makeId('usr'),
+      createdAt: new Date().toISOString(),
+      lastLoginAt: new Date().toISOString(),
+      name,
+      email,
+      company,
+      businessType,
+      passwordHash: hashPassword(password),
+      status: 'active',
+      role: 'customer'
+    };
+    users.push(user);
+    writeUsers(users);
+    appendLog('info', 'customer signup', { email, company });
+
+    const token = signJwt({ sub: user.id, email: user.email, name: user.name, type: 'customer' });
+    setUserCookie(res, token);
+    res.status(201).json({ success: true, user: publicUser(user), redirect: '/dashboard' });
+  } catch (error) {
+    appendLog('error', 'customer signup failed', { error: error.message });
+    res.status(500).json({ error: 'Something went wrong. Please try again.' });
+  }
+});
+
+app.post('/api/login', (req, res) => {
+  try {
+    const email = cleanText(req.body.email, 120).toLowerCase();
+    const password = String(req.body.password || '');
+    if (!isValidEmail(email) || !password) {
+      return res.status(400).json({ error: 'Please enter a valid email and password.' });
+    }
+
+    const users = readUsers();
+    const user = users.find(item => item.email.toLowerCase() === email);
+    if (!user || !verifyPassword(password, user.passwordHash)) {
+      return res.status(401).json({ error: 'Invalid email or password.' });
+    }
+
+    user.lastLoginAt = new Date().toISOString();
+    writeUsers(users);
+    appendLog('info', 'customer login', { email });
+
+    const token = signJwt({ sub: user.id, email: user.email, name: user.name, type: 'customer' });
+    setUserCookie(res, token);
+    res.json({ success: true, user: publicUser(user), redirect: '/dashboard' });
+  } catch (error) {
+    appendLog('error', 'customer login failed', { error: error.message });
+    res.status(500).json({ error: 'Something went wrong. Please try again.' });
+  }
+});
+
 app.post('/api/contact', (req, res) => {
-  const name = cleanText(req.body.name);
-  const email = cleanText(req.body.email).toLowerCase();
-  const phone = cleanText(req.body.phone);
-  const company = cleanText(req.body.company);
-  const service = cleanText(req.body.service);
-  const message = cleanMessage(req.body.message);
+  try {
+    const name = cleanText(req.body.name);
+    const email = cleanText(req.body.email).toLowerCase();
+    const phone = cleanText(req.body.phone);
+    const company = cleanText(req.body.company);
+    const service = cleanText(req.body.service);
+    const message = cleanMessage(req.body.message);
 
-  if (!name || !email || !service || !message) {
-    return res.status(400).json({ error: 'Name, email, service, and message are required.' });
-  }
-  if (!isValidEmail(email)) {
-    return res.status(400).json({ error: 'Please enter a valid email address.' });
-  }
+    if (!name || !email || !service || !message) {
+      return res.status(400).json({ error: 'Please complete name, email, service, and message.' });
+    }
+    if (!isValidEmail(email)) {
+      return res.status(400).json({ error: 'Please enter a valid email address.' });
+    }
 
-  const contacts = readContacts();
-  const newContact = {
-    id: makeId('c'),
-    createdAt: new Date().toISOString(),
-    name,
-    email,
-    phone,
-    company,
-    service,
-    message
-  };
-  contacts.push(newContact);
-  writeContacts(contacts);
-  res.json({ success: true, message: 'Message received successfully.' });
+    const contacts = readContacts();
+    const newContact = {
+      id: makeId('c'),
+      createdAt: new Date().toISOString(),
+      name,
+      email,
+      phone,
+      company,
+      service,
+      message
+    };
+    contacts.push(newContact);
+    writeContacts(contacts);
+    appendLog('info', 'contact submitted', { service, hasPhone: Boolean(phone) });
+    res.json({ success: true, message: 'Message received successfully.' });
+  } catch (error) {
+    appendLog('error', 'contact submission failed', { error: error.message });
+    res.status(500).json({ error: 'We could not send your message right now. Please try again.' });
+  }
 });
 
 app.post('/api/application', upload.single('resume'), (req, res) => {
-  const name = cleanText(req.body.name);
-  const email = cleanText(req.body.email).toLowerCase();
-  const phone = cleanText(req.body.phone);
-  const role = cleanText(req.body.role);
-  const portfolio = cleanText(req.body.portfolio, 300);
-  const message = cleanMessage(req.body.message);
+  try {
+    const name = cleanText(req.body.name);
+    const email = cleanText(req.body.email).toLowerCase();
+    const phone = cleanText(req.body.phone);
+    const role = cleanText(req.body.role);
+    const portfolio = cleanText(req.body.portfolio, 300);
+    const message = cleanMessage(req.body.message);
 
-  if (!name || !email || !role || !message) {
-    return res.status(400).json({ error: 'Name, email, role, and message are required.' });
-  }
-  if (!isValidEmail(email)) {
-    return res.status(400).json({ error: 'Please enter a valid email address.' });
-  }
+    if (!name || !email || !role || !message) {
+      return res.status(400).json({ error: 'Please complete name, email, role, and message.' });
+    }
+    if (!isValidEmail(email)) {
+      return res.status(400).json({ error: 'Please enter a valid email address.' });
+    }
 
-  const applications = readApplications();
-  const newApplication = {
-    id: makeId('a'),
-    createdAt: new Date().toISOString(),
-    name,
-    email,
-    phone,
-    role,
-    portfolio,
-    message,
-    resumePath: req.file ? `/uploads/${req.file.filename}` : null,
-    resumeOriginalName: req.file ? req.file.originalname : null
-  };
-  applications.push(newApplication);
-  writeApplications(applications);
-  res.json({ success: true, message: 'Application received successfully.' });
+    const applications = readApplications();
+    const newApplication = {
+      id: makeId('a'),
+      createdAt: new Date().toISOString(),
+      name,
+      email,
+      phone,
+      role,
+      portfolio,
+      message,
+      resumePath: req.file ? `/uploads/${req.file.filename}` : null,
+      resumeOriginalName: req.file ? req.file.originalname : null
+    };
+    applications.push(newApplication);
+    writeApplications(applications);
+    appendLog('info', 'application submitted', { role, hasResume: Boolean(req.file) });
+    res.json({ success: true, message: 'Application received successfully.' });
+  } catch (error) {
+    appendLog('error', 'application submission failed', { error: error.message });
+    res.status(500).json({ error: 'We could not submit your application right now. Please try again.' });
+  }
 });
 
 app.use(express.static(__dirname));
 
 app.use((err, req, res, next) => {
-  console.error('Server error:', err);
+  appendLog('error', 'server error', { path: req.path, error: err.message });
+  if (!IS_PRODUCTION) {
+    process.stderr.write(`Server error: ${err.message}\n`);
+  }
   const message = err.code === 'LIMIT_FILE_SIZE'
     ? 'Resume file too large. Maximum size is 5MB.'
     : err.message || 'Internal server error.';
@@ -508,10 +1044,13 @@ app.use((req, res) => {
 });
 
 ensureDataDir();
+ensureEnvAdmin();
 
 if (require.main === module) {
   app.listen(PORT, () => {
-    console.log(`Pravixa AI backend running on http://localhost:${PORT}`);
+    if (!IS_PRODUCTION) {
+      process.stdout.write(`Pravixa AI backend running on http://localhost:${PORT}\n`);
+    }
   });
 }
 

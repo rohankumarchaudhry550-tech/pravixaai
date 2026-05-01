@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | Pravixa AI</title>
+  <link rel="icon" href="/fa.png">
+  <style>
+    *{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;background:#07111d;color:#eef7ff}.nav{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px clamp(18px,5vw,72px);background:#081827;border-bottom:1px solid rgba(255,255,255,.08)}.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff;font-weight:900}.brand img{height:42px}.links{display:flex;gap:18px;align-items:center}.links a{color:#bdd0e5;text-decoration:none}.cta{background:#00c896;color:#06111d!important;padding:10px 16px;border-radius:10px;font-weight:900}.main{padding:44px clamp(18px,5vw,72px)}h1{font-size:clamp(2rem,4vw,3.8rem);margin:0 0 10px}.muted,p{color:#abc0d6;line-height:1.7}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:28px 0}.card,.panel{background:#0d1d31;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:20px}.kpi{font-size:2rem;font-weight:900;color:#fff;margin:8px 0}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}.actions a{padding:12px 16px;border-radius:10px;text-decoration:none;background:#12263d;color:#d9eaff;font-weight:800}.actions a.primary{background:#00c896;color:#06111d}@media(max-width:820px){.links{display:none}.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a class="brand" href="/"><img src="/logo.png" alt="Pravixa AI Logo">Pravixa AI</a>
+    <div class="links"><a href="/">Home</a><a href="/services">Services</a><a href="/consultation">Schedule Consultation</a><a href="/contact">Contact</a><a class="cta" href="/logout">Logout</a></div>
+  </nav>
+  <main class="main">
+    <section>
+      <p class="muted">Customer Dashboard</p>
+      <h1>Welcome, <%= user.name %></h1>
+      <p>Track your AI automation onboarding, manage consultation requests, and keep your account information ready for the Pravixa AI team.</p>
+    </section>
+    <section class="grid">
+      <div class="card"><div class="muted">AI Active</div><div class="kpi">Ready</div><p>Automation discovery can begin after your consultation workflow.</p></div>
+      <div class="card"><div class="muted">System Running</div><div class="kpi">Secure</div><p>Your account is stored in the backend and visible to authorized admins.</p></div>
+      <div class="card"><div class="muted">Performance Score</div><div class="kpi">New</div><p>ROI metrics become available after automation workflows go live.</p></div>
+    </section>
+    <section class="panel">
+      <h2>Account Details</h2>
+      <p><strong>Email:</strong> <%= user.email %></p>
+      <p><strong>Company:</strong> <%= user.company || user.businessType || 'Not specified' %></p>
+      <p><strong>Status:</strong> <%= user.status %></p>
+      <div class="actions">
+        <a class="primary" href="/consultation">Schedule Consultation</a>
+        <a href="/contact">Request AI Audit</a>
+        <a href="/services">View Services</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
