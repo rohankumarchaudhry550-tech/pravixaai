@@ -26,6 +26,7 @@ async function main() {
   const originalApplications = fs.existsSync(applicationsFile) ? fs.readFileSync(applicationsFile, 'utf8') : '[]';
   const originalAdmins = fs.existsSync(adminsFile) ? fs.readFileSync(adminsFile, 'utf8') : '[]';
   const originalUsers = fs.existsSync(usersFile) ? fs.readFileSync(usersFile, 'utf8') : '[]';
+  fs.writeFileSync(adminsFile, '[]');
   const server = app.listen(0);
   await new Promise(resolve => server.once('listening', resolve));
   const { port } = server.address();
@@ -45,7 +46,7 @@ async function main() {
       '/portfolio/customer-support-chatbot',
       '/careers',
       '/contact',
-      '/consultation',
+      '/book-demo',
       '/login',
       '/signup',
       '/admin',

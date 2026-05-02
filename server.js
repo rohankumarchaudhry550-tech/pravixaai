@@ -26,6 +26,9 @@ const LOG_FILE = path.join(DATA_DIR, 'app.log');
 const UPLOADS_DIR = path.join(__dirname, 'uploads');
 const MAX_TEXT_LENGTH = 1200;
 const MAX_SHORT_LENGTH = 160;
+const RATE_LIMIT_WINDOW_MS = Number(process.env.RATE_LIMIT_WINDOW_MS || 15 * 60 * 1000);
+const GENERAL_RATE_LIMIT = Number(process.env.GENERAL_RATE_LIMIT || 300);
+const SENSITIVE_RATE_LIMIT = Number(process.env.SENSITIVE_RATE_LIMIT || 25);
 const ALLOWED_RESUME_EXTENSIONS = new Set(['.pdf', '.doc', '.docx']);
 const ALLOWED_RESUME_MIME_TYPES = new Set([
   'application/pdf',
@@ -175,8 +178,48 @@ const upload = multer({
 });
 
 app.disable('x-powered-by');
+app.set('trust proxy', 1);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+
+app.use((req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
+  res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+  if (IS_PRODUCTION) {
+    res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+  }
+  if (req.path.startsWith('/admin') || req.path.startsWith('/api/')) {
+    res.setHeader('Cache-Control', 'no-store');
+  }
+  next();
+});
+
+const rateBuckets = new Map();
+
+function rateLimit(limit = GENERAL_RATE_LIMIT) {
+  return (req, res, next) => {
+    const ip = req.ip || req.socket.remoteAddress || 'unknown';
+    const key = `${ip}:${req.method}:${req.path}`;
+    const now = Date.now();
+    const bucket = rateBuckets.get(key) || { count: 0, resetAt: now + RATE_LIMIT_WINDOW_MS };
+    if (bucket.resetAt <= now) {
+      bucket.count = 0;
+      bucket.resetAt = now + RATE_LIMIT_WINDOW_MS;
+    }
+    bucket.count += 1;
+    rateBuckets.set(key, bucket);
+    res.setHeader('RateLimit-Limit', String(limit));
+    res.setHeader('RateLimit-Remaining', String(Math.max(0, limit - bucket.count)));
+    res.setHeader('RateLimit-Reset', String(Math.ceil(bucket.resetAt / 1000)));
+    if (bucket.count > limit) {
+      return res.status(429).json({ error: 'Too many requests. Please try again later.' });
+    }
+    next();
+  };
+}
 
 app.use((req, res, next) => {
   const forbidden = ['server.js', 'package.json', '.gitignore', '.env'];
@@ -189,6 +232,7 @@ app.use((req, res, next) => {
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(UPLOADS_DIR));
+app.use(rateLimit());
 app.use(bodyParser.json({ limit: '100kb' }));
 app.use(bodyParser.urlencoded({ extended: true, limit: '100kb' }));
 
@@ -608,8 +652,10 @@ app.get('/careers', (req, res) => res.sendFile(path.join(__dirname, 'careers.htm
 app.get('/careers.html', (req, res) => res.redirect(301, '/careers'));
 app.get('/contact', (req, res) => res.sendFile(path.join(__dirname, 'contact.html')));
 app.get('/contact.html', (req, res) => res.redirect(301, '/contact'));
-app.get('/consultation', (req, res) => res.sendFile(path.join(__dirname, 'consultation.html')));
-app.get('/consultation.html', (req, res) => res.redirect(301, '/consultation'));
+app.get('/book-demo', (req, res) => res.sendFile(path.join(__dirname, 'book-demo.html')));
+app.get('/book-demo.html', (req, res) => res.redirect(301, '/book-demo'));
+app.get('/consultation', (req, res) => res.redirect(301, '/book-demo'));
+app.get('/consultation.html', (req, res) => res.redirect(301, '/book-demo'));
 app.get('/login', (req, res) => res.sendFile(path.join(__dirname, 'login.html')));
 app.get('/login.html', (req, res) => res.redirect(301, '/login'));
 app.get('/signup', (req, res) => res.sendFile(path.join(__dirname, 'signup.html')));
@@ -652,7 +698,7 @@ app.get('/admin/setup', (req, res) => {
   res.render('admin-setup', { error: null });
 });
 
-app.post('/admin/setup', (req, res) => {
+app.post('/admin/setup', rateLimit(SENSITIVE_RATE_LIMIT), (req, res) => {
   try {
     if (readAdmins().length > 0) {
       return res.redirect('/admin/login');
@@ -692,7 +738,7 @@ app.get('/admin/login', (req, res) => {
   res.render('admin-login', { error: null });
 });
 
-app.post('/admin/login', (req, res) => {
+app.post('/admin/login', rateLimit(SENSITIVE_RATE_LIMIT), (req, res) => {
   try {
     const username = cleanText(req.body.username, 120).toLowerCase();
     const password = String(req.body.password || '');
@@ -864,7 +910,7 @@ app.get('/api/me', ensureUser, (req, res) => {
   res.json(publicUser(user));
 });
 
-app.post('/api/signup', (req, res) => {
+app.post('/api/signup', rateLimit(SENSITIVE_RATE_LIMIT), (req, res) => {
   try {
     const name = cleanText(req.body.name);
     const email = cleanText(req.body.email, 120).toLowerCase();
@@ -912,7 +958,7 @@ app.post('/api/signup', (req, res) => {
   }
 });
 
-app.post('/api/login', (req, res) => {
+app.post('/api/login', rateLimit(SENSITIVE_RATE_LIMIT), (req, res) => {
   try {
     const email = cleanText(req.body.email, 120).toLowerCase();
     const password = String(req.body.password || '');
@@ -939,7 +985,7 @@ app.post('/api/login', (req, res) => {
   }
 });
 
-app.post('/api/contact', (req, res) => {
+app.post('/api/contact', rateLimit(SENSITIVE_RATE_LIMIT), (req, res) => {
   try {
     const name = cleanText(req.body.name);
     const email = cleanText(req.body.email).toLowerCase();
@@ -976,7 +1022,7 @@ app.post('/api/contact', (req, res) => {
   }
 });
 
-app.post('/api/application', upload.single('resume'), (req, res) => {
+app.post('/api/application', rateLimit(SENSITIVE_RATE_LIMIT), upload.single('resume'), (req, res) => {
   try {
     const name = cleanText(req.body.name);
     const email = cleanText(req.body.email).toLowerCase();

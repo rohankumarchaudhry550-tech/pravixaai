@@ -12,16 +12,16 @@
 <body>
   <nav class="nav">
     <a class="brand" href="/"><img src="/logo.png" alt="Pravixa AI Logo"></a>
-    <div class="links"><a href="/">Home</a><a href="/services">Services</a><a href="/consultation">Schedule Consultation</a><a href="/contact">Contact</a><a class="cta" href="/logout">Logout</a></div>
+    <div class="links"><a href="/">Home</a><a href="/services">Services</a><a href="/book-demo">Book Demo</a><a href="/contact">Contact</a><a class="cta" href="/logout">Logout</a></div>
   </nav>
   <main class="main">
     <section>
       <p class="muted">Customer Dashboard</p>
       <h1>Welcome, <%= user.name %></h1>
-      <p>Track your AI automation onboarding, manage consultation requests, and keep your account information ready for the Pravixa AI team.</p>
+      <p>Track your AI automation onboarding, manage demo requests, and keep your account information ready for the Pravixa AI team.</p>
     </section>
     <section class="grid">
-      <div class="card"><div class="muted">AI Active</div><div class="kpi">Ready</div><p>Automation discovery can begin after your consultation workflow.</p></div>
+      <div class="card"><div class="muted">AI Active</div><div class="kpi">Ready</div><p>Automation discovery can begin after your demo workflow.</p></div>
       <div class="card"><div class="muted">System Running</div><div class="kpi">Secure</div><p>Your account is stored in the backend and visible to authorized admins.</p></div>
       <div class="card"><div class="muted">Performance Score</div><div class="kpi">New</div><p>ROI metrics become available after automation workflows go live.</p></div>
     </section>
@@ -31,7 +31,7 @@
       <p><strong>Company:</strong> <%= user.company || user.businessType || 'Not specified' %></p>
       <p><strong>Status:</strong> <%= user.status %></p>
       <div class="actions">
-        <a class="primary" href="/consultation">Schedule Consultation</a>
+        <a class="primary" href="/book-demo">Book Demo</a>
         <a href="/contact">Request AI Audit</a>
         <a href="/services">View Services</a>
       </div>
