@@ -4,6 +4,7 @@ const fs = require('fs');
 const crypto = require('crypto');
 const multer = require('multer');
 const bodyParser = require('body-parser');
+const nodemailer = require('nodemailer');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -26,6 +27,8 @@ const LOG_FILE = path.join(DATA_DIR, 'app.log');
 const UPLOADS_DIR = path.join(__dirname, 'uploads');
 const MAX_TEXT_LENGTH = 1200;
 const MAX_SHORT_LENGTH = 160;
+const ENQUIRY_EMAIL = process.env.ENQUIRY_EMAIL || 'info@pravixaai.com';
+const MAIL_FROM = process.env.MAIL_FROM || ENQUIRY_EMAIL;
 const RATE_LIMIT_WINDOW_MS = Number(process.env.RATE_LIMIT_WINDOW_MS || 15 * 60 * 1000);
 const GENERAL_RATE_LIMIT = Number(process.env.GENERAL_RATE_LIMIT || 300);
 const SENSITIVE_RATE_LIMIT = Number(process.env.SENSITIVE_RATE_LIMIT || 25);
@@ -589,6 +592,57 @@ function cleanMessage(value) {
   return String(value || '').replace(/\r\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim().slice(0, MAX_TEXT_LENGTH);
 }
 
+function hasMailConfig() {
+  return Boolean(process.env.SMTP_HOST && process.env.SMTP_PORT);
+}
+
+function buildMailTransport() {
+  const auth = process.env.SMTP_USER
+    ? { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS || '' }
+    : undefined;
+  return nodemailer.createTransport({
+    host: process.env.SMTP_HOST,
+    port: Number(process.env.SMTP_PORT),
+    secure: String(process.env.SMTP_SECURE || '').toLowerCase() === 'true' || Number(process.env.SMTP_PORT) === 465,
+    auth
+  });
+}
+
+function formatEnquiryText(enquiry) {
+  return [
+    `Source: ${enquiry.source || 'Contact Form'}`,
+    `Name: ${enquiry.name}`,
+    `Email: ${enquiry.email}`,
+    `Phone: ${enquiry.phone || 'Not provided'}`,
+    `Company: ${enquiry.company || 'Not provided'}`,
+    `Service: ${enquiry.service}`,
+    `Preferred Time: ${enquiry.preferredTime || 'Not provided'}`,
+    '',
+    'Message:',
+    enquiry.message
+  ].join('\n');
+}
+
+async function sendEnquiryEmail(enquiry) {
+  if (!hasMailConfig()) {
+    appendLog('warning', 'enquiry email skipped; SMTP_HOST and SMTP_PORT are not configured', {
+      to: ENQUIRY_EMAIL,
+      source: enquiry.source || 'Contact Form'
+    });
+    return false;
+  }
+
+  const transporter = buildMailTransport();
+  await transporter.sendMail({
+    from: MAIL_FROM,
+    to: ENQUIRY_EMAIL,
+    replyTo: enquiry.email,
+    subject: `New Pravixa AI ${enquiry.source || 'Enquiry'} - ${enquiry.service}`,
+    text: formatEnquiryText(enquiry)
+  });
+  return true;
+}
+
 function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
 }
@@ -1071,13 +1125,15 @@ app.post('/api/login', rateLimit(SENSITIVE_RATE_LIMIT), (req, res) => {
   }
 });
 
-app.post('/api/contact', rateLimit(SENSITIVE_RATE_LIMIT), (req, res) => {
+app.post('/api/contact', rateLimit(SENSITIVE_RATE_LIMIT), async (req, res) => {
   try {
     const name = cleanText(req.body.name);
     const email = cleanText(req.body.email).toLowerCase();
     const phone = cleanText(req.body.phone);
     const company = cleanText(req.body.company);
     const service = cleanText(req.body.service);
+    const source = cleanText(req.body.source || 'Contact Form');
+    const preferredTime = cleanText(req.body.preferredTime);
     const message = cleanMessage(req.body.message);
 
     if (!name || !email || !service || !message) {
@@ -1096,11 +1152,18 @@ app.post('/api/contact', rateLimit(SENSITIVE_RATE_LIMIT), (req, res) => {
       phone,
       company,
       service,
+      source,
+      preferredTime,
       message
     };
     contacts.push(newContact);
     writeContacts(contacts);
-    appendLog('info', 'contact submitted', { service, hasPhone: Boolean(phone) });
+    try {
+      const emailSent = await sendEnquiryEmail(newContact);
+      appendLog('info', 'contact submitted', { service, source, hasPhone: Boolean(phone), emailSent });
+    } catch (mailError) {
+      appendLog('error', 'enquiry email failed', { error: mailError.message, service, source });
+    }
     res.json({ success: true, message: 'Message received successfully.' });
   } catch (error) {
     appendLog('error', 'contact submission failed', { error: error.message });

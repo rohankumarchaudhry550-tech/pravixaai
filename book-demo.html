@@ -21,6 +21,7 @@
     <section>
       <h1>Book an AI Demo</h1>
       <p>See how Pravixa AI can automate your business processes, reduce costs, and improve customer experience with calling, lead generation, support, and workflow automation.</p>
+      <p>Demo enquiries are sent directly to <a href="mailto:info@pravixaai.com">info@pravixaai.com</a>.</p>
       <div class="metrics">
         <div class="metric"><strong>40-60%</strong><span>Cost reduction</span></div>
         <div class="metric"><strong>2x</strong><span>Faster operations</span></div>
@@ -53,6 +54,8 @@
         company: form.company.value.trim(),
         phone: '',
         service: 'AI Demo',
+        source: 'Book Demo Form',
+        preferredTime: form.preferredTime.value.trim(),
         message: `Preferred time: ${form.preferredTime.value.trim()}`
       };
       if (!payload.name || !payload.email || !payload.company || !form.preferredTime.value.trim()) {

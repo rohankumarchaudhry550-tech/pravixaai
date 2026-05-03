@@ -38,7 +38,7 @@
       "contactType": "Customer Service",
       "availableLanguage": "English",
       "telephone": "Available after inquiry",
-      "email": "contact@pravixaai.com"
+      "email": "info@pravixaai.com"
     },
     "address": {
       "@type": "PostalAddress",
@@ -623,13 +623,13 @@ body.loaded {
   <div class="container">
     <div class="contacts-title">
       <h2>Reach Pravixa AI</h2>
-      <p>Use the inquiry form for AI automation, calling systems, lead generation, and customer support automation requests.</p>
+      <p>Use the inquiry form for AI automation, calling systems, lead generation, and customer support automation requests. Enquiries go to <a href="mailto:info@pravixaai.com">info@pravixaai.com</a>.</p>
     </div>
     <div class="grid contacts">
 
       <div class="card">
         <h3> Email Support</h3>
-        <p>contact@pravixaai.com</p>
+        <p><a href="mailto:info@pravixaai.com">info@pravixaai.com</a></p>
         <small>Professional email responses within 24 business hours for all inquiries</small>
       </div>
 
@@ -774,6 +774,7 @@ form.addEventListener("submit", function(e){
       phone: document.getElementById("phone").value.trim(),
       company: document.getElementById("company").value.trim(),
       service: document.getElementById("service").value,
+      source: 'Contact Form',
       message: message.value.trim()
     };
 
