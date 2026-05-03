@@ -3,6 +3,42 @@
   "trailingSlash": false,
   "rewrites": [
     {
+      "source": "/about",
+      "destination": "/about.html"
+    },
+    {
+      "source": "/services",
+      "destination": "/services.html"
+    },
+    {
+      "source": "/portfolio",
+      "destination": "/portfolio.html"
+    },
+    {
+      "source": "/careers",
+      "destination": "/careers.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact.html"
+    },
+    {
+      "source": "/book-demo",
+      "destination": "/book-demo.html"
+    },
+    {
+      "source": "/consultation",
+      "destination": "/book-demo.html"
+    },
+    {
+      "source": "/login",
+      "destination": "/login.html"
+    },
+    {
+      "source": "/signup",
+      "destination": "/signup.html"
+    },
+    {
       "source": "/api/:path*",
       "destination": "https://pravixaai-oiqp.onrender.com/api/:path*"
     },

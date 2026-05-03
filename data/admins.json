@@ -1,9 +1,1 @@
-[
-  {
-    "id": "u_admin_pravixa_primary",
-    "username": "admin@pravixaai.com",
-    "passwordHash": "scrypt$9da24ebfd2266bc987be102a753a74ce$df62b5ac946481fe0c09597efcee97a79472991001e3058f2b2497526c1a00286958b950d6e09d1ba2c0c7a33d0fb221a1e7a1c1b06ef880bfad77083acb0f64",
-    "createdAt": "2026-05-02T06:38:11.853Z",
-    "role": "administrator"
-  }
-]
+[]
