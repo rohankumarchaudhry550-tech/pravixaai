@@ -1080,10 +1080,10 @@
     <div class="hero-overlay"></div>
     <div class="container">
         <div class="hero-content">
-            <h1>AI Solutions That Reduce Costs & Scale Your Business Faster</h1>
+            <h1>AI Solutions That Reduce<br> Costs & Scale Your <br>Business Faster</h1>
 
             <p class="subtitle">
-                We help US businesses automate operations, generate leads, and improve customer experience using advanced AI systems.
+                We help US businesses automate <br>operations, generate leads, and improve customer experience<br> using advanced AI systems.
             </p>
 
             <p class="tagline">
@@ -1103,8 +1103,7 @@
     position: relative;
     overflow: hidden;
     min-height: 50vh;
-    padding-top: 70px; /* header height adjust */
-
+    padding-top: 90px; /* header height adjust */
     background-image: url('hero.gif');
     background-position: center top;
     background-size: 100% auto;
@@ -1161,8 +1160,6 @@
     z-index: 1;
     text-align: left;
     margin-top: 80px;
-
-    /*  REMOVE fixed margin */
     margin-right: 0;
 
     animation: fadeInUp 1s ease-out;
@@ -1195,6 +1192,7 @@
     .hero-content {
         max-width: 100%;
         padding: 0;
+        margin-top: 70px;
     }
 
     .hero h1,
@@ -1212,8 +1210,8 @@
 
 /* ========= TEXT ========= */
 .hero h1 {
-    font-size: 1.85rem;
-    font-weight: 700;
+    font-size: 1.20rem;
+    font-weight: 500;
     margin-bottom: 15px;
     animation: fadeInUp 1s ease-out 0.2s both;
     font-family: 'Space Grotesk', 'Poppins', sans-serif;
@@ -1230,12 +1228,12 @@
 }
 
 @media (min-width: 768px) {
-    .hero h1 { font-size: 2.8rem; }
+    .hero h1 { font-size: 2.45rem; }
 }
 
 .hero .subtitle {
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: .75rem;
+    font-weight: 400;
     margin-bottom: 15px;
     animation: fadeInUp 1s ease-out 0.4s both;
     font-family: 'Poppins', sans-serif;
@@ -1248,7 +1246,7 @@
 }
 
 @media (min-width: 768px) {
-    .hero .subtitle { font-size: 1.9rem; }
+    .hero .subtitle { font-size: 1.55rem; }
 }
 
 .hero .tagline {
@@ -1266,7 +1264,7 @@
 }
 
 @media (min-width: 768px) {
-    .hero .tagline { font-size: 1.15rem; }
+    .hero .tagline { font-size: 0.8rem; }
 }
 
 /* ========= BUTTONS ========= */
@@ -4445,5 +4443,69 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 });
-</script></body>
+</script>
+<style>
+@media (max-width: 768px) {
+  #home.hero {
+    min-height: 72vh;
+    padding: 112px 16px 76px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-position: center top;
+  }
+  #home .container {
+    width: 100%;
+    max-width: 560px;
+    padding: 0;
+  }
+  #home .hero-content {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+  }
+  #home.hero h1 {
+    font-size: clamp(1.9rem, 8vw, 2.7rem);
+    line-height: 1.12;
+    margin-bottom: 14px;
+    letter-spacing: 0;
+  }
+  #home.hero .subtitle {
+    font-size: clamp(1rem, 4vw, 1.2rem);
+    line-height: 1.45;
+    margin-bottom: 12px;
+  }
+  #home.hero .tagline {
+    max-width: 100%;
+    font-size: 0.9rem;
+    line-height: 1.65;
+    margin: 0 auto 22px;
+  }
+  #home .hero-buttons {
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 16px;
+  }
+}
+@media (max-width: 500px) {
+  #home.hero {
+    padding: 104px 16px 64px;
+  }
+  #home .hero-buttons {
+    flex-direction: column;
+  }
+  #home .btn-primary,
+  #home .btn-outline {
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+    padding: 13px 18px;
+    font-size: 0.92rem;
+  }
+}
+</style>
+</body>
 </html>
