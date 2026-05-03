@@ -94,59 +94,145 @@ const LEGAL_PAGES = {
   }
 };
 const PORTFOLIO_PROJECTS = {
-  'predictive-analytics-platform': {
-    title: 'Predictive Analytics Platform',
-    category: 'AI Automation',
-    summary: 'An AI-powered demand forecasting platform that helps retail teams reduce stockouts and make faster inventory decisions.',
-    problem: 'Retail inventory planning was slow, manual, and inaccurate across multiple sales channels.',
-    solution: 'We built a machine learning demand prediction system with dashboards, automated alerts, and data pipelines for inventory insights.',
-    result: 'The client reduced stockouts by 40%, improved sales by 25%, and gained a repeatable planning workflow.',
-    stack: ['Python', 'TensorFlow', 'React', 'Analytics Dashboards']
-  },
-  'global-saas-website': {
-    title: 'Global SaaS Website',
-    category: 'Web Development',
-    summary: 'A fast, SEO-focused SaaS website redesigned to improve product clarity, performance, and consultation conversions.',
-    problem: 'The SaaS website had low conversion rates, unclear messaging, and slow page performance.',
-    solution: 'We rebuilt the experience with clearer product pages, stronger SEO structure, faster loading, and conversion-focused calls to action.',
-    result: 'The site became faster, clearer, and better structured for consultation requests.',
-    stack: ['React', 'Next.js', 'SEO', 'Conversion Optimization']
-  },
-  'fitness-tracking-app': {
-    title: 'Fitness Tracking App',
+  'sabbath-app': {
+    title: 'The Sabbath App',
     category: 'Mobile App Development',
-    summary: 'A cross-platform fitness app with AI-based progress tracking and personalized user insights.',
-    problem: 'The brand needed a scalable mobile product that could support personalized fitness journeys.',
-    solution: 'We developed a React Native app with Firebase, AI tracking logic, progress insights, and clean mobile UX.',
-    result: 'The app created a scalable mobile foundation for personalized fitness tracking.',
-    stack: ['React Native', 'Firebase', 'AI Tracking', 'Mobile UX']
+    summary: 'A faith-focused mobile experience with app-store presence, content access, and a supporting public website.',
+    problem: 'The product needed a polished cross-platform presence that users could discover through the web and major app stores.',
+    solution: 'We shaped the project around clear mobile onboarding, public website discovery, store-ready positioning, and reliable external access points.',
+    result: 'The Sabbath App now presents a consistent experience across website, Google Play, and Apple App Store channels.',
+    stack: ['Mobile App', 'Website', 'Android', 'iOS'],
+    links: [
+      { label: 'Website', url: 'https://thesabbathapp.com/' },
+      { label: 'Google Play', url: 'https://play.google.com/store/apps/details?id=com.thesabbath.ui&hl=en_IN' },
+      { label: 'App Store', url: 'https://apps.apple.com/us/app/the-sabbath-app/id446053110' }
+    ]
   },
-  'project-management-platform': {
-    title: 'Project Management Platform',
+  'electropayroll': {
+    title: 'Electropayroll',
     category: 'SaaS Development',
-    summary: 'A cloud SaaS platform for team collaboration, task automation, and project visibility.',
-    problem: 'Growing teams needed a custom workflow that generic project tools could not support.',
-    solution: 'We built a multi-user SaaS platform with task tracking, permissions, automation, and cloud infrastructure.',
-    result: 'The platform supports structured task ownership, permissions, automation, and reporting.',
-    stack: ['Node.js', 'MongoDB', 'AWS', 'Workflow Automation']
+    summary: 'A payroll and workforce platform with website, Android app, and iOS app distribution.',
+    problem: 'Payroll users needed a simple digital workflow available from web and mobile channels.',
+    solution: 'We supported a product presence that connects the website with mobile store listings for easier discovery and access.',
+    result: 'Electropayroll is positioned as a complete payroll product across web, Android, and iOS touchpoints.',
+    stack: ['Payroll SaaS', 'Website', 'Android', 'iOS'],
+    links: [
+      { label: 'Website', url: 'https://electropayroll.in/' },
+      { label: 'Google Play', url: 'https://play.google.com/store/apps/details?id=io.ep.electropayroll&hl=en_IN' },
+      { label: 'App Store', url: 'https://apps.apple.com/in/app/electropayroll/id6751296524' }
+    ]
   },
-  'luxury-fashion-store': {
-    title: 'Luxury Fashion Store',
+  'alrayyan-tv': {
+    title: 'Alrayyan TV',
+    category: 'Mobile App Development',
+    summary: 'A media streaming mobile app project built for Android distribution and content access.',
+    problem: 'The channel needed a mobile-first destination where viewers could access media content directly.',
+    solution: 'The app listing and product flow were structured around simple discovery, fast access, and a recognizable media brand experience.',
+    result: 'Alrayyan TV is available to Android users through Google Play with a focused media app presence.',
+    stack: ['Media App', 'Android', 'Streaming UX', 'Mobile UI'],
+    links: [
+      { label: 'Google Play', url: 'https://play.google.com/store/apps/details?id=com.LinkDev.Alrayyan.App&hl=en' }
+    ]
+  },
+  'space-launch-schedule': {
+    title: 'Space Launch Schedule',
+    category: 'Mobile App Development',
+    summary: 'A mobile app for tracking upcoming space launches and mission schedule information.',
+    problem: 'Space enthusiasts needed an easy way to check launch schedules from a dedicated Android app.',
+    solution: 'The product experience centers on searchable launch information, structured schedules, and clear mobile navigation.',
+    result: 'Space Launch Schedule gives Android users a dedicated launch-tracking app through Google Play.',
+    stack: ['Android', 'Schedule App', 'Data UX', 'Mobile App'],
+    links: [
+      { label: 'Google Play', url: 'https://play.google.com/store/apps/details?id=com.kickstandtech.spacelaunchschedule' }
+    ]
+  },
+  'pismitra': {
+    title: 'Pismitra',
+    category: 'Mobile App Development',
+    summary: 'An Android mobile app project with public Play Store distribution and utility-focused user flows.',
+    problem: 'The service needed a direct Android channel for users to access its core features.',
+    solution: 'The mobile presence was organized around discoverability, concise app-store messaging, and straightforward user access.',
+    result: 'Pismitra is listed on Google Play with a dedicated Android app presence.',
+    stack: ['Android', 'Utility App', 'Mobile UX', 'Play Store'],
+    links: [
+      { label: 'Google Play', url: 'https://play.google.com/store/apps/details?id=com.techinvein.pismitra' }
+    ]
+  },
+  'exicube-taxi-app-theme': {
+    title: 'Exicube Taxi App Theme',
+    category: 'Mobile App Development',
+    summary: 'A taxi booking app theme package for faster ride-hailing product launches.',
+    problem: 'Taxi businesses and developers needed a ready design foundation for ride-booking app workflows.',
+    solution: 'The theme provides a structured mobile UI base for booking, ride management, and transport marketplace screens.',
+    result: 'Exicube helps teams start taxi app projects faster with a marketplace-ready theme asset.',
+    stack: ['Taxi App', 'Mobile UI', 'Theme', 'Ride Booking'],
+    links: [
+      { label: 'CodeCanyon', url: 'https://codecanyon.net/item/exicube-taxi-app/24009645' }
+    ]
+  },
+  'electro-go': {
+    title: 'Electro Go',
+    category: 'Mobile App Development',
+    summary: 'An Android mobile app product with Google Play distribution and consumer-ready positioning.',
+    problem: 'The product required a reliable Android store presence and mobile-first user access.',
+    solution: 'We aligned the portfolio presentation around app discovery, platform availability, and concise product communication.',
+    result: 'Electro Go is available as an Android app through Google Play.',
+    stack: ['Android', 'Mobile App', 'Play Store', 'Consumer UX'],
+    links: [
+      { label: 'Google Play', url: 'https://play.google.com/store/apps/details?id=com.electrogo.android&hl=en_IN' }
+    ]
+  },
+  '8-poure': {
+    title: '8 Poure',
+    category: 'Mobile App Development',
+    summary: 'A consumer mobile app project distributed through Google Play.',
+    problem: 'The brand needed an Android app channel for users to install and engage with its product.',
+    solution: 'The project is presented with direct app-store access, brand-first naming, and mobile product positioning.',
+    result: '8 Poure is publicly reachable through its Google Play listing.',
+    stack: ['Android', 'Consumer App', 'Mobile UX', 'Play Store'],
+    links: [
+      { label: 'Google Play', url: 'https://play.google.com/store/apps/details?id=com.atpoure.app' }
+    ]
+  },
+  'osteo': {
+    title: "L'Osteo en poche",
+    category: 'Mobile App Development',
+    summary: 'A health and osteopathy mobile app with website, Android listing, and iOS app presence.',
+    problem: 'The product needed trusted discovery paths for users looking for osteopathy guidance on mobile.',
+    solution: 'The public website and store links were organized to make the product easy to verify, install, and understand.',
+    result: "L'Osteo en poche has a complete web, Android, and iOS presence for mobile users.",
+    stack: ['Health App', 'Website', 'Android', 'iOS'],
+    links: [
+      { label: 'Website', url: 'https://osteo.us/' },
+      { label: 'Google Play', url: 'https://play.google.com/store/apps/details?id=com.rastventure.osteo' },
+      { label: 'App Store', url: 'https://apps.apple.com/in/app/lost%C3%A9o-en-poche/id1633483874' }
+    ]
+  },
+  'snowy-delights': {
+    title: 'Snowy Delights',
     category: 'E-commerce',
-    summary: 'An e-commerce experience with AI-assisted shopping and AR try-on to reduce cart abandonment.',
-    problem: 'The store had high cart abandonment because customers needed more confidence before purchase.',
-    solution: 'We improved the buying journey with AR try-on, AI-assisted recommendations, and optimized product flows.',
-    result: 'The improved buying journey reduced friction and supported higher-value purchases.',
-    stack: ['Shopify', 'AR', 'AI Recommendations', 'E-commerce UX']
+    summary: 'A food and dessert ordering mobile app with Android and iOS app-store distribution.',
+    problem: 'The food brand needed a polished mobile ordering presence available to users on both major platforms.',
+    solution: 'The product presence connects Android and iOS store listings with clear brand naming and install actions.',
+    result: 'Snowy Delights is positioned for mobile ordering discovery across Google Play and the App Store.',
+    stack: ['Food App', 'Android', 'iOS', 'Ordering UX'],
+    links: [
+      { label: 'Google Play', url: 'https://play.google.com/store/apps/details?id=io.snowy.delights&hl=en_IN' },
+      { label: 'App Store', url: 'https://apps.apple.com/in/app/snowy-delights/id6747926425' }
+    ]
   },
-  'customer-support-chatbot': {
-    title: 'Customer Support Chatbot',
-    category: 'AI Automation',
-    summary: 'An NLP chatbot integrated with support workflows to reduce repetitive tickets and provide 24/7 answers.',
-    problem: 'Support volume was increasing operational costs and slowing response times.',
-    solution: 'We built an API-connected NLP chatbot that handles common questions, captures context, and routes complex issues.',
-    result: 'The workflow reduced repetitive support load while adding 24/7 self-service coverage.',
-    stack: ['NLP', 'Python', 'API Integration', 'Support Automation']
+  'aasthika-pharmacy': {
+    title: 'Aasthika Pharmacy',
+    category: 'E-commerce',
+    summary: 'A pharmacy commerce project with a public website and Android discovery path.',
+    problem: 'The pharmacy needed a trustworthy digital presence for customers searching online and on mobile.',
+    solution: 'The portfolio entry highlights the pharmacy website, store discovery, and healthcare commerce positioning.',
+    result: 'Aasthika Pharmacy is easier to discover through its website and Google Play search path.',
+    stack: ['Pharmacy Website', 'E-commerce', 'Healthcare', 'Android Discovery'],
+    links: [
+      { label: 'Website', url: 'https://aasthikapharmacy.com/' },
+      { label: 'Google Play Search', url: 'https://play.google.com/store/search?q=aasthika&c=apps' }
+    ]
   }
 };
 

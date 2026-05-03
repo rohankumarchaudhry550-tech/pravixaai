@@ -3,21 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pravixa AI Solution Examples | AI, SaaS, Web, Mobile & Automation</title>
-<meta name="description" content="Explore Pravixa AI solution examples across AI automation, predictive analytics, SaaS platforms, web development, mobile apps, e-commerce, chatbots, and digital transformation.">
-<meta name="keywords" content="AI solution examples, AI automation, SaaS workflows, web development examples, mobile app projects, automation projects, predictive analytics, chatbot implementation">
+<title>Pravixa AI Portfolio | Mobile Apps, Websites, SaaS & E-commerce Projects</title>
+<meta name="description" content="Explore Pravixa AI portfolio projects including The Sabbath App, Electropayroll, Alrayyan TV, Space Launch Schedule, Pismitra, Electro Go, Osteo, Snowy Delights, Aasthika Pharmacy, and more.">
+<meta name="keywords" content="Pravixa AI portfolio, mobile app portfolio, Android app projects, iOS app projects, SaaS projects, website projects, e-commerce app development, payroll app, pharmacy website">
 <meta name="author" content="Pravixa AI">
 <meta name="robots" content="index, follow">
 <meta name="language" content="English">
-<meta property="og:title" content="Pravixa AI Solution Examples | AI, SaaS, Web, Mobile & Automation">
-<meta property="og:description" content="See AI automation, SaaS, web development, mobile app, e-commerce, chatbot, and predictive analytics solution examples from Pravixa AI.">
+<meta property="og:title" content="Pravixa AI Portfolio | Mobile Apps, Websites, SaaS & E-commerce Projects">
+<meta property="og:description" content="See real portfolio projects across mobile apps, websites, SaaS products, media apps, food ordering, healthcare, payroll, and pharmacy commerce.">
 <meta property="og:image" content="https://pravixaai.com/portfolio-og-image.jpg">
 <meta property="og:url" content="https://pravixaai.com/portfolio">
 <link rel="icon" href="logo.png">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Pravixa AI Solution Examples | AI, SaaS, Web, Mobile & Automation">
-<meta name="twitter:description" content="See AI automation, SaaS, web development, mobile app, e-commerce, chatbot, and predictive analytics solution examples from Pravixa AI.">
+<meta name="twitter:title" content="Pravixa AI Portfolio | Mobile Apps, Websites, SaaS & E-commerce Projects">
+<meta name="twitter:description" content="See real portfolio projects across mobile apps, websites, SaaS products, media apps, food ordering, healthcare, payroll, and pharmacy commerce.">
 <meta name="twitter:image" content="https://pravixaai.com/portfolio-twitter-image.jpg">
 <link rel="canonical" href="https://pravixaai.com/portfolio">
 <link rel="icon" href="fa.png" type="image/png">
@@ -25,8 +25,8 @@
 {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
-  "name": "Pravixa AI Solution Examples",
-  "description": "Examples of AI automation, predictive analytics, SaaS, web, e-commerce, chatbot, and workflow solutions Pravixa AI can build.",
+  "name": "Pravixa AI Portfolio",
+  "description": "Portfolio projects across mobile apps, websites, SaaS platforms, e-commerce, media, healthcare, payroll, and utility applications.",
   "url": "https://pravixaai.com/portfolio",
   "publisher": {
     "@type": "Organization",
@@ -93,12 +93,21 @@ p{color:#aaa}
 }
 
 /* CARD */
-.card{background:rgba(255,255,255,0.05);padding:20px;border-radius:16px;transition:0.4s;border:1px solid rgba(0,200,150,0.2);backdrop-filter:blur(10px);position: relative;overflow: hidden;cursor: pointer;}
+.card{background:rgba(255,255,255,0.05);padding:20px;border-radius:16px;transition:0.4s;border:1px solid rgba(0,200,150,0.2);backdrop-filter:blur(10px);position: relative;overflow: hidden;cursor: default;display:flex;flex-direction:column;gap:12px;min-height:100%;}
 .card::before {content: '';position: absolute;top: 0;left: -100%;width: 100%;height: 100%;background: linear-gradient(90deg, transparent, rgba(0, 200, 150, 0.1), transparent);transition: left 0.5s;}
 .card:hover::before {left: 100%;}
 .card:hover{transform:translateY(-6px) scale(1.02);background:rgba(0,200,150,0.1);box-shadow:0 15px 40px rgba(0,200,150,0.3);border-color: rgba(0,200,150, 0.5);}
 
-.tags{margin:10px 0;}
+.project-heading{display:flex;align-items:center;gap:14px;}
+.project-logo{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;flex:0 0 52px;background:linear-gradient(135deg,#00C896,#007BFF);color:#fff;font-weight:800;font-size:1rem;box-shadow:0 12px 30px rgba(0,200,150,0.22);}
+.project-kicker{display:block;color:#00C896;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0;}
+.project-heading h3{margin:0;line-height:1.2;}
+.project-summary{color:#cbd5df;}
+.project-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:4px;}
+.project-link{display:inline-flex;align-items:center;justify-content:center;min-height:34px;background:linear-gradient(135deg,rgba(0,200,150,0.9),rgba(0,123,255,0.9));color:#fff;text-decoration:none;border-radius:8px;padding:7px 11px;font-size:12px;font-weight:700;transition:0.25s;}
+.project-link:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,200,150,0.28);}
+.project-link.secondary{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.16);color:#dcecff;}
+.tags{margin:0;}
 .tag{display:inline-block;background:rgba(0,200,150,0.2);padding:4px 10px;border-radius:12px;font-size:12px;margin:3px;color:#00C896;}
 
 /* FOOTER */
@@ -468,16 +477,16 @@ body.loaded {
 <section class="hero">
   <div class="container">
     <div class="badges"> Our Work</div>
-    <h1>AI & SaaS Solution Examples</h1>
-    <p>Explore proven projects in AI automation, predictive analytics, SaaS platforms, web development, mobile apps, e-commerce, chatbots, and digital transformation.</p>
+    <h1>Mobile App, Website & SaaS Portfolio</h1>
+    <p>Explore real Pravixa AI projects across Android apps, iOS apps, websites, payroll SaaS, media, healthcare, taxi, food ordering, and pharmacy commerce.</p>
 
     <div class="filters">
       <div class="filter-btn active" data-filter="all">All Projects</div>
-      <div class="filter-btn" data-filter="ai">AI Solutions</div>
-      <div class="filter-btn" data-filter="web">Web Development</div>
+      <div class="filter-btn" data-filter="web">Websites</div>
       <div class="filter-btn" data-filter="mobile">Mobile Apps</div>
       <div class="filter-btn" data-filter="saas">SaaS</div>
       <div class="filter-btn" data-filter="ecom">E-commerce</div>
+      <div class="filter-btn" data-filter="media">Media</div>
     </div>
   </div>
 </section>
@@ -486,79 +495,156 @@ body.loaded {
 <section class="section">
   <div class="container grid fade" id="projects">
 
-    <!-- 1 -->
-    <div class="card" data-category="ai">
-      <h3>Predictive Analytics Platform</h3>
-      <p>A comprehensive AI-powered platform that predicts demand and optimizes inventory management for retail businesses.</p>
-      <div class="tags">
-        <span class="tag">ML</span><span class="tag">Python</span><span class="tag">TensorFlow</span><span class="tag">React</span>
+    <article class="card" data-category="mobile web">
+      <div class="project-heading">
+        <div class="project-logo" aria-hidden="true">SA</div>
+        <div><span class="project-kicker">Faith App</span><h3>The Sabbath App</h3></div>
       </div>
-      <p><b>Problem:</b> Retail inventory planning was slow and inaccurate.</p>
-      <p><b>Solution:</b> Machine learning demand forecasting and automated inventory insights.</p>
-      <p><b>Business Impact:</b> Better inventory visibility and faster demand planning</p>
-      <a class="tag" href="/portfolio/predictive-analytics-platform">View Solution</a>
-    </div>
+      <p class="project-summary">A faith-focused mobile experience with website discovery and Android/iOS app-store presence.</p>
+      <div class="tags"><span class="tag">Android</span><span class="tag">iOS</span><span class="tag">Website</span></div>
+      <div class="project-actions">
+        <a class="project-link" href="/portfolio/sabbath-app">View Details</a>
+        <a class="project-link secondary" href="https://thesabbathapp.com/" target="_blank" rel="noopener noreferrer">Website</a>
+        <a class="project-link secondary" href="https://play.google.com/store/apps/details?id=com.thesabbath.ui&hl=en_IN" target="_blank" rel="noopener noreferrer">Google Play</a>
+        <a class="project-link secondary" href="https://apps.apple.com/us/app/the-sabbath-app/id446053110" target="_blank" rel="noopener noreferrer">App Store</a>
+      </div>
+    </article>
 
-    <!-- 2 -->
-    <div class="card" data-category="web">
-      <h3>Global SaaS Website</h3>
-      <p>A modern, high-performance website for a SaaS company serving international clients with advanced features.</p>
-      <div class="tags">
-        <span class="tag">React</span><span class="tag">Next.js</span><span class="tag">SEO</span>
+    <article class="card" data-category="saas mobile web">
+      <div class="project-heading">
+        <div class="project-logo" aria-hidden="true">EP</div>
+        <div><span class="project-kicker">Payroll SaaS</span><h3>Electropayroll</h3></div>
       </div>
-      <p><b>Problem:</b> The SaaS website had low conversion rates and slow performance.</p>
-      <p><b>Solution:</b> SEO-focused redesign with faster pages and clearer product messaging.</p>
-      <p><b>Business Impact:</b> Clearer product messaging, faster pages, stronger demo flow</p>
-      <a class="tag" href="/portfolio/global-saas-website">View Solution</a>
-    </div>
+      <p class="project-summary">A payroll and workforce product with website, Android app, and iOS app distribution.</p>
+      <div class="tags"><span class="tag">SaaS</span><span class="tag">Payroll</span><span class="tag">Android</span><span class="tag">iOS</span></div>
+      <div class="project-actions">
+        <a class="project-link" href="/portfolio/electropayroll">View Details</a>
+        <a class="project-link secondary" href="https://electropayroll.in/" target="_blank" rel="noopener noreferrer">Website</a>
+        <a class="project-link secondary" href="https://play.google.com/store/apps/details?id=io.ep.electropayroll&hl=en_IN" target="_blank" rel="noopener noreferrer">Google Play</a>
+        <a class="project-link secondary" href="https://apps.apple.com/in/app/electropayroll/id6751296524" target="_blank" rel="noopener noreferrer">App Store</a>
+      </div>
+    </article>
 
-    <!-- 3 -->
-    <div class="card" data-category="mobile">
-      <h3>Fitness Tracking App</h3>
-      <div class="tags">
-        <span class="tag">React Native</span><span class="tag">AI</span><span class="tag">Firebase</span>
+    <article class="card" data-category="mobile media">
+      <div class="project-heading">
+        <div class="project-logo" aria-hidden="true">TV</div>
+        <div><span class="project-kicker">Media App</span><h3>Alrayyan TV</h3></div>
       </div>
-      <p><b>Problem:</b> The fitness brand needed a scalable mobile app with personalized tracking.</p>
-      <p><b>Solution:</b> Cross-platform app with AI-based activity and progress insights.</p>
-      <p><b>Business Impact:</b> Personalized tracking, retention insights, scalable mobile foundation</p>
-      <a class="tag" href="/portfolio/fitness-tracking-app">View Solution</a>
-    </div>
+      <p class="project-summary">A media streaming Android app presence for direct content access and viewer engagement.</p>
+      <div class="tags"><span class="tag">Android</span><span class="tag">Media</span><span class="tag">Streaming UX</span></div>
+      <div class="project-actions">
+        <a class="project-link" href="/portfolio/alrayyan-tv">View Details</a>
+        <a class="project-link secondary" href="https://play.google.com/store/apps/details?id=com.LinkDev.Alrayyan.App&hl=en" target="_blank" rel="noopener noreferrer">Google Play</a>
+      </div>
+    </article>
 
-    <!-- 4 -->
-    <div class="card" data-category="saas">
-      <h3>Project Management Platform</h3>
-      <div class="tags">
-        <span class="tag">Node.js</span><span class="tag">MongoDB</span><span class="tag">AWS</span>
+    <article class="card" data-category="mobile">
+      <div class="project-heading">
+        <div class="project-logo" aria-hidden="true">SL</div>
+        <div><span class="project-kicker">Schedule App</span><h3>Space Launch Schedule</h3></div>
       </div>
-      <p><b>Problem:</b> Growing teams needed a custom project management workflow.</p>
-      <p><b>Solution:</b> Cloud SaaS platform with collaboration, task tracking, and automation.</p>
-      <p><b>Business Impact:</b> Centralized tasks, permissions, automation, and team visibility</p>
-      <a class="tag" href="/portfolio/project-management-platform">View Solution</a>
-    </div>
+      <p class="project-summary">An Android app for tracking space launch schedules, missions, and upcoming launch information.</p>
+      <div class="tags"><span class="tag">Android</span><span class="tag">Data UX</span><span class="tag">Schedule</span></div>
+      <div class="project-actions">
+        <a class="project-link" href="/portfolio/space-launch-schedule">View Details</a>
+        <a class="project-link secondary" href="https://play.google.com/store/apps/details?id=com.kickstandtech.spacelaunchschedule" target="_blank" rel="noopener noreferrer">Google Play</a>
+      </div>
+    </article>
 
-    <!-- 5 -->
-    <div class="card" data-category="ecom">
-      <h3>Luxury Fashion Store</h3>
-      <div class="tags">
-        <span class="tag">Shopify</span><span class="tag">AR</span><span class="tag">AI</span>
+    <article class="card" data-category="mobile">
+      <div class="project-heading">
+        <div class="project-logo" aria-hidden="true">PM</div>
+        <div><span class="project-kicker">Utility App</span><h3>Pismitra</h3></div>
       </div>
-      <p><b>Problem:</b> The e-commerce store had high cart abandonment.</p>
-      <p><b>Solution:</b> AI-assisted shopping experience with AR product try-on.</p>
-      <p><b>Result:</b> -45% abandonment, 2x value</p>
-      <a class="tag" href="/portfolio/luxury-fashion-store">View Solution</a>
-    </div>
+      <p class="project-summary">A utility-focused Android app project with direct Play Store distribution and mobile-first access.</p>
+      <div class="tags"><span class="tag">Android</span><span class="tag">Utility</span><span class="tag">Mobile UX</span></div>
+      <div class="project-actions">
+        <a class="project-link" href="/portfolio/pismitra">View Details</a>
+        <a class="project-link secondary" href="https://play.google.com/store/apps/details?id=com.techinvein.pismitra" target="_blank" rel="noopener noreferrer">Google Play</a>
+      </div>
+    </article>
 
-    <!-- 6 -->
-    <div class="card" data-category="ai">
-      <h3>Customer Support Chatbot</h3>
-      <div class="tags">
-        <span class="tag">NLP</span><span class="tag">Python</span><span class="tag">API</span>
+    <article class="card" data-category="mobile">
+      <div class="project-heading">
+        <div class="project-logo" aria-hidden="true">EX</div>
+        <div><span class="project-kicker">Taxi Theme</span><h3>Exicube Taxi App Theme</h3></div>
       </div>
-      <p><b>Problem:</b> Support volume was increasing operational costs.</p>
-      <p><b>Solution:</b> NLP chatbot integrated with support workflows and APIs.</p>
-      <p><b>Result:</b> -70% cost, 24/7 support</p>
-      <a class="tag" href="/portfolio/customer-support-chatbot">View Solution</a>
-    </div>
+      <p class="project-summary">A taxi booking app theme package designed for faster ride-hailing product launches.</p>
+      <div class="tags"><span class="tag">Taxi App</span><span class="tag">Theme</span><span class="tag">Ride Booking</span></div>
+      <div class="project-actions">
+        <a class="project-link" href="/portfolio/exicube-taxi-app-theme">View Details</a>
+        <a class="project-link secondary" href="https://codecanyon.net/item/exicube-taxi-app/24009645" target="_blank" rel="noopener noreferrer">CodeCanyon</a>
+      </div>
+    </article>
+
+    <article class="card" data-category="mobile">
+      <div class="project-heading">
+        <div class="project-logo" aria-hidden="true">EG</div>
+        <div><span class="project-kicker">Consumer App</span><h3>Electro Go</h3></div>
+      </div>
+      <p class="project-summary">An Android mobile app product with Google Play availability and consumer-ready positioning.</p>
+      <div class="tags"><span class="tag">Android</span><span class="tag">Consumer App</span><span class="tag">Play Store</span></div>
+      <div class="project-actions">
+        <a class="project-link" href="/portfolio/electro-go">View Details</a>
+        <a class="project-link secondary" href="https://play.google.com/store/apps/details?id=com.electrogo.android&hl=en_IN" target="_blank" rel="noopener noreferrer">Google Play</a>
+      </div>
+    </article>
+
+    <article class="card" data-category="mobile">
+      <div class="project-heading">
+        <div class="project-logo" aria-hidden="true">8P</div>
+        <div><span class="project-kicker">Consumer App</span><h3>8 Poure</h3></div>
+      </div>
+      <p class="project-summary">A consumer Android app project with a clear brand listing and direct app-store access.</p>
+      <div class="tags"><span class="tag">Android</span><span class="tag">Mobile App</span><span class="tag">Play Store</span></div>
+      <div class="project-actions">
+        <a class="project-link" href="/portfolio/8-poure">View Details</a>
+        <a class="project-link secondary" href="https://play.google.com/store/apps/details?id=com.atpoure.app" target="_blank" rel="noopener noreferrer">Google Play</a>
+      </div>
+    </article>
+
+    <article class="card" data-category="mobile web">
+      <div class="project-heading">
+        <div class="project-logo" aria-hidden="true">OS</div>
+        <div><span class="project-kicker">Health App</span><h3>L'Osteo en poche</h3></div>
+      </div>
+      <p class="project-summary">A healthcare and osteopathy mobile app with website, Android listing, and iOS availability.</p>
+      <div class="tags"><span class="tag">Health</span><span class="tag">Website</span><span class="tag">Android</span><span class="tag">iOS</span></div>
+      <div class="project-actions">
+        <a class="project-link" href="/portfolio/osteo">View Details</a>
+        <a class="project-link secondary" href="https://osteo.us/" target="_blank" rel="noopener noreferrer">Website</a>
+        <a class="project-link secondary" href="https://play.google.com/store/apps/details?id=com.rastventure.osteo" target="_blank" rel="noopener noreferrer">Google Play</a>
+        <a class="project-link secondary" href="https://apps.apple.com/in/app/lost%C3%A9o-en-poche/id1633483874" target="_blank" rel="noopener noreferrer">App Store</a>
+      </div>
+    </article>
+
+    <article class="card" data-category="mobile ecom">
+      <div class="project-heading">
+        <div class="project-logo" aria-hidden="true">SD</div>
+        <div><span class="project-kicker">Food Ordering</span><h3>Snowy Delights</h3></div>
+      </div>
+      <p class="project-summary">A dessert and food ordering mobile app available through Android and iOS app stores.</p>
+      <div class="tags"><span class="tag">Food App</span><span class="tag">E-commerce</span><span class="tag">Android</span><span class="tag">iOS</span></div>
+      <div class="project-actions">
+        <a class="project-link" href="/portfolio/snowy-delights">View Details</a>
+        <a class="project-link secondary" href="https://play.google.com/store/apps/details?id=io.snowy.delights&hl=en_IN" target="_blank" rel="noopener noreferrer">Google Play</a>
+        <a class="project-link secondary" href="https://apps.apple.com/in/app/snowy-delights/id6747926425" target="_blank" rel="noopener noreferrer">App Store</a>
+      </div>
+    </article>
+
+    <article class="card" data-category="web ecom mobile">
+      <div class="project-heading">
+        <div class="project-logo" aria-hidden="true">AP</div>
+        <div><span class="project-kicker">Pharmacy Commerce</span><h3>Aasthika Pharmacy</h3></div>
+      </div>
+      <p class="project-summary">A pharmacy commerce project with public website access and Android discovery path.</p>
+      <div class="tags"><span class="tag">Pharmacy</span><span class="tag">Website</span><span class="tag">Healthcare</span><span class="tag">E-commerce</span></div>
+      <div class="project-actions">
+        <a class="project-link" href="/portfolio/aasthika-pharmacy">View Details</a>
+        <a class="project-link secondary" href="https://aasthikapharmacy.com/" target="_blank" rel="noopener noreferrer">Website</a>
+        <a class="project-link secondary" href="https://play.google.com/store/search?q=aasthika&c=apps" target="_blank" rel="noopener noreferrer">Google Play</a>
+      </div>
+    </article>
 
   </div>
 </section>
@@ -582,13 +668,15 @@ const cards = document.querySelectorAll(".card");
 
 filterBtns.forEach(btn=>{
   btn.addEventListener("click",()=>{
-    document.querySelector(".active").classList.remove("active");
+    const activeFilter = document.querySelector(".filter-btn.active");
+    if (activeFilter) activeFilter.classList.remove("active");
     btn.classList.add("active");
 
     const filter = btn.dataset.filter;
 
     cards.forEach(card=>{
-      if(filter==="all" || card.dataset.category===filter){
+      const categories = (card.dataset.category || "").split(" ");
+      if(filter==="all" || categories.includes(filter)){
         card.classList.remove("hide");
       } else {
         card.classList.add("hide");

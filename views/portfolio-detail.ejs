@@ -214,6 +214,13 @@
       font-size: 0.85rem;
     }
 
+    .project-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
     /* BUTTONS */
     .actions {
       margin: 30px 0;
@@ -326,6 +333,17 @@
       <% }) %>
     </div>
   </section>
+
+  <% if (project.links && project.links.length) { %>
+  <section class="panel">
+    <h2>Project Links</h2>
+    <div class="project-links">
+      <% project.links.forEach(link => { %>
+        <a class="btn secondary" href="<%= link.url %>" target="_blank" rel="noopener noreferrer"><%= link.label %></a>
+      <% }) %>
+    </div>
+  </section>
+  <% } %>
 
   <div class="actions">
     <a class="btn primary" href="/contact">Start a Similar Project</a>
