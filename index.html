@@ -391,14 +391,16 @@
             top: 100%;
             left: 0;
             width: 100%;
-            background: rgba(13, 13, 13, 0.95);
+            background: rgba(13, 13, 13, 0.98);
             backdrop-filter: blur(20px);
             display: none;
             flex-direction: column;
-            padding: 20px;
-            transform: translateY(-20px);
+            padding: 18px 20px;
+            transform: translateY(-12px);
             opacity: 0;
             transition: all 0.3s ease;
+            z-index: 1001;
+            box-shadow: 0 18px 40px rgba(0,0,0,0.35);
         }
         .mobile-menu.active {
             display: flex;
@@ -924,16 +926,10 @@
 
         /* ========= ANIMATED BACKGROUND ========= */
         .animated-bg {
-            
-            top: 0;
-            left: 0;
-          
+            position: fixed;
+            inset: 0;
             z-index: -1;
-            .animated-bg {
-    position: fixed;
-    inset: 0; /*  instead of width/height */
-    overflow: hidden;
-}
+            overflow: hidden;
             background: linear-gradient(135deg, #0D0D0D 0%, #1a1a1a 50%, #0D0D0D 100%);
         }
 
@@ -1068,6 +1064,13 @@
     .nav .cta-button {
         display: none;
     }
+    .mobile-menu .mobile-cta {
+        display: block;
+        width: 100%;
+        margin-top: 12px;
+        text-align: center;
+        border-bottom: 0;
+    }
 }
     </style>
 </div>
@@ -1099,10 +1102,13 @@
 .hero {
     position: relative;
     overflow: hidden;
-max-height: 1400px;
-    padding-top: 90px; /* header height adjust */
+    min-height: 50vh;
+    padding-top: 70px; /* header height adjust */
 
-    background: url('hero.gif') center/cover no-repeat;
+    background-image: url('hero.gif');
+    background-position: center top;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
 }
 
 
@@ -1121,18 +1127,15 @@ max-height: 1400px;
     .hero {
         background: linear-gradient(135deg, rgba(0, 200, 150, 0.15), rgba(0, 123, 255, 0.15)), url('heromobile.gif') center center no-repeat;
 
-        background-size: cover; /*  FIX */
+        background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
 
-        min-height: 68vh;
-        padding-top: 80px;
-        padding-bottom: 100px;
-        padding-left: 15px;
-        padding-right: 15px;
-
-        text-align: left;
-        justify-content: flex-start;
+        min-height: 72vh;
+        padding: 96px 16px 72px;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
     }
 }
 
@@ -1180,7 +1183,10 @@ max-height: 1400px;
 /* Tablet */
 @media (max-width: 768px) {
     .hero-content {
-        max-width: 90%;
+        max-width: 620px;
+        margin: 0 auto;
+        padding: 0 12px;
+        text-align: center;
     }
 }
 
@@ -1188,7 +1194,7 @@ max-height: 1400px;
 @media (max-width: 500px) {
     .hero-content {
         max-width: 100%;
-        padding: 0 10px;
+        padding: 0;
     }
 
     .hero h1,
@@ -1206,7 +1212,7 @@ max-height: 1400px;
 
 /* ========= TEXT ========= */
 .hero h1 {
-    font-size: .45rem;
+    font-size: 1.85rem;
     font-weight: 700;
     margin-bottom: 15px;
     animation: fadeInUp 1s ease-out 0.2s both;
@@ -1228,7 +1234,7 @@ max-height: 1400px;
 }
 
 .hero .subtitle {
-    font-size: 0.65rem;
+    font-size: 1rem;
     font-weight: 600;
     margin-bottom: 15px;
     animation: fadeInUp 1s ease-out 0.4s both;
@@ -1277,14 +1283,17 @@ max-height: 1400px;
 @media (max-width: 500px) {
     .hero-buttons {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         gap: 12px;
     }
 
     .btn-primary,
     .btn-outline {
         width: 100%;
-        max-width: 260px;
+        max-width: 300px;
+        text-align: center;
+        padding: 13px 18px;
+        font-size: 0.92rem;
     }
 }
 

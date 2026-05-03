@@ -121,7 +121,7 @@
       position: fixed;
       top: 0;
       right: -100%;
-      width: 260px;
+      width: min(280px, 82vw);
       height: 100vh;
       background: rgba(8,24,39,0.96);
       backdrop-filter: blur(16px);
@@ -130,7 +130,8 @@
       flex-direction: column;
       gap: 18px;
       transition: 0.35s ease;
-      z-index: 999;
+      z-index: 1002;
+      box-shadow: -18px 0 40px rgba(0,0,0,0.35);
     }
 
     .mobile-menu.active {
@@ -144,6 +145,7 @@
       opacity: 0;
       visibility: hidden;
       transition: 0.3s;
+      z-index: 1001;
     }
 
     .overlay.active {
@@ -221,6 +223,46 @@
       margin-top: 12px;
     }
 
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .related-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 58px;
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(0,200,150,0.16);
+      background: rgba(255,255,255,0.035);
+      color: #eef7ff;
+      text-decoration: none;
+      font-weight: 700;
+      transition: 0.25s;
+    }
+
+    .related-card:hover {
+      transform: translateY(-3px);
+      border-color: #00c896;
+      background: rgba(0,200,150,0.08);
+    }
+
+    .related-card span {
+      overflow-wrap: anywhere;
+    }
+
+    .related-card::after {
+      content: "View";
+      flex: 0 0 auto;
+      color: #00c896;
+      font-size: 0.82rem;
+    }
+
     /* BUTTONS */
     .actions {
       margin: 30px 0;
@@ -265,8 +307,8 @@
       }
 
       main {
-        padding: 50px 16px;
-        text-align: center;
+        padding: 42px 16px;
+        text-align: left;
       }
 
       .actions {
@@ -276,6 +318,28 @@
       .btn {
         width: 100%;
         text-align: center;
+      }
+
+      .summary {
+        margin-bottom: 22px;
+      }
+
+      .panel {
+        padding: 16px;
+      }
+
+      .project-links,
+      .tags {
+        justify-content: flex-start;
+      }
+
+      .related-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .related-card {
+        align-items: flex-start;
+        flex-direction: column;
       }
     }
   </style>
@@ -352,9 +416,11 @@
 
   <section class="panel">
     <h2>More Solution Examples</h2>
-    <% relatedProjects.forEach(item => { %>
-      <p><a href="/portfolio/<%= item.slug %>"><%= item.title %></a></p>
-    <% }) %>
+    <div class="related-grid">
+      <% relatedProjects.forEach(item => { %>
+        <a class="related-card" href="/portfolio/<%= item.slug %>"><span><%= item.title %></span></a>
+      <% }) %>
+    </div>
   </section>
 
 </main>

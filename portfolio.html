@@ -60,7 +60,7 @@ header.scrolled{background:rgba(13,13,13,0.95);backdrop-filter:blur(20px);border
 .hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
 .hamburger.active span:nth-child(2){opacity:0;}
 .hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(7px,-6px);}
-.mobile-menu{position:absolute;top:100%;left:0;width:100%;background:rgba(13,13,13,0.95);backdrop-filter:blur(20px);display:none;flex-direction:column;padding:20px;transform:translateY(-100%);opacity:0;transition:all 0.3s ease;}
+.mobile-menu{position:absolute;top:100%;left:0;width:100%;background:rgba(13,13,13,0.98);backdrop-filter:blur(20px);display:none;flex-direction:column;padding:18px 20px;transform:translateY(-12px);opacity:0;transition:all 0.3s ease;z-index:1001;box-shadow:0 18px 40px rgba(0,0,0,0.35);}
 .mobile-menu.active{display:flex;transform:translateY(0);opacity:1;}
 .mobile-menu.active{display:flex;}
 .mobile-menu a{color:#fff;text-decoration:none;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.1);}
@@ -314,6 +314,8 @@ body.loaded {
   .nav-links{display:none;}
   .hamburger{display:flex;}
   .cta-button{padding:8px 14px;font-size:0.8rem;border-radius:20px;}
+  .mobile-menu{padding:14px 16px;}
+  .mobile-menu a{padding:11px 0;font-size:0.9rem;}
   .section{padding:35px 0;}
   .container{width:96%;padding:0 12px;}
   .hero{padding:70px 12px 50px;margin-top:48px;}
@@ -324,7 +326,11 @@ body.loaded {
   h2{font-size:1.3rem;margin-bottom:10px;}
   h3{font-size:1rem;margin-bottom:6px;}
   p{font-size:0.85rem;line-height:1.6;}
-  .grid{grid-template-columns:1fr;gap:12px;}
+  .grid{grid-template-columns:1fr;gap:14px;margin-top:28px;}
+  .project-heading{align-items:flex-start;}
+  .project-logo{width:44px;height:44px;flex-basis:44px;border-radius:12px;font-size:0.85rem;}
+  .project-actions{gap:7px;}
+  .project-link{flex:1 1 calc(50% - 7px);padding:8px 9px;text-align:center;}
   .portfolio-card{padding:0;border-radius:10px;}
   .card-image{height:200px;}
   .card-content{padding:12px;}
@@ -458,16 +464,22 @@ body.loaded {
 
     <!-- CTA BUTTON INSIDE MOBILE -->
     <a href="/book-demo" class="cta-button mobile-cta">Book Demo</a>
+    </div>
     <style>
-        /* Desktop → CTA visible */
 .cta-button {
     display: inline-block;
 }
 
-/* Mobile → CTA hide from navbar */
 @media (max-width: 768px) {
     .nav .cta-button {
         display: none;
+    }
+    .mobile-menu .mobile-cta {
+        display: block;
+        width: 100%;
+        margin-top: 12px;
+        text-align: center;
+        border-bottom: 0;
     }
 }
     </style>

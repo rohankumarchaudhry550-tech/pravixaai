@@ -125,7 +125,7 @@
       position: fixed;
       top: 0;
       right: -100%;
-      width: 260px;
+      width: min(280px, 82vw);
       height: 100vh;
       background: rgba(8, 24, 39, 0.96);
       backdrop-filter: blur(16px);
@@ -134,7 +134,8 @@
       flex-direction: column;
       gap: 18px;
       transition: 0.35s ease;
-      z-index: 999;
+      z-index: 1002;
+      box-shadow: -18px 0 40px rgba(0,0,0,0.35);
     }
 
     .mobile-menu.active {
@@ -156,6 +157,7 @@
       opacity: 0;
       visibility: hidden;
       transition: 0.3s;
+      z-index: 1001;
     }
 
     .overlay.active {
