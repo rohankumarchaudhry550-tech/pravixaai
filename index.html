@@ -1127,30 +1127,39 @@
 /*  Mobile Background (NO CENTER ALIGN BREAK) */
 @media (max-width: 768px) {
     .hero {
-        background: linear-gradient(135deg, rgba(0, 200, 150, 0.15), rgba(0, 123, 255, 0.15)), url('heromobile.gif') center center no-repeat;
+        position: relative;
 
-        background-size: cover;
-        background-position: center;
+        background:
+            linear-gradient(
+                135deg,
+                rgba(0, 200, 150, 0.15),
+                rgba(0, 123, 255, 0.15)
+            ),
+            url('heromobile.gif');
+
+        background-size: contain; /* cover hatao */
+        background-position: center center;
         background-repeat: no-repeat;
 
         min-height: 72vh;
         padding: 96px 16px 72px;
-        text-align: center;
+
+        display: flex;
         justify-content: center;
         align-items: center;
+        text-align: center;
+
+        overflow: hidden;
+        background-color: #000; /* empty area black dikhe */
     }
 }
 
 .hero::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     background: rgba(0, 0, 0, 0.4);
 }
-
 @media (min-width: 768px) {
     .hero::before {
         background: rgba(0, 0, 0, 0.3);
